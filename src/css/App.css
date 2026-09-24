@@ -1,0 +1,291 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Login Page */
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background-image: url("login-images/bgimage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+/* Dark overlay */
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* Login Card */
+.login-card {
+  position: relative;
+  z-index: 1;
+
+  width: 420px;
+  max-width: calc(100% - 40px);
+
+  background: #ffffff;
+  border-radius: 8px;
+
+  padding: 40px;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo */
+.login-logo {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.login-logo img {
+  max-width: 190px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Form */
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #333333;
+
+  margin-bottom: 8px;
+}
+
+/* Inputs */
+.form-group input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  background-color: #ffffff;
+  color: #333333;
+
+  border: 1px solid #d7d7d7;
+  border-radius: 5px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #96c33b;
+
+  box-shadow: 0 0 0 3px rgba(150, 195, 59, 0.12);
+}
+
+.form-group input::placeholder {
+  color: #999999;
+}
+
+.form-group input[aria-invalid="true"] {
+  border-color: #d93025;
+}
+
+.field-error {
+  margin: 6px 0 0;
+  color: #d93025;
+  font-size: 12px;
+}
+
+/* Password */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 45px;
+}
+
+.password-toggle {
+  position: absolute;
+
+  right: 0;
+  top: 0;
+
+  width: 45px;
+  height: 46px;
+
+  border: none;
+  background: transparent;
+
+  color: #96c33b;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: #799c31;
+}
+
+/* Login Options */
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 5px 0 25px;
+}
+
+/* Remember Me */
+.remember-me {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 13px;
+  color: #555555;
+
+  cursor: pointer;
+
+  position: relative;
+}
+
+.remember-me input {
+  position: absolute;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  width: 17px;
+  height: 17px;
+
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Checked Checkbox */
+.remember-me input:checked+.custom-checkbox {
+  background: #96c33b;
+  border-color: #799c31;
+}
+
+/* White Tick */
+.remember-me input:checked+.custom-checkbox::after {
+  content: "✓";
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  line-height: 1;
+}
+
+/* Forgot Password */
+.forgot-password {
+  color: #96c33b;
+
+  text-decoration: none;
+
+  font-size: 13px;
+}
+
+.forgot-password:hover {
+  color: #799c31;
+
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-button {
+  width: 100%;
+  height: 46px;
+
+  background: #96c33b;
+
+  border: 1px solid #799c31;
+  border-radius: 5px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Button Hover */
+.login-button:hover {
+  background: #799c31;
+  border-color: #799c31;
+}
+
+/* Button Active */
+.login-button:active {
+  background: #6d8c2c;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 25px;
+  }
+
+  .login-options {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+}
