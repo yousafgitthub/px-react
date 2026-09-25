@@ -2,10 +2,12 @@ import { useState } from "react";
 import "../css/dashboard.css";
 import PoAdminUsers from "./po-admin-users";
 import TanentUsers from "./tanent-users";
+import CarrierUsers from "./carrier-users";
+import DriverUsers from "./driver-users";
 function Dashboard({ onLogout }) {
-    const [userManagementOpen, setUserManagementOpen] = useState(
-        () => ["admin-users", "tanent-users"].includes(localStorage.getItem("activePage"))
-    );
+    const [userManagementOpen, setUserManagementOpen] =
+        useState(() => ["admin-users", "tanent-users", "carrier-users", "driver-users"].includes(localStorage.getItem("activePage"))
+        );
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activePage, setActivePage] = useState(() => localStorage.getItem("activePage") || "dashboard");
 
@@ -18,6 +20,8 @@ function Dashboard({ onLogout }) {
     const pageTitles = {
         "admin-users": "PD Admin Users",
         "tanent-users": "Tenant Users",
+        "carrier-users": "Carrier Users",
+        "driver-users": "Driver Users",
     };
     return (
         <div className={`admin-layout ${sidebarOpen ? "sidebar-open" : ""}`}>
@@ -93,11 +97,25 @@ function Dashboard({ onLogout }) {
                                     Tanent Users
                                 </a>
 
-                                <a href="#" className="sidebar-subitem">
+                                <a
+                                    href="/carrier-users"
+                                    className={`sidebar-subitem ${activePage === "carrier-users" ? "active" : ""}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        changePage("carrier-users");
+                                    }}
+                                >
                                     Carrier Users
                                 </a>
 
-                                <a href="#" className="sidebar-subitem">
+                                <a
+                                    href="/driver-users"
+                                    className={`sidebar-subitem ${activePage === "driver-users" ? "active" : ""}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        changePage("driver-users");
+                                    }}
+                                >
                                     Driver Users
                                 </a>
 
@@ -377,6 +395,12 @@ function Dashboard({ onLogout }) {
                 )}
                 {activePage === "tanent-users" && (
                     <TanentUsers />
+                )}
+                {activePage === "carrier-users" && (
+                    <CarrierUsers />
+                )}
+                {activePage === "driver-users" && (
+                    <DriverUsers />
                 )}
 
             </div>

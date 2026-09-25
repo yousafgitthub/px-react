@@ -891,6 +891,84 @@
     background: rgba(150, 195, 59, 0.1);
 }
 
+/* =========================
+   CARRIER TABLE
+========================= */
+
+.carrier-users-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.carrier-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.carrier-users-table th,
+.carrier-users-table td {
+    height: 42px;
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(216, 225, 230, 0.7);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.carrier-users-table th {
+    background: rgba(241, 246, 232, 0.5);
+    color: #34495e;
+    font-weight: 600;
+}
+
+.carrier-users-table td {
+    color: #60717e;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.carrier-users-table tbody tr:hover {
+    background: rgba(150, 195, 59, 0.1);
+}
+
+/* =========================
+   DRIVER TABLE
+========================= */
+
+.driver-users-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.driver-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.driver-users-table th,
+.driver-users-table td {
+    height: 42px;
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(216, 225, 230, 0.7);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.driver-users-table th {
+    background: rgba(241, 246, 232, 0.5);
+    color: #34495e;
+    font-weight: 600;
+}
+
+.driver-users-table td {
+    color: #60717e;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.driver-users-table tbody tr:hover {
+    background: rgba(150, 195, 59, 0.1);
+}
+
 
 /* =========================
    SORT ICONS

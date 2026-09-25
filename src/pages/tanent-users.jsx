@@ -95,7 +95,7 @@ function TanentUsers() {
                     <section className="user-modal" role="dialog" aria-modal="true" aria-labelledby="new-tenant-user-title" onMouseDown={(event) => event.stopPropagation()}>
                         <div className="user-modal-header">
                             <div>
-                                <p className="user-modal-eyebrow">Add New Tenant</p>
+                                <p className="user-modal-eyebrow">Add Tenant</p>
                             </div>
                             <button type="button" className="user-modal-close" aria-label="Close form" onClick={() => setIsNewUserModalOpen(false)}><i className="fa fa-times"></i></button>
                         </div>

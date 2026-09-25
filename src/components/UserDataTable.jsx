@@ -14,7 +14,7 @@ function SortHeader({ label, column, sortConfig, onSort }) {
     );
 }
 
-function UserDataTable({ users, columns, toolbar, renderActions, tableClassName, wrapperClassName }) {
+function UserDataTable({ users = [], columns = [], toolbar, renderActions, tableClassName, wrapperClassName }) {
     const [sortConfig, setSortConfig] = useState({ column: "", direction: "asc" });
 
     const sortedUsers = useMemo(() => [...users].sort((firstUser, secondUser) => {
@@ -47,7 +47,7 @@ function UserDataTable({ users, columns, toolbar, renderActions, tableClassName,
                         {sortedUsers.map((user, index) => (
                             <tr key={`${user.email}-${index}`}>
                                 {columns.map((column) => <td key={column.key}>{column.render ? column.render(user) : user[column.key]}</td>)}
-                                <td>{renderActions(user)}</td>
+                                <td>{renderActions ? renderActions(user) : null}</td>
                             </tr>
                         ))}
                     </tbody>
