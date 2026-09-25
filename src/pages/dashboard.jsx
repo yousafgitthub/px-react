@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "../css/dashboard.css";
-import PoAdminUsers from "./po-admin-users";
-import TanentUsers from "./tanent-users";
-import CarrierUsers from "./carrier-users";
-import DriverUsers from "./driver-users";
+import PoAdminUsers from "./admin/po-admin-users";
+import TanentUsers from "./admin/tanent-users";
+import CarrierUsers from "./admin/carrier-users";
+import DriverUsers from "./admin/driver-users";
 function Dashboard({ onLogout }) {
     const [userManagementOpen, setUserManagementOpen] =
         useState(() => ["admin-users", "tanent-users", "carrier-users", "driver-users"].includes(localStorage.getItem("activePage"))
