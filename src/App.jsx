@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
-function app() {
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => localStorage.getItem("isLoggedIn") === "true"
   );
@@ -23,4 +23,4 @@ function app() {
     return <Dashboard onLogout={handleLogout} />;
   }
 }
-export default app;   
+export default App;   

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-function SortHeader({ label, column, sortConfig, onSort }) {
+function SortHeader({ column, sortConfig, onSort }) {
     const isActive = sortConfig.column === column.key;
 
     return (

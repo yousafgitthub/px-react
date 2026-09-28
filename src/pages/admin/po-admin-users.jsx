@@ -1,11 +1,26 @@
 import { useState } from "react";
-import "../css/dashboard.css";
-import UserDataTable from "../components/UserDataTable";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
+import "../../css/dashboard.css";
+import UserDataTable from "../../components/UserDataTable";
+import UserFormModal from "../../components/UserFormModal";
+import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
 
 function PoAdminUsers() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isNewUserModalOpen, setIsNewUserModalOpen] = useState(false);
-    const [imagePreview, setImagePreview] = useState("");
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const closeUserModal = () => { setIsNewUserModalOpen(false);};
+    const testing = () => {toastr.success("User details submitted successfully.", "Success");};
+    const fields = [
+        { name: "firstName", label: "First name", type: "text", required: true, placeholder: "Enter first name" },
+        { name: "lastName", label: "Last name", type: "text", required: true, placeholder: "Enter last name" },
+        { name: "email", label: "Email address", type: "email", required: true, placeholder: "name@company.com" },
+        { name: "password", label: "Password", type: "password", required: true, placeholder: "Abc@123" },
+        { name: "phone", label: "Phone number", type: "tel", placeholder: "+1 000 000 0000" },
+        { name: "role_id", label: "Type", type: "select", options: ["Super Admin"], defaultValue: "Super Admin" },
+        { name: "status", label: "Status", type: "select", options: ["Active", "Inactive"], defaultValue: "Active" },
+    ];
     const adminUsers = [
         {
             firstName: "John",
@@ -47,7 +62,7 @@ function PoAdminUsers() {
             <div className="admin-users-header">
                 <h2>PD Admin Users</h2>
 
-                <button className="new-admin-button" onClick={() => setIsNewUserModalOpen(true)}>
+                <button className="new-admin-button" onClick={() => { closeUserModal(); setIsNewUserModalOpen(true); }}>
                     <i className="fa fa-plus"></i>
                     New
                 </button>
@@ -66,55 +81,30 @@ function PoAdminUsers() {
                 toolbar={<div className="admin-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div>}
                 tableClassName="admin-users-table"
                 wrapperClassName="admin-users-table-wrapper"
-                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button" aria-label="Delete user"><i className="fa fa-trash"></i></button></>}
+                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button"aria-label="Delete user" onClick={() => setIsDeleteModalOpen(true)}><i className="fa fa-trash"></i></button></>}
             />
-
+            {/* Create Modal */}
             {isNewUserModalOpen && (
-                <div className="user-modal-backdrop" onMouseDown={() => setIsNewUserModalOpen(false)}>
-                    <section className="user-modal" role="dialog" aria-modal="true" aria-labelledby="new-admin-user-title" onMouseDown={(event) => event.stopPropagation()}>
-                        <div className="user-modal-header">
-                            <div>
-                                <p className="user-modal-eyebrow">Add PD Admin Users</p>
-                            </div>
-                            <button type="button" className="user-modal-close" aria-label="Close form" onClick={() => setIsNewUserModalOpen(false)}><i className="fa fa-times"></i></button>
-                        </div>
-                        <form onSubmit={(event) => { event.preventDefault(); setIsNewUserModalOpen(false); }}>
-                            <div className="user-form-grid">
-                                <label className="user-image-upload">
-                                    <input
-                                        type="file"
-                                        name="profileImage"
-                                        accept="image/*"
-                                        onChange={(event) => {
-                                            const file = event.target.files?.[0];
-                                            setImagePreview(file ? URL.createObjectURL(file) : "");
-                                        }}
-                                    />
-                                    <span className="user-image-upload-circle">
-                                        {imagePreview ? (
-                                            <img src={imagePreview} alt="Selected user profile" />
-                                        ) : (
-                                            <i className="fa fa-cloud-upload" aria-hidden="true"></i>
-                                        )}
-                                    </span>
-                                    <span className="user-image-upload-text">Upload profile image</span>
-                                    <span className="user-image-upload-hint">JPG, PNG, or WEBP</span>
-                                </label>
-                                <label>First name<input required name="firstName" placeholder="Enter first name" /></label>
-                                <label>Last name<input required name="lastName" placeholder="Enter last name" /></label>
-                                <label>Email address<input required type="email" name="email" placeholder="name@company.com" /></label>
-                                <label>Phone number<input required type="tel" name="phone" placeholder="+1 000 000 0000" /></label>
-                                <label className="user-form-full">Status<select name="status" defaultValue="Active"><option>Active</option><option>Inactive</option></select></label>
-                            </div>
-                            <div className="user-modal-actions">
-                                <button type="button" className="user-modal-cancel" onClick={() => setIsNewUserModalOpen(false)}>Cancel</button>
-                                <button type="submit" className="new-admin-button">Save user</button>
-                            </div>
-                        </form>
-                    </section>
-                </div>
+                <UserFormModal
+                    title="Add PD Admin Users"
+                    fields={fields}
+                    onClose={closeUserModal}
+                    onSubmit={() => {
+                        testing();
+                        closeUserModal();
+                    }}
+                />
             )}
-
+            {/* Delete Modal */}
+            {isDeleteModalOpen && (
+                <ConfirmDeleteModal
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onConfirm={() => {
+                        setIsDeleteModalOpen(false);
+                        toastr.success("User deleted successfully.", "Success");
+                    }}
+                />
+            )}
         </div>
     );
 }
