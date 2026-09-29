@@ -4,10 +4,14 @@ import PoAdminUsers from "./admin/po-admin-users";
 import TanentUsers from "./admin/tanent-users";
 import CarrierUsers from "./admin/carrier-users";
 import DriverUsers from "./admin/driver-users";
+import TenantCompany from "./admin/tenant-company";
+
 function Dashboard({ onLogout }) {
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [userManagementOpen, setUserManagementOpen] =
         useState(() => ["admin-users", "tanent-users", "carrier-users", "driver-users"].includes(localStorage.getItem("activePage"))
         );
+    const [companiesOpen, setCompaniesOpen] = useState(() => localStorage.getItem("activePage") === "tenant-company");
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activePage, setActivePage] = useState(() => localStorage.getItem("activePage") || "dashboard");
 
@@ -22,9 +26,10 @@ function Dashboard({ onLogout }) {
         "tanent-users": "Tenant Users",
         "carrier-users": "Carrier Users",
         "driver-users": "Driver Users",
+        "tenant-company": "Tenant Companies",
     };
     return (
-        <div className={`admin-layout ${sidebarOpen ? "sidebar-open" : ""}`}>
+        <div className={`admin-layout ${sidebarOpen ? "sidebar-open" : ""} ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
 
             {/* Sidebar */}
             <aside className="admin-sidebar">
@@ -50,10 +55,39 @@ function Dashboard({ onLogout }) {
                         <span>Dashboard</span>
                     </a>
 
-                    <a href="#" className="sidebar-item">
-                        <i className="fa fa-building"></i>
-                        <span>Companies</span>
-                    </a>
+                    <div className="sidebar-group">
+
+                        <button
+                            className="sidebar-item sidebar-parent"
+                            onClick={() => setCompaniesOpen(!companiesOpen)}
+                        >
+                            <span className="sidebar-item-left">
+                                <i className="fa fa-building"></i>
+                                <span>Tenant Company</span>
+                            </span>
+
+                            <i
+                                className={`fa fa-chevron-down sidebar-arrow ${companiesOpen ? "open" : ""
+                                    }`}
+                            ></i>
+                        </button>
+
+                        {companiesOpen && (
+                            <div className="sidebar-submenu">
+
+                                <a
+                                    href="/tenant-company"
+                                    className={`sidebar-subitem ${activePage === "tenant-company" ? "active" : ""}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        changePage("tenant-company");
+                                    }}
+                                >
+                                    Tenant Company
+                                </a>
+                            </div>
+                        )}
+                    </div>
 
                     <div className="sidebar-group">
 
@@ -154,7 +188,7 @@ function Dashboard({ onLogout }) {
                     </a>
 
                     <a href="#" className="sidebar-item">
-                        <i className="fa fa-file-text-o"></i>
+                        <i className="fa-solid fa-file-signature"></i>
                         <span>Paperless</span>
                     </a>
 
@@ -178,9 +212,16 @@ function Dashboard({ onLogout }) {
                 <div className="sidebar-bottom">
                     <button className="map-email-button">
                         <i className="fa fa-envelope"></i>
-                        Map Email
+                        <span>Map Email</span>
                     </button>
                 </div>
+
+                <button
+                    type="button" className="sidebar-collapse-button" onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                    aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                >
+                    <i className={`fa ${sidebarCollapsed ? "fa-chevron-right" : "fa-chevron-left"}`}></i>
+                </button>
 
             </aside>
 
@@ -401,6 +442,9 @@ function Dashboard({ onLogout }) {
                 )}
                 {activePage === "driver-users" && (
                     <DriverUsers />
+                )}
+                {activePage === "tenant-company" && (
+                    <TenantCompany />
                 )}
 
             </div>

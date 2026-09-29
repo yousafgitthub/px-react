@@ -16,13 +16,16 @@
 ========================= */
 
 .admin-sidebar {
+    position: relative;
     width: 220px;
-    min-height: 100vh;
+    height: 100vh;
     background: #1d1f2a;
     color: #aeb3c2;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    overflow: hidden;
+    transition: width 0.25s ease;
 }
 
 .sidebar-logo {
@@ -42,7 +45,18 @@
 
 .sidebar-menu {
     flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 8px 0;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebar-menu::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar-item {
@@ -90,6 +104,7 @@
     padding: 15px;
     background: #202228;
     border-top: 1px solid #2b2e39;
+    flex-shrink: 0;
 }
 
 .sidebar-group {
@@ -180,6 +195,139 @@
 
 .map-email-button:hover {
     background: #799c31;
+}
+
+/* =========================
+   COLLAPSED SIDEBAR
+========================= */
+
+.admin-layout.sidebar-collapsed .admin-sidebar {
+    width: 65px;
+}
+
+/* Hide text */
+.admin-layout.sidebar-collapsed .sidebar-item > span,
+.admin-layout.sidebar-collapsed .sidebar-item-left > span,
+.admin-layout.sidebar-collapsed .map-email-button span {
+    display: none;
+}
+
+/* Main sidebar items */
+.admin-layout.sidebar-collapsed .sidebar-item {
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+    gap: 0;
+}
+
+/* Tenant Company + User Management */
+.admin-layout.sidebar-collapsed .sidebar-parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+}
+
+.admin-layout.sidebar-collapsed .sidebar-parent .sidebar-item-left {
+    width: 18px;
+    height: 45px;
+    flex: 0 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0;
+}
+
+.admin-layout.sidebar-collapsed .sidebar-parent .sidebar-item-left i {
+    display: block;
+    width: 18px;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Normal icons */
+.admin-layout.sidebar-collapsed .sidebar-item > i {
+    display: block;
+    width: 18px;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Hide arrows */
+.admin-layout.sidebar-collapsed .sidebar-arrow {
+    display: none;
+}
+
+/* Hide submenu */
+.admin-layout.sidebar-collapsed .sidebar-submenu {
+    display: none;
+}
+
+/* Map Email */
+.admin-layout.sidebar-collapsed .sidebar-bottom {
+    padding: 15px 10px;
+}
+
+.admin-layout.sidebar-collapsed .map-email-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+    font-size: 0;
+}
+
+.admin-layout.sidebar-collapsed .map-email-button i {
+    margin: 0;
+    font-size: 15px;
+}
+
+
+/* =========================
+   COLLAPSE BUTTON
+========================= */
+
+.admin-sidebar .sidebar-collapse-button {
+    position: absolute;
+    right: -1px;
+    bottom: 72px;
+
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: 1px solid #3a3d48;
+    border-radius: 50%;
+
+    background: #1d1f2a;
+    color: #aeb3c2;
+
+    cursor: pointer;
+    z-index: 999;
+
+    flex-shrink: 0;
+}
+
+.admin-sidebar .sidebar-collapse-button i {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+}
+
+.admin-sidebar .sidebar-collapse-button:hover {
+    background: #96c33b;
+    border-color: #96c33b;
+    color: #ffffff;
 }
 
 
@@ -570,18 +718,20 @@
     border: none !important;
     background: transparent !important;
 
-    color: #777;
+    color: #96c33b !important;
     cursor: pointer;
     z-index: 2;
 }
 
 .password-toggle:hover {
-    color: #333;
+    color: #96c33b;
 }
 
-.password-toggle:focus {
+.password-toggle:focus,
+.password-toggle:active {
     outline: none;
     box-shadow: none;
+    color: #96c33b !important;
 }
 
 .password-input-wrapper input.field-error {
@@ -976,6 +1126,29 @@
     pointer-events: none;
     transform: translateY(-50%);
 }
+.tenant-filter-users {
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    color: #8d99a3;
+    font-size: 10px;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+.tenant-filter-icon {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    color: #8d99a3;
+    font-size: 10px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.tenant-users-filter {
+    padding-left: 30px;
+    padding-right: 30px;
+}
 
 .tenant-clear-filters {
     align-self: end;
@@ -1344,6 +1517,27 @@
     .tenant-users-filters {
         flex-wrap: wrap;
         justify-content: flex-end;
+    }
+        .admin-layout.sidebar-collapsed .admin-sidebar {
+        width: 65px;
+    }
+
+    .admin-layout.sidebar-collapsed .sidebar-parent {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .admin-layout.sidebar-collapsed .sidebar-parent .sidebar-item-left {
+        width: 18px;
+        flex: 0 0 18px;
+    }
+
+    .admin-layout.sidebar-collapsed .sidebar-parent .sidebar-item-left i {
+        display: block;
+    }
+
+    .admin-layout.sidebar-collapsed .sidebar-arrow {
+        display: none;
     }
 }
 

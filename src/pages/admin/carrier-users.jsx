@@ -45,7 +45,7 @@ function CarrierUsers() {
     const roles = [...new Set(carrierUsers.map((user) => user.roleName))];
     const hasActiveFilters = Boolean(companyFilter || roleFilter);
     const fields = [
-        { name: "company", label: "Carrier Company", type: "select", options: companies, placeholder: "Select carrier company" },
+        { name: "company", label: "Carrier Company", type: "select", options: companies, placeholder: "Select carrier company", fullWidth: true },
         { name: "firstName", label: "First name", type: "text", required: true, placeholder: "Enter first name" },
         { name: "lastName", label: "Last name", type: "text", required: true, placeholder: "Enter last name" },
         { name: "role", label: "Role", type: "select", required: true, options: roles, placeholder: "Select role" },

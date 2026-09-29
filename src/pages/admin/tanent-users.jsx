@@ -46,12 +46,12 @@ function TanentUsers() {
     const hasActiveFilters = Boolean(companyFilter || roleFilter);
     const testing = () => {toastr.success("User details submitted successfully.", "Success");};
     const fields = [
-        { name: "company", label: "Company", type: "select", options: companies, placeholder: "Select company" },
+        { name: "company", label: "Company", type: "select", options: companies, placeholder: "Select company", fullWidth: true },
         { name: "firstName", label: "First name", type: "text", required: true, placeholder: "Enter first name" },
         { name: "lastName", label: "Last name", type: "text", required: true, placeholder: "Enter last name" },
         { name: "role", label: "Role", type: "select", required: true, options: roles, placeholder: "Select role" },
         { name: "email", label: "Email address", type: "email", required: true, placeholder: "name@company.com" },
-        // { name: "password", label: "Password", type: "password", required: true, placeholder: "Abc@123" },
+        { name: "password", label: "Password", type: "password", required: true, placeholder: "Abc@123" },
         { name: "phone", label: "Phone number", type: "tel", placeholder: "+1 000 000 0000" },
         { name: "address", label: "Address", type: "text", placeholder: "Enter full address", fullWidth: true },
         { name: "notifications", label: "Notifications", type: "select", options: ["SMS", "Phone call", "SMS/Phone call", "None"], defaultValue: "None" },

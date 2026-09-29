@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function UserFormModal({ title, fields, onClose, onSubmit, initialData = {} }) {
+function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, initialData = {} }) {
     const [formData, setFormData] = useState(initialData);
     const [imagePreview, setImagePreview] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -47,18 +47,20 @@ function UserFormModal({ title, fields, onClose, onSubmit, initialData = {} }) {
                 <form noValidate onSubmit={handleSubmit}>
                     <div className="user-form-grid">
 
-                        <label className="user-image-upload">
-                            <input type="file" name="profileImage" accept="image/*" onChange={handleImageChange} />
-                            <span className="user-image-upload-circle">
-                                {imagePreview ? (
-                                    <img src={imagePreview} alt="Selected user profile" />
-                                ) : (
-                                    <i className="fa fa-cloud-upload" aria-hidden="true"></i>
-                                )}
-                            </span>
-                            <span className="user-image-upload-text">Upload profile image</span>
-                            <span className="user-image-upload-hint">JPG, PNG, or WEBP</span>
-                        </label>
+                        {showImage && (
+                            <label className="user-image-upload">
+                                <input type="file" name="profileImage" accept="image/*" onChange={handleImageChange} />
+                                <span className="user-image-upload-circle">
+                                    {imagePreview ? (
+                                        <img src={imagePreview} alt="Selected user profile" />
+                                    ) : (
+                                        <i className="fa fa-cloud-upload" aria-hidden="true"></i>
+                                    )}
+                                </span>
+                                <span className="user-image-upload-text">Upload profile image</span>
+                                <span className="user-image-upload-hint">JPG, PNG, or WEBP</span>
+                            </label>
+                        )}
 
                         {fields.map((field) => {
                             const hasError = formSubmitted && field.required && !String(formData[field.name] || "").trim();
@@ -91,7 +93,7 @@ function UserFormModal({ title, fields, onClose, onSubmit, initialData = {} }) {
 
                     <div className="user-modal-actions">
                         <button type="button" className="user-modal-cancel" onClick={onClose}>Cancel</button>
-                        <button type="submit" className="new-admin-button">Save user</button>
+                        <button type="submit" className="new-admin-button">Save</button>
                     </div>
                 </form>
             </section>
