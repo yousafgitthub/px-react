@@ -7,12 +7,10 @@ import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
 import Actions from "../../components/Actions";
 
-function TenantCompany() {
-    const companyTypes = ["Operator", "Company"];
+function CarrierCompany() {
     const premiumTypes = ["Premium", "Standard"];
     const statuses = ["Active", "Inactive"];
     const [searchTerm, setSearchTerm] = useState("");
-    const [companyTypeFilter, setCompanyTypeFilter] = useState("");
     const [premiumFilter, setPremiumFilter] = useState("");
     const [statusFilter, setStatusFilter] = useState("");
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -41,42 +39,42 @@ function TenantCompany() {
         },
     ];
 
-    const tenantCompanies = [
+    const carrierCompanies = [
         {
-            companyName: "Admin Addition Test",
-            companyType: "Company",
-            phone: "+1 234 567 890",
-            address: "1950 West 17th Avenue, Denver, CO, USA",
+            carrierName: "Carrier",
+            email: "carrier@gmail.com",
+            state: "Colorado",
+            country: "USA",
             type: "Premium",
             status: "Active",
         },
         {
-            companyName: "Bulk Logic",
-            companyType: "Company",
-            phone: "+1 234 567 891",
-            address: "2100 Brookwood Drive, Little Rock, AR, USA",
-            type: "Premium",
-            status: "Active",
-        },
-        {
-            companyName: "Client Demos",
-            companyType: "Company",
-            phone: "+1 234 567 892",
-            address: "950 17th Street, Denver, CO, USA",
+            carrierName: "Carrier abc",
+            email: "carrierabc@gmail.com",
+            state: "California",
+            country: "USA",
             type: "Standard",
             status: "Active",
         },
         {
-            companyName: "Fellowship O&G",
-            companyType: "Operator",
-            phone: "+1 234 567 893",
-            address: "Valinor Road, Hillsborough Township, NJ, USA",
+            carrierName: "Carrier cdf",
+            email: "carriercdf@gmail.com",
+            state: "washington",
+            country: "USA",
+            type: "Premium",
+            status: "Active",
+        },
+        {
+            carrierName: "Carrier xyz",
+            email: "carrierxyz@gmail.com",
+            state: "new york",
+            country: "USA",
             type: "Premium",
             status: "Active",
         },
     ];
 
-    const hasActiveFilters = Boolean(companyTypeFilter || premiumFilter || statusFilter);
+    const hasActiveFilters = Boolean(premiumFilter || statusFilter);
 
     const testing = () => { toastr.success("Company details submitted successfully.", "Success"); };
 
@@ -86,23 +84,22 @@ function TenantCompany() {
         { name: "lastName", label: "Last name", type: "text", required: true, placeholder: "Enter last name" },
         { name: "email", label: "Email address", type: "email", required: true, placeholder: "name@company.com" },
         { name: "password", label: "Password", type: "password", required: true, placeholder: "Abc@123" },
-        { name: "address", label: "CompanyAddress", type: "text", placeholder: "Enter full address", fullWidth: true },
+        { name: "address", label: "Address", type: "text", placeholder: "Enter full address", fullWidth: true },
         { name: "phone", label: "Company Phone", type: "tel", placeholder: "+1 000 000 0000" },
-        { name: "companyType", label: "Company Type", type: "select", options: ["Company", "Operator"], defaultValue: "Operator" },
         { name: "type", label: "Subscription Type", type: "select", options: ["Premium", "Standard"], defaultValue: "Standard" },
+        { name: "legal_entity", label: "Legal Entity", type: "text", placeholder: "Enter legal entity" },
         { name: "status", label: "Status", type: "select", options: ["Active", "Inactive"], defaultValue: "Active" },
     ];
 
-    const filteredCompanies = tenantCompanies.filter((company) => {
+    const filteredCompanies = carrierCompanies.filter((company) => {
         const search = searchTerm.toLowerCase();
 
-        const matchesSearch = company.companyName.toLowerCase().includes(search) || company.companyType.toLowerCase().includes(search) || company.phone.toLowerCase().includes(search) || company.address.toLowerCase().includes(search) || company.type.toLowerCase().includes(search) || company.status.toLowerCase().includes(search);
+        const matchesSearch = company.carrierName.toLowerCase().includes(search) || company.email.toLowerCase().includes(search) || company.state.toLowerCase().includes(search) || company.country.toLowerCase().includes(search) || company.type.toLowerCase().includes(search) || company.status.toLowerCase().includes(search);
 
-        const matchesCompanyType = companyTypeFilter === "" || company.companyType === companyTypeFilter;
         const matchesPremium = premiumFilter === "" || company.type === premiumFilter;
         const matchesStatus = statusFilter === "" || company.status === statusFilter;
 
-        return matchesSearch && matchesCompanyType && matchesPremium && matchesStatus;
+        return matchesSearch && matchesPremium && matchesStatus;
     });
 
     return (
@@ -110,7 +107,7 @@ function TenantCompany() {
 
             {/* Page Header */}
             <div className="admin-users-header">
-                <h2>Tenant Company</h2>
+                <h2>Carrier Company</h2>
 
                 <button className="new-admin-button" onClick={() => setIsNewCompanyModalOpen(true)}>
                     <i className="fa fa-plus"></i>
@@ -121,20 +118,13 @@ function TenantCompany() {
             <UserDataTable
                 users={filteredCompanies}
                 columns={[
-                    { key: "companyName", label: "Company Name" }, { key: "companyType", label: "Company Type" }, { key: "phone", label: "Phone" }, { key: "address", label: "Address" }, { key: "type", label: "Type" },
+                    { key: "carrierName", label: "Carrier Name" }, { key: "email", label: "Email" }, { key: "state", label: "State" }, { key: "country", label: "Country" }, { key: "type", label: "Type" },
                     { key: "status", label: "Status", render: (company) => <span className={company.status === "Active" ? "admin-status-active" : "admin-status-inactive"}>{company.status}</span> },
                 ]}
                 toolbar={
                     <div className="tenant-users-filters">
 
                         {[
-                            {
-                                value: companyTypeFilter,
-                                onChange: setCompanyTypeFilter,
-                                placeholder: "Company Type",
-                                icon: "fa-building",
-                                options: companyTypes,
-                            },
                             {
                                 value: premiumFilter,
                                 onChange: setPremiumFilter,
@@ -190,7 +180,6 @@ function TenantCompany() {
                                 type="button"
                                 className="tenant-clear-filters"
                                 onClick={() => {
-                                    setCompanyTypeFilter("");
                                     setPremiumFilter("");
                                     setStatusFilter("");
                                 }}
@@ -224,7 +213,7 @@ function TenantCompany() {
             {/* Create Modal */}
             {isNewCompanyModalOpen && (
                 <UserFormModal
-                    title="Add Tenant Company"
+                    title="Add Carrier Company"
                     fields={fields}
                     showImage={false}
                     onClose={() => setIsNewCompanyModalOpen(false)}
@@ -249,4 +238,4 @@ function TenantCompany() {
     );
 }
 
-export default TenantCompany;
+export default CarrierCompany;

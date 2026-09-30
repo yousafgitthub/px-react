@@ -5,6 +5,7 @@ import "../../css/dashboard.css";
 import UserDataTable from "../../components/UserDataTable";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
+import Actions from "../../components/Actions";
 
 function DriverUsers() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -16,6 +17,8 @@ function DriverUsers() {
             lastName: "Doe",
             email: "john@example.com",
             phone: "+1 234 567 890",
+            state: "new york",
+            country: "USA",
             status: "Active",
         },
         {
@@ -23,6 +26,8 @@ function DriverUsers() {
             lastName: "Smith",
             email: "michael@example.com",
             phone: "+1 234 567 891",
+            state: "washington",
+            country: "USA",
             status: "Active",
         },
         {
@@ -30,7 +35,25 @@ function DriverUsers() {
             lastName: "Wilson",
             email: "david@example.com",
             phone: "+1 234 567 892",
+             state: "california",
+            country: "USA",
             status: "Inactive",
+        },
+    ];
+    const carrierActionItems = [
+        {
+            label: "Download QR Code",
+            icon: "fa fa-qrcode",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
+        },
+        {
+            label: "Make Inactive",
+            icon: "fa-toggle-on",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
         },
     ];
     const fields = [
@@ -81,14 +104,19 @@ function DriverUsers() {
                 users={filteredUsers}
                 columns={[
                     { key: "firstName", label: "First Name" }, { key: "lastName", label: "Last Name" },
-                    { key: "email", label: "Email" }, { key: "phone", label: "Phone" },
+                    { key: "email", label: "Email" }, { key: "phone", label: "Phone" }, { key: "state", label: "State" }, { key: "country", label: "Country" },
                     { key: "status", label: "Status", render: (user) => <span className={user.status === "Active" ? "admin-status-active" : "admin-status-inactive"}>{user.status}</span> },
                 ]}
                 toolbar={<div className="tenant-users-filters">
                     <div className="tanent-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div></div>}
                 tableClassName="driver-users-table"
                 wrapperClassName="driver-users-table-wrapper"
-                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button"aria-label="Delete user" onClick={() => setIsDeleteModalOpen(true)}><i className="fa fa-trash"></i></button></>}
+                renderActions={() => (
+                    <Actions
+                        onDelete={() => setIsDeleteModalOpen(true)}
+                        menuItems={carrierActionItems}
+                    />
+                )}
             />
             {/* Create Modal */}
             {isNewUserModalOpen && (

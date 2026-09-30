@@ -5,13 +5,15 @@ import TanentUsers from "./admin/tanent-users";
 import CarrierUsers from "./admin/carrier-users";
 import DriverUsers from "./admin/driver-users";
 import TenantCompany from "./admin/tenant-company";
+import CarrierCompany from "./admin/carrier-company";
+import ProfileSettings from "./admin/profile-settings";
 
 function Dashboard({ onLogout }) {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [userManagementOpen, setUserManagementOpen] =
         useState(() => ["admin-users", "tanent-users", "carrier-users", "driver-users"].includes(localStorage.getItem("activePage"))
         );
-    const [companiesOpen, setCompaniesOpen] = useState(() => localStorage.getItem("activePage") === "tenant-company");
+    const [companiesOpen, setCompaniesOpen] = useState(() => ["tanent-company", "carrier-company"].includes(localStorage.getItem("activePage")));
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activePage, setActivePage] = useState(() => localStorage.getItem("activePage") || "dashboard");
 
@@ -27,6 +29,8 @@ function Dashboard({ onLogout }) {
         "carrier-users": "Carrier Users",
         "driver-users": "Driver Users",
         "tenant-company": "Tenant Companies",
+        "carrier-company": "Carrier Companies",
+        "profile-settings": "Profile Settings",
     };
     return (
         <div className={`admin-layout ${sidebarOpen ? "sidebar-open" : ""} ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
@@ -67,8 +71,7 @@ function Dashboard({ onLogout }) {
                             </span>
 
                             <i
-                                className={`fa fa-chevron-down sidebar-arrow ${companiesOpen ? "open" : ""
-                                    }`}
+                                className={`fa fa-chevron-down sidebar-arrow ${companiesOpen ? "open" : ""}`}
                             ></i>
                         </button>
 
@@ -84,6 +87,16 @@ function Dashboard({ onLogout }) {
                                     }}
                                 >
                                     Tenant Company
+                                </a>
+                                <a
+                                    href="/carrier-company"
+                                    className={`sidebar-subitem ${activePage === "carrier-company" ? "active" : ""}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        changePage("carrier-company");
+                                    }}
+                                >
+                                    Carrier Company
                                 </a>
                             </div>
                         )}
@@ -202,11 +215,19 @@ function Dashboard({ onLogout }) {
                         <span>API Settings</span>
                     </a>
 
-                    <a href="#" className="sidebar-item">
-                        <i className="fa fa-user"></i>
-                        <span>Profile Settings</span>
-                    </a>
+                    <div className="sidebar-group">
 
+                        <button
+                            type="button"
+                            className={`sidebar-item sidebar-parent ${activePage === "profile-settings" ? "active" : ""}`}
+                            onClick={() => changePage("profile-settings")}
+                        >
+                            <span className="sidebar-item-left">
+                                <i className="fa fa-user"></i>
+                                <span>Profile Settings</span>
+                            </span>
+                        </button>
+                    </div>
                 </nav>
 
                 <div className="sidebar-bottom">
@@ -445,6 +466,12 @@ function Dashboard({ onLogout }) {
                 )}
                 {activePage === "tenant-company" && (
                     <TenantCompany />
+                )}
+                {activePage === "carrier-company" && (
+                    <CarrierCompany />
+                )}
+                {activePage === "profile-settings" && (
+                    <ProfileSettings />
                 )}
 
             </div>

@@ -5,6 +5,7 @@ import "../../css/dashboard.css";
 import UserDataTable from "../../components/UserDataTable";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
+import Actions from "../../components/Actions";
 
 function CarrierUsers() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +40,22 @@ function CarrierUsers() {
             email: "david@example.com",
             phone: "+1 234 567 892",
             status: "Inactive",
+        },
+    ];
+    const carrierActionItems = [
+        {
+            label: "Reset Password",
+            icon: "fa fa-refresh",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
+        },
+        {
+            label: "Make Inactive",
+            icon: "fa-toggle-on",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
         },
     ];
     const companies = [...new Set(carrierUsers.map((user) => user.companyName))];
@@ -123,7 +140,12 @@ function CarrierUsers() {
                     </label>{hasActiveFilters && <button type="button" className="tenant-clear-filters" onClick={() => { setCompanyFilter(""); setRoleFilter(""); }}>Clear filters</button>}<div className="tanent-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div></div>}
                 tableClassName="carrier-users-table"
                 wrapperClassName="carrier-users-table-wrapper"
-                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button"aria-label="Delete user" onClick={() => setIsDeleteModalOpen(true)}><i className="fa fa-trash"></i></button></>}
+                renderActions={() => (
+                    <Actions
+                        onDelete={() => setIsDeleteModalOpen(true)}
+                        menuItems={carrierActionItems}
+                    />
+                )}
             />
             {/* Create Modal */}
             {isNewUserModalOpen && (

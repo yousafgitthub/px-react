@@ -5,6 +5,7 @@ import "../../css/dashboard.css";
 import UserDataTable from "../../components/UserDataTable";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
+import Actions from "../../components/Actions";
 
 function PoAdminUsers() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -20,6 +21,15 @@ function PoAdminUsers() {
         { name: "phone", label: "Phone number", type: "tel", placeholder: "+1 000 000 0000" },
         { name: "role_id", label: "Type", type: "select", options: ["Super Admin"], defaultValue: "Super Admin" },
         { name: "status", label: "Status", type: "select", options: ["Active", "Inactive"], defaultValue: "Active" },
+    ];
+    const carrierActionItems = [
+        {
+            label: "Make Inactive",
+            icon: "fa-toggle-on",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
+        },
     ];
     const adminUsers = [
         {
@@ -81,7 +91,12 @@ function PoAdminUsers() {
                 toolbar={<div className="admin-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div>}
                 tableClassName="admin-users-table"
                 wrapperClassName="admin-users-table-wrapper"
-                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button"aria-label="Delete user" onClick={() => setIsDeleteModalOpen(true)}><i className="fa fa-trash"></i></button></>}
+                renderActions={() => (
+                    <Actions
+                        onDelete={() => setIsDeleteModalOpen(true)}
+                        menuItems={carrierActionItems}
+                    />
+                )}
             />
             {/* Create Modal */}
             {isNewUserModalOpen && (

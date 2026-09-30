@@ -5,6 +5,8 @@ import "../../css/dashboard.css";
 import UserDataTable from "../../components/UserDataTable";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
+import Actions from "../../components/Actions";
+
 
 function TanentUsers() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +41,22 @@ function TanentUsers() {
             email: "david@example.com",
             phone: "+1 234 567 892",
             status: "Inactive",
+        },
+    ];
+    const carrierActionItems = [
+        {
+            label: "Reset Password",
+            icon: "fa fa-refresh",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
+        },
+        {
+            label: "Make Inactive",
+            icon: "fa-toggle-on",
+            onClick: () => {
+                console.log("Duplicate carrier");
+            },
         },
     ];
     const companies = [...new Set(tanentUsers.map((user) => user.companyName))];
@@ -104,7 +122,13 @@ function TanentUsers() {
                 toolbar={<div className="tenant-users-filters"><label className="tenant-filter-control"><span className="tenant-filter-label"></span><span className="tenant-filter-select-wrap"><i className="fa fa-building" aria-hidden="true"></i><select value={companyFilter} onChange={(event) => setCompanyFilter(event.target.value)} className="tenant-users-filter"><option value="">All companies</option>{companies.map((company) => <option key={company} value={company}>{company}</option>)}</select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i></span></label><label className="tenant-filter-control"><span className="tenant-filter-label"></span><span className="tenant-filter-select-wrap"><i className="fa fa-user-tag" aria-hidden="true"></i><select value={roleFilter} onChange={(event) => setRoleFilter(event.target.value)} className="tenant-users-filter"><option value="">All roles</option>{roles.map((role) => <option key={role} value={role}>{role}</option>)}</select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i></span></label>{hasActiveFilters && <button type="button" className="tenant-clear-filters" onClick={() => { setCompanyFilter(""); setRoleFilter(""); }}>Clear filters</button>}<div className="tanent-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div></div>}
                 tableClassName="tanent-users-table"
                 wrapperClassName="tanent-users-table-wrapper"
-                renderActions={() => <><button className="admin-action-button" aria-label="Edit user"><i className="fa fa-pencil"></i></button><button className="admin-action-button"aria-label="Delete user" onClick={() => setIsDeleteModalOpen(true)}><i className="fa fa-trash"></i></button></>}
+                renderActions={() => (
+                    <Actions
+                        onDelete={() => setIsDeleteModalOpen(true)}
+                        menuItems={carrierActionItems}
+                    
+                    />
+                )}
             />
             {/* Create Modal */}
             {isNewUserModalOpen && (

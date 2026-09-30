@@ -12,12 +12,12 @@ function ConfirmDeleteModal({ onClose, onConfirm }) {
                     <i className="fa fa-trash"></i>
                 </div>
 
-                <h3 id="delete-modal-title">Delete user?</h3>
+                <h3 id="delete-modal-title">Delete Record</h3>
 
                 <p>
-                    Are you sure you want to delete this user?
-                    <br />
-                    This action cannot be undone.
+                    Are you sure you want to delete this record?
+                    {/* <br />
+                    This action cannot be undone. */}
                 </p>
 
                 <div className="delete-modal-actions">

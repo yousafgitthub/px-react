@@ -78,7 +78,7 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
                                         <div className="password-input-wrapper">
                                             <input required={field.required} type={showPassword ? "text" : "password"} name={field.name} placeholder={field.placeholder} value={formData[field.name] || ""} onChange={handleInputChange} className={hasError ? "field-error" : ""} />
                                             <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"}>
-                                                <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} aria-hidden="true"></i>
+                                                <i className={showPassword ? "fa fa-eye" : "fa fa-eye-slash"} aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     ) : (
