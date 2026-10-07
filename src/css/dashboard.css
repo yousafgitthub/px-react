@@ -1,4 +1,681 @@
 /* =========================
+   DARK MODE STYLES
+========================= */
+
+.dark-mode .admin-layout {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.dark-mode .admin-sidebar {
+    background: #111827;
+    color: #aeb7c5;
+}
+
+.dark-mode .sidebar-logo {
+    background: #151b26;
+    border-bottom-color: #27303d;
+}
+
+.dark-mode .sidebar-item {
+    color: #aeb7c5;
+}
+
+.dark-mode .sidebar-item:hover {
+    background: #1d2633;
+    color: #96c33b;
+}
+
+.dark-mode .sidebar-item.active {
+    background: #1d2633;
+    color: #ffffff;
+    border-left-color: #96c33b;
+}
+
+.dark-mode .sidebar-submenu {
+    background: #0d131d;
+}
+
+.dark-mode .sidebar-subitem {
+    color: #9ca8b7;
+}
+
+.dark-mode .sidebar-subitem:hover {
+    background: #19222e;
+    color: #ffffff;
+}
+
+.dark-mode .sidebar-subitem.active {
+    background: #19222e;
+    color: #ffffff;
+    border-left-color: #96c33b;
+}
+
+.dark-mode .sidebar-bottom {
+    background: #151b26;
+    border-top-color: #27303d;
+}
+
+.dark-mode .admin-sidebar .sidebar-collapse-button {
+    background: #18212d;
+    border-color: #374151;
+    color: #aeb7c5;
+}
+
+.dark-mode .admin-sidebar .sidebar-collapse-button:hover {
+    background: #96c33b;
+    border-color: #96c33b;
+    color: #ffffff;
+}
+
+
+/* =========================
+   MAIN AREA
+========================= */
+
+.dark-mode .admin-main {
+    background: #111827;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.dark-mode .admin-topbar {
+    background: #1f2937;
+    border-bottom-color: #374151;
+}
+
+.dark-mode .breadcrumb-dashboard {
+    color: #96c33b;
+}
+
+.dark-mode .breadcrumb-dashboard.current {
+    color: #f3f4f6;
+}
+
+.dark-mode .page-title {
+    color: #d1d5db;
+}
+
+.dark-mode .breadcrumb-separator {
+    color: #6b7280;
+}
+
+.dark-mode .user-info {
+    color: #d1d5db;
+}
+
+.dark-mode .user-avatar {
+    background: #374151;
+    color: #d1d5db;
+}
+
+.dark-mode .logout-button {
+    color: #c4ccd5;
+}
+
+.dark-mode .logout-button:hover {
+    background: #374151;
+    color: #96c33b;
+}
+
+.dark-mode .mobile-menu-toggle {
+    background: #1f2937;
+    border-color: #374151;
+    color: #d1d5db;
+}
+
+.dark-mode .mobile-menu-toggle:hover {
+    border-color: #96c33b;
+    color: #96c33b;
+}
+
+
+/* =========================
+   THEME BUTTON
+========================= */
+
+.dark-mode .theme-toggle-button {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f3f4f6;
+}
+
+.dark-mode .theme-toggle-button:hover {
+    background: #273241;
+    border-color: #96c33b;
+    color: #96c33b;
+}
+
+
+/* =========================
+   DASHBOARD CONTENT
+========================= */
+
+.dark-mode .dashboard-content {
+    background: #111827;
+}
+
+
+/* =========================
+   STATISTICS CARDS
+========================= */
+
+.dark-mode .stat-card {
+    background: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.dark-mode .stat-card:hover {
+    border-color: #4b5563;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.dark-mode .stat-icon {
+    background: rgba(150, 195, 59, 0.12);
+    color: #96c33b;
+}
+
+.dark-mode .stat-label {
+    color: #9ca8b7;
+}
+
+.dark-mode .stat-number {
+    color: #f3f4f6;
+}
+
+.dark-mode .stat-footer {
+    color: #8d99a8;
+}
+
+.dark-mode .stat-status {
+    color: #96c33b;
+}
+
+
+/* =========================
+   COMING SOON CARD
+========================= */
+
+.dark-mode .coming-soon-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.dark-mode .coming-soon-header {
+    background: #18212d;
+    border-bottom-color: #374151;
+}
+
+.dark-mode .coming-soon-header h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .coming-soon-header span {
+    color: #9ca3af;
+}
+
+.dark-mode .coming-soon-table th,
+.dark-mode .coming-soon-table td {
+    border-color: #374151;
+}
+
+.dark-mode .coming-soon-table th {
+    background: #18212d;
+    color: #e5e7eb;
+}
+
+.dark-mode .coming-soon-table td {
+    background: #1f2937;
+    color: #aeb7c5;
+}
+
+
+/* =========================
+   ADMIN USERS / OTHER PAGES
+========================= */
+
+.dark-mode .admin-users-page {
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            rgba(150, 195, 59, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 92% 85%,
+            rgba(103, 156, 188, 0.06),
+            transparent 32%
+        ),
+        #111827;
+}
+
+.dark-mode .admin-users-header h2 {
+    color: #f3f4f6;
+}
+
+
+/* =========================
+   TABLE CARDS
+========================= */
+
+.dark-mode .admin-users-card {
+    background: rgba(31, 41, 55, 0.82);
+    border-color: #374151;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+}
+
+.dark-mode .admin-users-card-header {
+    background: rgba(24, 33, 45, 0.88);
+    border-bottom-color: #374151;
+}
+
+.dark-mode .admin-users-card-header h3 {
+    color: #f3f4f6;
+}
+
+
+/* =========================
+   SEARCH INPUTS
+========================= */
+
+.dark-mode .admin-users-search input,
+.dark-mode .tanent-users-search input {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.dark-mode .admin-users-search input::placeholder,
+.dark-mode .tanent-users-search input::placeholder {
+    color: #7d8998;
+}
+
+.dark-mode .admin-users-search i,
+.dark-mode .tanent-users-search i {
+    color: #8b97a6;
+}
+
+
+/* =========================
+   TENANT FILTERS
+========================= */
+
+.dark-mode .tenant-filter-label {
+    color: #9ca8b7;
+}
+
+.dark-mode .tenant-users-filter {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.dark-mode .tenant-users-filter:focus {
+    border-color: #96c33b;
+}
+
+.dark-mode .tenant-filter-select-wrap > .fa-building,
+.dark-mode .tenant-filter-select-wrap > .fa-user-tag,
+.dark-mode .tenant-filter-chevron,
+.dark-mode .tenant-filter-users,
+.dark-mode .tenant-filter-icon {
+    color: #8b97a6;
+}
+
+.dark-mode .tenant-clear-filters {
+    color: #9ca3af;
+}
+
+.dark-mode .tenant-clear-filters:hover {
+    color: #96c33b;
+}
+
+
+/* =========================
+   ALL USER TABLES
+========================= */
+
+.dark-mode .admin-users-table th,
+.dark-mode .tanent-users-table th,
+.dark-mode .carrier-users-table th,
+.dark-mode .driver-users-table th {
+    background: rgba(24, 33, 45, 0.95);
+    color: #e5e7eb;
+    border-color: #374151;
+}
+
+.dark-mode .admin-users-table td,
+.dark-mode .tanent-users-table td,
+.dark-mode .carrier-users-table td,
+.dark-mode .driver-users-table td {
+    background: rgba(31, 41, 55, 0.45);
+    color: #b7c0cb;
+    border-color: #374151;
+}
+
+.dark-mode .admin-users-table tbody tr:hover,
+.dark-mode .tanent-users-table tbody tr:hover,
+.dark-mode .carrier-users-table tbody tr:hover,
+.dark-mode .driver-users-table tbody tr:hover {
+    background: rgba(150, 195, 59, 0.08);
+}
+
+
+/* =========================
+   SORTING
+========================= */
+
+.dark-mode .sort-icons i {
+    color: #6b7280;
+}
+
+.dark-mode .sort-icons i:hover,
+.dark-mode .sort-icons i.active {
+    color: #96c33b;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.dark-mode .admin-action-button {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #aeb7c5;
+}
+
+.dark-mode .admin-action-button:hover {
+    border-color: #96c33b;
+    color: #96c33b;
+}
+
+
+/* =========================
+   COMPANY ACTION POPUP
+========================= */
+
+.dark-mode .company-actions-popup {
+    background: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.dark-mode .company-action-item {
+    color: #d1d5db;
+}
+
+.dark-mode .company-action-item:hover {
+    background: #273241;
+    color: #96c33b;
+}
+
+
+/* =========================
+   PROFILE SETTINGS
+========================= */
+
+.dark-mode .profile-settings-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.dark-mode .profile-settings-tabs {
+    border-bottom-color: #374151;
+}
+
+.dark-mode .profile-settings-tabs button {
+    color: #9ca3af;
+}
+
+.dark-mode .profile-settings-tabs button:hover,
+.dark-mode .profile-settings-tabs button.active {
+    color: #96c33b;
+}
+
+.dark-mode .form-group label {
+    color: #d1d5db;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+    background: #18212d;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.dark-mode .form-group input::placeholder {
+    color: #7d8998;
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group select:focus {
+    border-color: #96c33b;
+    background: #1b2633;
+}
+
+.dark-mode .profile-form-actions {
+    border-top-color: #374151;
+}
+
+
+/* =========================
+   USER MODALS
+========================= */
+
+.dark-mode .user-modal-backdrop {
+    background: rgba(0, 0, 0, 0.62);
+}
+
+.dark-mode .user-modal {
+    background: rgba(31, 41, 55, 0.97);
+    border-color: #374151;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.dark-mode .user-modal-header h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .user-modal-eyebrow {
+    color: #96c33b;
+}
+
+.dark-mode .user-modal-close {
+    background: #273241;
+    color: #aeb7c5;
+}
+
+.dark-mode .user-modal-close:hover {
+    background: #374151;
+    color: #ffffff;
+}
+
+.dark-mode .user-form-grid label {
+    color: #d1d5db;
+}
+
+.dark-mode .user-form-grid input,
+.dark-mode .user-form-grid select {
+    background: #18212d;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.dark-mode .user-form-grid input::placeholder {
+    color: #7d8998;
+}
+
+.dark-mode .user-form-grid input:focus,
+.dark-mode .user-form-grid select:focus {
+    border-color: #96c33b;
+    background: #1b2633;
+}
+
+.dark-mode .user-image-upload-circle {
+    background: rgba(150, 195, 59, 0.08);
+    border-color: #66852d;
+    color: #96c33b;
+}
+
+.dark-mode .user-image-upload:hover .user-image-upload-circle {
+    background: rgba(150, 195, 59, 0.14);
+    border-color: #96c33b;
+}
+
+.dark-mode .user-image-upload-text {
+    color: #d1d5db;
+}
+
+.dark-mode .user-image-upload-hint {
+    color: #8b97a6;
+}
+
+.dark-mode .user-modal-cancel {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #d1d5db;
+}
+
+.dark-mode .user-modal-cancel:hover {
+    background: #273241;
+    border-color: #6b7280;
+}
+
+
+/* =========================
+   DELETE MODAL
+========================= */
+
+.dark-mode .delete-modal-backdrop {
+    background: rgba(0, 0, 0, 0.68);
+}
+
+.dark-mode .delete-modal {
+    background: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.dark-mode .delete-modal h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .delete-modal p {
+    color: #aeb7c5;
+}
+
+.dark-mode .delete-modal-icon {
+    background: rgba(220, 53, 69, 0.12);
+}
+
+.dark-mode .delete-modal-cancel {
+    background: #1f2937;
+    border-color: #4b5563;
+    color: #d1d5db;
+}
+
+.dark-mode .delete-modal-cancel:hover {
+    background: #273241;
+    border-color: #6b7280;
+}
+
+
+/* =========================
+   PASSWORD FIELDS
+========================= */
+
+.dark-mode .password-input-wrapper input {
+    background: #18212d;
+    color: #e5e7eb;
+}
+
+.dark-mode .password-input-wrapper input::placeholder {
+    color: #7d8998;
+}
+
+.dark-mode .password-toggle {
+    color: #96c33b !important;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.admin-footer {
+    min-height: 48px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: #ffffff;
+    border-top: 1px solid #e3e7eb;
+    color: #8a96a1;
+    font-size: 12px;
+}
+
+.dark-mode .admin-footer {
+    background: #1f2937;
+    border-top-color: #374151;
+    color: #8f9baa;
+}
+
+
+/* =========================
+   SELECT OPTIONS
+========================= */
+
+.dark-mode select option {
+    background: #1f2937;
+    color: #e5e7eb;
+}
+
+
+/* =========================
+   SMOOTH THEME TRANSITION
+========================= */
+
+.admin-layout,
+.admin-sidebar,
+.sidebar-logo,
+.sidebar-item,
+.sidebar-submenu,
+.sidebar-subitem,
+.admin-topbar,
+.stat-card,
+.coming-soon-card,
+.coming-soon-header,
+.admin-users-page,
+.admin-users-card,
+.admin-users-card-header,
+.profile-settings-card,
+.form-group input,
+.form-group select,
+.user-modal,
+.delete-modal,
+.admin-footer,
+.admin-action-button,
+.company-actions-popup {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* =========================
+   LIGHT MODE STYLES
+========================= */
+/* =========================
    MAIN LAYOUT
 ========================= */
 
@@ -437,6 +1114,31 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+.theme-toggle-button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dfe4e8;
+    border-radius: 6px;
+    background: #fff;
+    color: #52616d;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+    color: #96c33b;
+    border-color: #96c33b;
+    background: #f8faf5;
+}
+
+.theme-toggle-button:focus {
+    outline: none;
 }
 
 .user-info {
