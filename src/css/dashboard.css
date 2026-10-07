@@ -344,7 +344,38 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+/* =========================
+   PPROFILE TABS
+========================= */
+.profile-settings-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid #e3e7eb;
+    margin-bottom: 20px;
+}
 
+.profile-settings-tabs button {
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #60717e;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.profile-settings-tabs button:hover {
+    color: #799c31;
+}
+
+.profile-settings-tabs button.active {
+    color: #799c31;
+    font-weight: 600;
+    border-bottom-color: #96c33b;
+}
 
 /* =========================
    TOP BAR
