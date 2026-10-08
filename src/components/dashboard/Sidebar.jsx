@@ -7,6 +7,8 @@ function Sidebar({
     setUserManagementOpen,
     companiesOpen,
     setCompaniesOpen,
+    locationOpen,
+    setLocationOpen,
 }) {
     return (
         <aside className="admin-sidebar">
@@ -167,10 +169,52 @@ function Sidebar({
                     <span>Products</span>
                 </a>
 
-                <a href="#" className="sidebar-item">
-                    <i className="fa fa-map-marker"></i>
-                    <span>Locations</span>
-                </a>
+                {/* Terminal */}
+                <div className="sidebar-group">
+
+                    <button
+                        className="sidebar-item sidebar-parent"
+                        onClick={() => setLocationOpen(!locationOpen)}
+                    >
+                        <span className="sidebar-item-left">
+                            <i className="fa fa-location"></i>
+                            <span>Locations</span>
+                        </span>
+
+                        <i
+                            className={`fa fa-chevron-down sidebar-arrow ${locationOpen ? "open" : ""}`}
+                        ></i>
+                    </button>
+
+                    {locationOpen  && (
+                        <div className="sidebar-submenu">
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "terminal" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("terminal");
+                                }}
+                            >
+                                Terminal
+                            </a>
+
+                            {/* <a
+                                href="/carrier-company"
+                                className={`sidebar-subitem ${activePage === "carrier-company" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("carrier-company");
+                                }}
+                            >
+                                Carrier Company
+                            </a> */}
+
+                        </div>
+                    )}
+
+                </div>
 
                 <a href="#" className="sidebar-item">
                     <i className="fa fa-cog"></i>

@@ -7,8 +7,21 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = event.target;
+        if (type === "checkbox" && ["paperless", "qr_code", "mts"].includes(name)) {
+            setFormData((prev) => ({
+                ...prev,
+                paperless: name === "paperless" ? checked : false,
+                qr_code: name === "qr_code" ? checked : false,
+                mts: name === "mts" ? checked : false,
+            }));
+
+            return;
+        }
+        setFormData((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
     };
 
     const handleImageChange = (event) => {
@@ -63,8 +76,41 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
                         )}
 
                         {fields.map((field) => {
-                            const hasError = formSubmitted && field.required && !String(formData[field.name] || "").trim();
+                            const shouldShow =
+                            !field.showWhen ||
+                            (
+                                (
+                                    Array.isArray(field.showWhen.value)
+                                        ? field.showWhen.value.includes(formData[field.showWhen.field])
+                                        : formData[field.showWhen.field] === field.showWhen.value
+                                ) &&
+                                (
+                                    !field.showWhen.dependsOn ||
+                                    formData[field.showWhen.dependsOn.field] === field.showWhen.dependsOn.value
+                                )
+                            );
+                            if (!shouldShow) {
+                                return null;
+                            }
 
+                            const hasError =
+                                formSubmitted &&
+                                field.required &&
+                                !String(formData[field.name] || "").trim();
+
+                                if (field.type === "checkbox") {
+                                    return (
+                                        <label key={field.name} className="user-form-checkbox">
+                                            <input
+                                                type="checkbox"
+                                                name={field.name}
+                                                checked={formData[field.name] || false}
+                                                onChange={handleInputChange}
+                                            />
+                                            <span>{field.label}</span>
+                                        </label>
+                                    );
+                                }
                             return (
                                 <label key={field.name} className={field.fullWidth ? "user-form-full" : ""}>
                                     {field.label}

@@ -11,6 +11,7 @@ import DriverUsers from "../../pages/admin/driver-users";
 import TenantCompany from "../../pages/admin/tenant-company";
 import CarrierCompany from "../../pages/admin/carrier-company";
 import ProfileSettings from "../../pages/admin/profile-settings";
+import Terminal from "../../pages/admin/terminal";
 
 function DashboardLayout({ onLogout }) {
 
@@ -27,12 +28,19 @@ function DashboardLayout({ onLogout }) {
         );
 
     const [companiesOpen, setCompaniesOpen] =
-        useState(() =>
-            [
-                "tanent-company",
-                "carrier-company",
-            ].includes(localStorage.getItem("activePage"))
-        );
+    useState(() =>
+        [
+            "tanent-company",
+            "carrier-company",
+        ].includes(localStorage.getItem("activePage"))
+    );
+    const [locationOpen, setLocationOpen] =
+    useState(() =>
+        [
+            "terminal",
+            "destination",
+        ].includes(localStorage.getItem("activePage"))
+    );
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -57,6 +65,7 @@ function DashboardLayout({ onLogout }) {
         "tenant-company": "Tenant Companies",
         "carrier-company": "Carrier Companies",
         "profile-settings": "Profile Settings",
+        "terminal": "Terminals",
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -81,6 +90,8 @@ function DashboardLayout({ onLogout }) {
                 setUserManagementOpen={setUserManagementOpen}
                 companiesOpen={companiesOpen}
                 setCompaniesOpen={setCompaniesOpen}
+                locationOpen={locationOpen}
+                setLocationOpen={setLocationOpen}
             />
 
             <div className="admin-main">
@@ -285,6 +296,9 @@ function DashboardLayout({ onLogout }) {
 
                 {activePage === "profile-settings" && (
                     <ProfileSettings />
+                )}
+                {activePage === "terminal" && (
+                    <Terminal />
                 )}
 
                 {/* <Footer /> */}

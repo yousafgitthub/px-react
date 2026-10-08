@@ -502,6 +502,17 @@
 .dark-mode .user-form-grid label {
     color: #d1d5db;
 }
+/* =========================
+   CHECKBOX FIELDS DARK MODE
+========================= */
+
+.dark-mode .user-form-checkbox {
+    color: #d1d5db;
+}
+
+.dark-mode .user-form-checkbox input[type="checkbox"] {
+    accent-color: #96c33b;
+}
 
 .dark-mode .user-form-grid input,
 .dark-mode .user-form-grid select {
@@ -2485,6 +2496,28 @@
     color: #526b80;
     font-size: 12px;
     font-weight: 600;
+}
+/* =========================
+   CHECKBOX FIELDS
+========================= */
+
+.user-form-checkbox {
+    display: flex !important;
+    align-items: center;
+    gap: 8px !important;
+    cursor: pointer;
+    color: #526b80;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.user-form-checkbox input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0;
+    padding: 0;
+    accent-color: #96c33b;
+    cursor: pointer;
 }
 
 .user-form-grid input,
