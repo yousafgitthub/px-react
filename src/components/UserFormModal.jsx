@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, initialData = {} }) {
+function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, initialData = {}, locationType, setLocationType }) {
     const [formData, setFormData] = useState(initialData);
     const [imagePreview, setImagePreview] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [showMap, setShowMap] = useState(false);
 
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
@@ -93,24 +94,112 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
                                 return null;
                             }
 
-                            const hasError =
-                                formSubmitted &&
-                                field.required &&
-                                !String(formData[field.name] || "").trim();
+                            
+                            const hasError = formSubmitted && field.required && (
+                                field.type === "location"
+                                ? locationType === "coordinates"
+                                    ? (
+                                        !String(formData.longitude || "").trim() ||
+                                        !String(formData.latitude || "").trim()
+                                    )
+                                    : !String(formData.address || "").trim()
+                                : !String(formData[field.name] || "").trim()
+                            );
 
-                                if (field.type === "checkbox") {
-                                    return (
-                                        <label key={field.name} className="user-form-checkbox">
+                            if (field.type === "checkbox") {
+                                return (
+                                    <label key={field.name} className="user-form-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            name={field.name}
+                                            checked={formData[field.name] || false}
+                                            onChange={handleInputChange}
+                                        />
+                                        <span>{field.label}</span>
+                                    </label>
+                                );
+                            }
+                            if (field.type === "location") {
+                                return (
+                                    <label
+                                        key={field.name}
+                                        className={field.fullWidth ? "user-form-full" : ""}
+                                    >
+                                        <div className="location-field-label">
+                                            <span>{locationType === "address" ? "Address" : "Coordinates"}</span>
+
+                                            <button
+                                                type="button"
+                                                className="location-dropdown-button"
+                                                onClick={() => setLocationType(
+                                                    locationType === "address" ? "coordinates" : "address"
+                                                )}
+                                            >
+                                                <i className="fa fa-chevron-down"></i>
+                                            </button>
+                                        </div>
+
+                                        {locationType === "address" ? (
                                             <input
-                                                type="checkbox"
-                                                name={field.name}
-                                                checked={formData[field.name] || false}
+                                                required={field.required}
+                                                type="text"
+                                                name="address"
+                                                placeholder={field.placeholder}
+                                                value={formData.address || ""}
                                                 onChange={handleInputChange}
+                                                className={hasError ? "field-error" : ""}
                                             />
-                                            <span>{field.label}</span>
-                                        </label>
-                                    );
-                                }
+                                       
+                                        ) : (
+                                            
+                                            <div className="coordinates-fields">
+                                                <div className="coordinate-field">
+                                                    <input
+                                                        type="text"
+                                                        name="longitude"
+                                                        placeholder="Longitude"
+                                                        value={formData.longitude || ""}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                    {formSubmitted && !String(formData.longitude || "").trim() && (
+                                                        <span className="field-error-message">Longitude is required</span>
+                                                    )}
+                                                </div>
+
+                                                <div className="coordinate-field">
+                                                    <input
+                                                        type="text"
+                                                        name="latitude"
+                                                        placeholder="Latitude"
+                                                        value={formData.latitude || ""}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                    {formSubmitted && !String(formData.latitude || "").trim() && (
+                                                        <span className="field-error-message">Latitude is required</span>
+                                                    )}
+                                                </div>
+
+                                                <button
+                                                    type="button"
+                                                    className="coordinates-map-button"
+                                                    title="Show location on map"
+                                                    aria-label="Show location on map"
+                                                    onClick={() => setShowMap(true)}
+                                                >
+                                                    <i className="fa fa-crosshairs" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+
+                                        )}
+
+                                        {hasError && locationType === "address" && (
+                                            <span className="field-error-message">
+                                                This field is required
+                                            </span>
+                                        )}
+                                    </label>
+                                );
+                            }
                             return (
                                 <label key={field.name} className={field.fullWidth ? "user-form-full" : ""}>
                                     {field.label}
@@ -136,6 +225,27 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
                             );
                         })}
                     </div>
+                    <br></br>
+                    {showMap &&
+                        String(formData.longitude || "").trim() &&
+                        String(formData.latitude || "").trim() &&
+                        Number.isFinite(Number(formData.longitude)) &&
+                        Number.isFinite(Number(formData.latitude)) &&
+                        Math.abs(Number(formData.longitude)) <= 180 &&
+                        Math.abs(Number(formData.latitude)) <= 90 && (
+                        <div className="coordinates-map">
+                            <iframe
+                                title="Terminal location map"
+                                width="100%"
+                                height="300"
+                                style={{ border: 0 }}
+                                loading="lazy"
+                                src={`https://maps.google.com/maps?q=${formData.latitude},${formData.longitude}&z=15&output=embed`}
+                                allowFullScreen
+                            />
+                        </div>
+                    )}
+
 
                     <div className="user-modal-actions">
                         <button type="button" className="user-modal-cancel" onClick={onClose}>Cancel</button>

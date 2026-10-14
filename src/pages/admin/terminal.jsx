@@ -11,6 +11,7 @@ function Terminal() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isNewTerminalModalOpen, setIsNewTerminalModalOpen] = useState(false);
+    const [locationType, setLocationType] = useState("address");
     const terminalActionItems = [
         {
             label: "View",
@@ -74,7 +75,7 @@ function Terminal() {
 
     const fields = [
         { name: "name", label: "Terminal Name", type: "text", required: true, placeholder: "Enter Terminal name", fullWidth: true },
-        { name: "address", label: "Address", type: "text", required: true, placeholder: "Enter full address", fullWidth: true },
+        { name: "address", label: "Address", type: "location", required: true, placeholder: "Enter full address", fullWidth: true },
         { name: "email", label: "Email address", type: "email", required: true, placeholder: "name@company.com" },
         { name: "password", label: "Password", type: "password", required: true, placeholder: "Abc@123" },
         { name: "phone", label: "Phone", type: "tel", placeholder: "+1 000 000 0000" },
@@ -154,6 +155,8 @@ function Terminal() {
                     title="Add Terminal"
                     fields={fields}
                     showImage={false}
+                    locationType={locationType}
+                    setLocationType={setLocationType}
                     onClose={() => setIsNewTerminalModalOpen(false)}
                     onSubmit={() => {
                         setIsNewTerminalModalOpen(false);
