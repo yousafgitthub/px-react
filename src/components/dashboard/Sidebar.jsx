@@ -200,16 +200,16 @@ function Sidebar({
                                 Terminal
                             </a>
 
-                            {/* <a
-                                href="/carrier-company"
-                                className={`sidebar-subitem ${activePage === "carrier-company" ? "active" : ""}`}
+                            <a
+                                href="/destination"
+                                className={`sidebar-subitem ${activePage === "destination" ? "active" : ""}`}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    changePage("carrier-company");
+                                    changePage("destination");
                                 }}
                             >
-                                Carrier Company
-                            </a> */}
+                                Destination
+                            </a>
 
                         </div>
                     )}

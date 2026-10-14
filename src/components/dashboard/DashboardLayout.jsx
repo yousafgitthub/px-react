@@ -12,6 +12,7 @@ import TenantCompany from "../../pages/admin/tenant-company";
 import CarrierCompany from "../../pages/admin/carrier-company";
 import ProfileSettings from "../../pages/admin/profile-settings";
 import Terminal from "../../pages/admin/terminal";
+import Destination from "../../pages/admin/destination";
 
 function DashboardLayout({ onLogout }) {
 
@@ -66,6 +67,7 @@ function DashboardLayout({ onLogout }) {
         "carrier-company": "Carrier Companies",
         "profile-settings": "Profile Settings",
         "terminal": "Terminals",
+        "destination": "Destinations",
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -299,6 +301,9 @@ function DashboardLayout({ onLogout }) {
                 )}
                 {activePage === "terminal" && (
                     <Terminal />
+                )}
+                {activePage === "destination" && (
+                    <Destination />
                 )}
 
                 {/* <Footer /> */}
