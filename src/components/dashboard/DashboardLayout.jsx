@@ -14,6 +14,10 @@ import ProfileSettings from "../../pages/admin/profile-settings";
 import Terminal from "../../pages/admin/terminal";
 import Destination from "../../pages/admin/destination";
 import Disposal from "../../pages/admin/disposal-facilities";
+import ProductType from "../../pages/admin/product-type";
+import ProductSubType from "../../pages/admin/product-sub-type";
+import ProductListing from "../../pages/admin/product-listing";
+import ProductFamily from "../../pages/admin/product-family";
 
 function DashboardLayout({ onLogout }) {
 
@@ -21,12 +25,8 @@ function DashboardLayout({ onLogout }) {
 
     const [userManagementOpen, setUserManagementOpen] =
         useState(() =>
-            [
-                "admin-users",
-                "tanent-users",
-                "carrier-users",
-                "driver-users",
-            ].includes(localStorage.getItem("activePage"))
+            ["admin-users", "tanent-users", "carrier-users", "driver-users"]
+            .includes(localStorage.getItem("activePage"))
         );
 
     const [companiesOpen, setCompaniesOpen] =
@@ -42,6 +42,16 @@ function DashboardLayout({ onLogout }) {
             "terminal",
             "destination",
             "disposal-facilities",
+        ].includes(localStorage.getItem("activePage"))
+    );
+
+    const [productOpen, setProductOpen] =
+    useState(() =>
+        [
+            "product-type",  
+            "product-sub-type",  
+            "product-listing", 
+            "product-family"       
         ].includes(localStorage.getItem("activePage"))
     );
 
@@ -71,6 +81,10 @@ function DashboardLayout({ onLogout }) {
         "terminal": "Terminals",
         "destination": "Destinations",
         "disposal-facilities": "Disposal",
+        "product-type": "Product Type",
+        "product-sub-type": "Products Sub Type",
+        "product-listing": "Product Listing",
+        "product-family": "Product Family",
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -97,6 +111,8 @@ function DashboardLayout({ onLogout }) {
                 setCompaniesOpen={setCompaniesOpen}
                 locationOpen={locationOpen}
                 setLocationOpen={setLocationOpen}
+                productOpen={productOpen}
+                setProductOpen={setProductOpen}
             />
 
             <div className="admin-main">
@@ -310,6 +326,18 @@ function DashboardLayout({ onLogout }) {
                 )}
                 {activePage === "disposal-facilities" && (
                     <Disposal />
+                )}
+                {activePage === "product-type" && (
+                    <ProductType />
+                )}
+                {activePage === "product-sub-type" && (
+                    <ProductSubType />
+                )}
+                {activePage === "product-listing" && (
+                    <ProductListing />
+                )}
+                {activePage === "product-family" && (
+                    <ProductFamily />
                 )}
 
                 {/* <Footer /> */}

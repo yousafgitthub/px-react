@@ -9,6 +9,8 @@ function Sidebar({
     setCompaniesOpen,
     locationOpen,
     setLocationOpen,
+    productOpen,
+    setProductOpen,
 }) {
     return (
         <aside className="admin-sidebar">
@@ -163,11 +165,73 @@ function Sidebar({
                     <i className="fa fa-cube"></i>
                     <span>Box Management</span>
                 </a>
+                {/* Product Type */}
+                <div className="sidebar-group">
 
-                <a href="#" className="sidebar-item">
-                    <i className="fa fa-shopping-bag"></i>
-                    <span>Products</span>
-                </a>
+                    <button
+                        className="sidebar-item sidebar-parent"
+                        onClick={() => setProductOpen(!productOpen)}
+                    >
+                        <span className="sidebar-item-left">
+                            <i className="fa fa-bag-shopping"></i>
+                            <span>Product</span>
+                        </span>
+
+                        <i
+                            className={`fa fa-chevron-down sidebar-arrow ${productOpen ? "open" : ""}`}
+                        ></i>
+                    </button>
+
+                    {productOpen  && (
+                        <div className="sidebar-submenu">
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "product-type" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("product-type");
+                                }}
+                            >
+                                Product Type
+                            </a>
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "product-sub-type" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("product-sub-type");
+                                }}
+                            >
+                                Product Sub Type
+                            </a>
+                            
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "product-listing" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("product-listing");
+                                }}
+                            >
+                                Product Listing
+                            </a>
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "product-family" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("product-family");
+                                }}
+                            >
+                                Product Family
+                            </a>
+
+                        </div>
+                    )}
+                </div>
 
                 {/* Terminal */}
                 <div className="sidebar-group">

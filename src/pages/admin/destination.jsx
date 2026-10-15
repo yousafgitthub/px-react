@@ -159,7 +159,7 @@ function Destination() {
                     onClose={() => setIsDeleteModalOpen(false)}
                     onConfirm={() => {
                         setIsDeleteModalOpen(false);
-                        toastr.success("Terminal deleted successfully.", "Success");
+                        toastr.success("Destination deleted successfully.", "Success");
                     }}
                 />
             )}

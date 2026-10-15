@@ -137,7 +137,7 @@ function Disposal() {
                     onClose={() => setIsDeleteModalOpen(false)}
                     onConfirm={() => {
                         setIsDeleteModalOpen(false);
-                        toastr.success("Terminal deleted successfully.", "Success");
+                        toastr.success("Disposal facility deleted successfully.", "Success");
                     }}
                 />
             )}
