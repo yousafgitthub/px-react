@@ -108,6 +108,9 @@ No `:root` CSS variables were found. Values below are taken from class rules in 
 
 ## D. DataTables Standards
 
+> **Dedicated reference:** [`DATATABLE_UI.md`](./DATATABLE_UI.md) — Terminals-style admin DataTable, green palette, layout anatomy.  
+> **Visual reference page:** Admin → Terminals (`src/pages/admin/terminal.jsx`).
+
 ### Library
 
 **There is no third-party DataTables / AG Grid / TanStack Table dependency** in `package.json`.
@@ -120,7 +123,7 @@ Admin “DataTables” are **custom React tables** styled with CSS classes.
 |-----------|------|------|
 | `UserDataTable` | `src/components/UserDataTable.jsx` | Shared sortable admin list table |
 
-**Mandatory rule:** Before creating a new table, find and reuse `UserDataTable` (or extend it). Do not introduce a different table library or rebuild a parallel table shell without a justified technical reason.
+**Mandatory rule:** Before creating a new table, find and reuse `UserDataTable` (or extend it). Match the **admin Terminals** look: soft green page wash, glass table card, pale lime headers, PropX green `#96c33b` CTA/focus/hover, Active/Inactive badges, bordered action icons. Do not introduce a different table library or rebuild a parallel table shell without a justified technical reason.
 
 ### How admin pages use it
 
@@ -168,14 +171,14 @@ Reuse one of these pairs (same visual metrics: `13px`, row height `42px`, paddin
 | `carrier-users-table` | `carrier-users-table-wrapper` |
 | `driver-users-table` | `driver-users-table-wrapper` |
 
-### Tenant Jobs tables
+### Tenant Jobs / Box / Reports tables
 
 | Component | Path | When to use |
 |-----------|------|-------------|
 | `UserDataTable` | `src/components/UserDataTable.jsx` | Canonical table (admin + tenant) |
-| `SearchableAdminTable` | `src/components/jobs/SearchableAdminTable.jsx` | Thin adapter: admin search toolbar + `UserDataTable` for Loads / job tabs |
+| `SearchableAdminTable` | `src/components/jobs/SearchableAdminTable.jsx` | Thin adapter: admin search toolbar + `UserDataTable` for Loads / job tabs / Box lists |
 
-Tenant Loads (Transit, Destination, Delivered, Loads Status, Daily Allocation) must use `UserDataTable` via `SearchableAdminTable`. Do not introduce a separate table library.
+**All tenant DataTables** (Jobs tabs, Box Management lists, Reports detail, Overview Recent Activity) must match Admin Terminals: glass card, pale lime headers, PropX green `#96c33b`, `.admin-users-search`. See `DATATABLE_UI.md`. Do not reintroduce flat gray overrides under `.job-detail-content` or `.box-main-content`.
 
 Demo Jobs data lives only in `src/data/tenantJobsDemo.js` (`USE_TENANT_JOBS_DEMO`). Do not mix demo fixtures into real API responses.
 
@@ -351,11 +354,12 @@ When implementing missing behaviors, add them to the **shared** components/CSS f
 
 ## Quick reference — verified source files
 
+- `DATATABLE_UI.md` — Terminals-style DataTable + green palette  
 - `src/css/dashboard.css` — primary visual system  
 - `src/css/index.css`, `src/css/App.css` — global + login  
 - `src/components/UserDataTable.jsx` — admin table primitive  
 - `src/components/Actions.jsx`, `UserFormModal.jsx`, `ConfirmDeleteModal.jsx`  
 - `src/components/dashboard/*` — admin shell  
-- `src/pages/admin/*` — canonical page patterns  
+- `src/pages/admin/*` — canonical page patterns (Terminals = table reference)  
 - `src/components/jobs/*`, `src/data/tenantJobsDemo.js` — tenant Jobs (demo)  
 - `package.json` — UI dependencies (`react`, `react-router-dom`, `@fortawesome/fontawesome-free`, `toastr`)  

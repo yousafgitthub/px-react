@@ -13,31 +13,45 @@ import {
  * a generic Sanctum login without PropX tenant roles. Replace
  * resolveAccountProfile() with a real API call when available.
  */
-const DEMO_ACCOUNT_PROFILES = {
-  "admin@tenant.com": {
-    id: "user-tenant-admin",
-    email: "admin@tenant.com",
-    firstName: "Tenant",
-    lastName: "Admin",
-    displayName: "Tenant Admin",
+const TENANT_DEMO_PERMISSIONS = [
+  "tenant.overview",
+  "tenant.jobs",
+  "tenant.map",
+  "tenant.box-management",
+  "tenant.reports",
+  "tenant.slicer-report",
+  "tenant.carrier",
+  "tenant.po-tracker",
+  "tenant.settings",
+  "tenant.help",
+];
+
+const TENANT_DEMO_COMPANY = {
+  id: "tenant-demo-1",
+  name: "Demo Tenant Company",
+};
+
+function buildTenantDemoProfile(email, overrides = {}) {
+  return {
+    id: overrides.id || "user-tenant-admin",
+    email,
+    firstName: overrides.firstName || "Tenant",
+    lastName: overrides.lastName || "Admin",
+    displayName: overrides.displayName || "Tenant Admin",
     accountType: ACCOUNT_TYPES.TENANT,
     role: "Company Admin",
-    tenant: {
-      id: "tenant-demo-1",
-      name: "Demo Tenant Company",
-    },
-    permissions: [
-      "tenant.overview",
-      "tenant.jobs",
-      "tenant.map",
-      "tenant.box-management",
-      "tenant.slicer-report",
-      "tenant.carrier",
-      "tenant.po-tracker",
-      "tenant.settings",
-      "tenant.help",
-    ],
-  },
+    tenant: TENANT_DEMO_COMPANY,
+    permissions: TENANT_DEMO_PERMISSIONS,
+  };
+}
+
+const DEMO_ACCOUNT_PROFILES = {
+  "admin@tenant.com": buildTenantDemoProfile("admin@tenant.com"),
+  // Primary demo tenant login used for /tenant redirects
+  "tenant@admin.com": buildTenantDemoProfile("tenant@admin.com", {
+    id: "user-tenant-admin-alt",
+    displayName: "Tenant Admin",
+  }),
 };
 
 function buildDefaultSuperAdminProfile(email) {

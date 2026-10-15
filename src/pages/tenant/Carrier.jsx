@@ -1,12 +1,7 @@
-import ModuleUnavailable from "./ModuleUnavailable";
+import CarriersWorkspace from "../../components/carrier/CarriersWorkspace";
 
 function Carrier() {
-  return (
-    <ModuleUnavailable
-      title="Carrier"
-      description="Admin carrier screens manage all carriers globally. A tenant-scoped carrier module is not available yet."
-    />
-  );
+  return <CarriersWorkspace />;
 }
 
 export default Carrier;

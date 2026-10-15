@@ -5,7 +5,7 @@ function formatNumber(value) {
   return Number(value || 0).toLocaleString("en-US");
 }
 
-function DetailsTab({ job, details }) {
+function DetailsTab({ job, details, onOpenJobSettings }) {
   const [statusMenuOpen, setStatusMenuOpen] = useState(false);
   const [demoNotice, setDemoNotice] = useState("");
   const [jobStatus, setJobStatus] = useState(
@@ -41,9 +41,15 @@ function DetailsTab({ job, details }) {
         <button
           type="button"
           className="job-details-action-btn"
-          onClick={() =>
-            showDemoNotice("Job Settings is demo-only and does not open a form API.")
-          }
+          onClick={() => {
+            if (typeof onOpenJobSettings === "function") {
+              onOpenJobSettings(job);
+              return;
+            }
+            showDemoNotice(
+              "Job Settings is demo-only and does not open a form API."
+            );
+          }}
         >
           <i className="fa fa-wrench" aria-hidden="true"></i>
           Job Settings

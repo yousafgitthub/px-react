@@ -28,6 +28,19 @@ export const BOX_INTERVAL_OPTIONS = [
   { value: "1-Day", label: "1-Day" },
 ];
 
+export const BOX_LOCATION_FILTERS = [
+  { value: "all", label: "All Locations" },
+  { value: "eqr", label: "EQR terminal - MT" },
+  { value: "cre", label: "cre paint energy" },
+  { value: "slurry-yard", label: "Slurry Yard" },
+];
+
+export const BOX_UNIT_OPTIONS = [
+  { value: "LBS", label: "LBS" },
+  { value: "KG", label: "KG" },
+  { value: "TONS", label: "TONS" },
+];
+
 function seed(text) {
   let hash = 0;
   const value = String(text || "box");
@@ -45,7 +58,6 @@ export function getTenantBoxDemoData() {
   };
 
   const truckCounts = [
-    { label: "Sep 30 12 AM", value: 0 },
     { label: "Oct 1 12 AM", value: 0 },
     { label: "Oct 1 12 PM", value: 0 },
     { label: "Oct 2 12 AM", value: 0 },
@@ -73,6 +85,18 @@ export function getTenantBoxDemoData() {
     { label: "Oct 13 12 AM", value: 0 },
     { label: "Oct 13 12 PM", value: 0 },
     { label: "Oct 14 12 AM", value: 0 },
+    { label: "Oct 14 12 PM", value: 0 },
+    { label: "Oct 15 12 AM", value: 0 },
+  ];
+
+  const inventoryChart = [
+    { label: "Oct 14 12 AM", boxes: 0, product: 0 },
+    { label: "Oct 14 6 AM", boxes: 0, product: 0 },
+    { label: "Oct 14 12 PM", boxes: 0, product: 0 },
+    { label: "Oct 14 6 PM", boxes: 0, product: 0 },
+    { label: "Oct 15 12 AM", boxes: 0, product: 0 },
+    { label: "Oct 15 6 AM", boxes: 0, product: 0 },
+    { label: "Oct 15 12 PM", boxes: 0, product: 0 },
   ];
 
   const inventory = [
@@ -192,7 +216,9 @@ export function getTenantBoxDemoData() {
   return {
     kpis,
     truckCounts,
-    dateRangeLabel: "09/30/2026 - 10/14/2026",
+    inventoryChart,
+    truckDateRangeLabel: "10/01/2026 - 10/15/2026",
+    inventoryDateRangeLabel: "10/14/2026 - 10/15/2026",
     inventory,
     management,
     history,

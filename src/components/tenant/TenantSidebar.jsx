@@ -6,12 +6,28 @@ const NAV_ITEMS = [
   { to: "/tenant/jobs", label: "Jobs", icon: "fa-briefcase", permission: "tenant.jobs" },
   { to: "/tenant/map", label: "Map", icon: "fa-map-marker", permission: "tenant.map" },
   { to: "/tenant/box-management", label: "Box Management", icon: "fa-cube", permission: "tenant.box-management" },
-  { to: "/tenant/slicer-report", label: "Slicer Report", icon: "fa-pie-chart", permission: "tenant.slicer-report" },
+  // Directly after Box Management (matches PropX Reports rail position)
+  {
+    to: "/tenant/reports",
+    label: "Reports",
+    icon: "fa-bar-chart",
+    permission: ["tenant.reports", "tenant.slicer-report"],
+  },
   { to: "/tenant/carrier", label: "Carrier", icon: "fa-truck", permission: "tenant.carrier" },
-  { to: "/tenant/po-tracker", label: "PO Tracker", icon: "fa-file-text", permission: "tenant.po-tracker" },
+  { to: "/tenant/po-tracker", label: "PO Tracker", icon: "fa-clipboard", permission: "tenant.po-tracker" },
   { to: "/tenant/settings", label: "Company Settings", icon: "fa-cog", permission: "tenant.settings" },
   { to: "/tenant/help", label: "Help", icon: "fa-life-ring", permission: "tenant.help" },
 ];
+
+function canSeeNavItem(item, hasPermission) {
+  if (!item.permission) {
+    return true;
+  }
+  if (Array.isArray(item.permission)) {
+    return item.permission.some((permission) => hasPermission(permission));
+  }
+  return hasPermission(item.permission);
+}
 
 function TenantSidebar({
   sidebarCollapsed,
@@ -20,8 +36,8 @@ function TenantSidebar({
 }) {
   const { user, hasPermission, logout } = useAuth();
 
-  const visibleItems = NAV_ITEMS.filter(
-    (item) => !item.permission || hasPermission(item.permission)
+  const visibleItems = NAV_ITEMS.filter((item) =>
+    canSeeNavItem(item, hasPermission)
   );
 
   return (
