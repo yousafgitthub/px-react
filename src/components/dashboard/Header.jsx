@@ -1,3 +1,5 @@
+import { useAuth } from "../../auth/useAuth";
+
 function Header({
     activePage,
     pageTitles,
@@ -8,6 +10,9 @@ function Header({
     darkMode,
     setDarkMode,
 }) {
+    const { user } = useAuth();
+    const displayName = user?.displayName || "admin_user";
+
     return (
         <header className="admin-topbar">
 
@@ -80,7 +85,7 @@ function Header({
                         <i className="fa fa-user"></i>
                     </div>
 
-                    <span>admin_user</span>
+                    <span>{displayName}</span>
 
                 </div>
 
