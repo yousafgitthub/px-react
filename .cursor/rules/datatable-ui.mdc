@@ -1,0 +1,14 @@
+---
+description: Enforce PropX admin DataTable UI and green palette
+globs: src/**/*.{jsx,js,css}
+alwaysApply: false
+---
+
+# PropX DataTable UI
+
+When building or changing list tables (admin or tenant):
+
+1. Read `DATATABLE_UI.md` at the repo root (Terminals-style reference).
+2. Use `UserDataTable` + `.admin-users-page` / `.admin-users-table` (or existing class pairs).
+3. Keep PropX greens: primary `#96c33b`, header tint `rgba(241, 246, 232, 0.5)`, row hover `rgba(150, 195, 59, 0.1)`, Active `#4caf50`, Inactive `#D3494E`.
+4. Search, `+ New`, status badges, and `Actions` must match admin Terminals — do not invent a parallel table theme.

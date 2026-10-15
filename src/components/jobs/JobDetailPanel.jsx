@@ -4,7 +4,14 @@ import DetailsTab from "./DetailsTab";
 import SearchableAdminTable from "./SearchableAdminTable";
 import LoadsTab from "./LoadsTab";
 
-function JobDetailPanel({ job, loads, tables, dashboard, details }) {
+function JobDetailPanel({
+  job,
+  loads,
+  tables,
+  dashboard,
+  details,
+  onOpenJobSettings,
+}) {
   // Default tab matches PropX Details screenshot. Parent remounts via
   // key={job.id} when the selected job changes.
   const [activeTab, setActiveTab] = useState("Details");
@@ -12,7 +19,13 @@ function JobDetailPanel({ job, loads, tables, dashboard, details }) {
   const renderTabContent = () => {
     switch (activeTab) {
       case "Details":
-        return <DetailsTab job={job} details={details} />;
+        return (
+          <DetailsTab
+            job={job}
+            details={details}
+            onOpenJobSettings={onOpenJobSettings}
+          />
+        );
       case "Loads":
         return <LoadsTab loads={loads} dashboard={dashboard} />;
       case "Assets":

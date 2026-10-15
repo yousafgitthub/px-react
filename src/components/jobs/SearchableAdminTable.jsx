@@ -69,12 +69,12 @@ function SearchableAdminTable({
         wrapperClassName="admin-users-table-wrapper"
         toolbar={
           extraToolbar || showSearch ? (
-            <div className="loads-table-toolbar">
+            <div className="tenant-users-filters loads-table-toolbar">
               {extraToolbar}
               {showSearch ? (
                 <div className="admin-users-search">
                   <input
-                    type="search"
+                    type="text"
                     placeholder="Search..."
                     value={searchTerm}
                     onChange={(event) => {

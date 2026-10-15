@@ -14,6 +14,7 @@ import Jobs from "./pages/tenant/Jobs";
 import MapView from "./pages/tenant/MapView";
 import BoxManagement from "./pages/tenant/BoxManagement";
 import SlicerReport from "./pages/tenant/SlicerReport";
+import Reports from "./pages/tenant/Reports";
 import Carrier from "./pages/tenant/Carrier";
 import PoTracker from "./pages/tenant/PoTracker";
 import Settings from "./pages/tenant/Settings";
@@ -66,6 +67,7 @@ function App() {
         <Route path="jobs" element={<Jobs />} />
         <Route path="map" element={<MapView />} />
         <Route path="box-management" element={<BoxManagement />} />
+        <Route path="reports" element={<Reports />} />
         <Route path="slicer-report" element={<SlicerReport />} />
         <Route path="carrier" element={<Carrier />} />
         <Route path="po-tracker" element={<PoTracker />} />

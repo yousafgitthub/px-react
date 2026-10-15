@@ -1,3 +1,4 @@
+import UserDataTable from "../../components/UserDataTable";
 import { useAuth } from "../../auth/useAuth";
 
 const TENANT_STATS = [
@@ -23,11 +24,18 @@ const TENANT_STATS = [
   },
 ];
 
+const ACTIVITY_COLUMNS = [
+  { key: "index", label: "#" },
+  { key: "title", label: "Title" },
+  { key: "hits", label: "Hits" },
+  { key: "status", label: "Status" },
+];
+
 function Overview() {
   const { user } = useAuth();
 
   return (
-    <main className="dashboard-content">
+    <main className="admin-users-page tenant-overview-page">
       <div className="tenant-dashboard-note">
         Welcome, {user?.displayName || "Tenant User"}
         {user?.tenant?.name ? ` — ${user.tenant.name}` : ""}.
@@ -54,33 +62,15 @@ function Overview() {
         ))}
       </div>
 
-      <div className="coming-soon-card">
-        <div className="coming-soon-header">
-          <div>
-            <h3>Recent Activity</h3>
-          </div>
-        </div>
-
-        <div className="coming-soon-table-wrapper">
-          <table className="coming-soon-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Hits</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colSpan="4" className="tenant-empty-table-cell">
-                  No recent activity available for this tenant.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <UserDataTable
+        title="Recent Activity"
+        rows={[]}
+        columns={ACTIVITY_COLUMNS}
+        showActions={false}
+        emptyMessage="No recent activity available for this tenant."
+        tableClassName="admin-users-table"
+        wrapperClassName="admin-users-table-wrapper"
+      />
     </main>
   );
 }

@@ -1,12 +1,8 @@
-import ModuleUnavailable from "./ModuleUnavailable";
+import { Navigate } from "react-router-dom";
 
+/** Legacy path — PropX Reports lives at /tenant/reports. */
 function SlicerReport() {
-  return (
-    <ModuleUnavailable
-      title="Slicer Report"
-      description="Slicer Report has no existing page or data source in this React application."
-    />
-  );
+  return <Navigate to="/tenant/reports" replace />;
 }
 
 export default SlicerReport;

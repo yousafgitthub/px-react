@@ -1,12 +1,7 @@
-import ModuleUnavailable from "./ModuleUnavailable";
+import PoTrackerWorkspace from "../../components/poTracker/PoTrackerWorkspace";
 
 function PoTracker() {
-  return (
-    <ModuleUnavailable
-      title="PO Tracker"
-      description="PO Tracker is not implemented in the current React frontend."
-    />
-  );
+  return <PoTrackerWorkspace />;
 }
 
 export default PoTracker;

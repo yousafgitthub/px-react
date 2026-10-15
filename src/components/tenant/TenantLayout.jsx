@@ -9,7 +9,8 @@ const PAGE_TITLES = {
   jobs: "Jobs",
   map: "Map",
   "box-management": "Box Management",
-  "slicer-report": "Slicer Report",
+  reports: "Reports",
+  "slicer-report": "Reports",
   carrier: "Carrier",
   "po-tracker": "PO Tracker",
   settings: "Company Settings",
@@ -24,7 +25,12 @@ function TenantLayout() {
     () =>
       typeof window !== "undefined" &&
       (window.location.pathname.includes("/tenant/jobs") ||
-        window.location.pathname.includes("/tenant/box-management"))
+        window.location.pathname.includes("/tenant/box-management") ||
+        window.location.pathname.includes("/tenant/reports") ||
+        window.location.pathname.includes("/tenant/slicer-report") ||
+        window.location.pathname.includes("/tenant/carrier") ||
+        window.location.pathname.includes("/tenant/po-tracker") ||
+        window.location.pathname.includes("/tenant/settings"))
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -42,8 +48,20 @@ function TenantLayout() {
       : location.pathname;
 
   const isJobsWorkspace = normalizedPath === "/tenant/jobs";
+  const isCarrierWorkspace = normalizedPath === "/tenant/carrier";
+  const isPoTrackerWorkspace = normalizedPath === "/tenant/po-tracker";
   const isBoxWorkspace = normalizedPath === "/tenant/box-management";
-  const isImmersiveWorkspace = isJobsWorkspace || isBoxWorkspace;
+  const isSettingsWorkspace = normalizedPath === "/tenant/settings";
+  const isReportsWorkspace =
+    normalizedPath === "/tenant/reports" ||
+    normalizedPath === "/tenant/slicer-report";
+  const isImmersiveWorkspace =
+    isJobsWorkspace ||
+    isCarrierWorkspace ||
+    isPoTrackerWorkspace ||
+    isBoxWorkspace ||
+    isSettingsWorkspace ||
+    isReportsWorkspace;
   const activePage =
     normalizedPath === "/tenant" || normalizedPath === "/tenant/"
       ? "dashboard"
@@ -61,9 +79,13 @@ function TenantLayout() {
     <div
       className={`admin-layout ${sidebarOpen ? "sidebar-open" : ""} ${
         sidebarCollapsed ? "sidebar-collapsed" : ""
-      } ${isJobsWorkspace ? "jobs-workspace-layout" : ""} ${
-        isBoxWorkspace ? "box-workspace-layout" : ""
-      }`}
+      } ${
+        isJobsWorkspace || isCarrierWorkspace || isPoTrackerWorkspace
+          ? "jobs-workspace-layout"
+          : ""
+      } ${
+        isBoxWorkspace || isSettingsWorkspace ? "box-workspace-layout" : ""
+      } ${isReportsWorkspace ? "reports-workspace-layout" : ""}`}
     >
       <TenantSidebar
         sidebarCollapsed={sidebarCollapsed}
@@ -73,7 +95,12 @@ function TenantLayout() {
           if (
             typeof path === "string" &&
             (path.includes("/tenant/jobs") ||
-              path.includes("/tenant/box-management"))
+              path.includes("/tenant/carrier") ||
+              path.includes("/tenant/po-tracker") ||
+              path.includes("/tenant/box-management") ||
+              path.includes("/tenant/settings") ||
+              path.includes("/tenant/reports") ||
+              path.includes("/tenant/slicer-report"))
           ) {
             setSidebarCollapsed(true);
           }

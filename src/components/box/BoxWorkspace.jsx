@@ -2,26 +2,34 @@ import { useMemo, useState } from "react";
 import {
   BOX_INTERVAL_OPTIONS,
   BOX_JOB_FILTERS,
+  BOX_LOCATION_FILTERS,
   BOX_SETTINGS_NAV,
+  BOX_UNIT_OPTIONS,
   USE_TENANT_BOX_DEMO,
   getTenantBoxDemoData,
 } from "../../data/tenantBoxDemo";
 import SearchableAdminTable from "../jobs/SearchableAdminTable";
 
-function TruckCountsChart({ points }) {
+function LineChart({
+  points,
+  getValue,
+  ariaLabel,
+  variant = "truck",
+}) {
   const width = Math.max(720, points.length * 56);
-  const height = 260;
-  const pad = { top: 24, right: 16, bottom: 48, left: 40 };
+  const height = 240;
+  const pad = { top: 20, right: 16, bottom: 46, left: 40 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
-  const maxValue = Math.max(1, ...points.map((point) => point.value));
+  const values = points.map((point) => getValue(point));
+  const maxValue = Math.max(1, ...values);
   const yTicks = [0, Math.ceil(maxValue / 2), maxValue];
 
   const coords = points.map((point, index) => {
     const x =
       pad.left +
       (points.length <= 1 ? plotW / 2 : (index / (points.length - 1)) * plotW);
-    const y = pad.top + plotH - (point.value / maxValue) * plotH;
+    const y = pad.top + plotH - (getValue(point) / maxValue) * plotH;
     return { ...point, x, y };
   });
 
@@ -32,12 +40,12 @@ function TruckCountsChart({ points }) {
   return (
     <div className="box-chart-scroll">
       <svg
-        className="box-truck-chart"
+        className={`box-truck-chart is-${variant}`}
         viewBox={`0 0 ${width} ${height}`}
         width={width}
         height={height}
         role="img"
-        aria-label="Truck counts over time"
+        aria-label={ariaLabel}
       >
         {yTicks.map((tick) => {
           const y = pad.top + plotH - (tick / maxValue) * plotH;
@@ -69,10 +77,15 @@ function TruckCountsChart({ points }) {
 
         {coords.map((point) => (
           <g key={point.label}>
-            <circle cx={point.x} cy={point.y} r="3.5" className="box-chart-dot" />
+            <circle
+              cx={point.x}
+              cy={point.y}
+              r="3.5"
+              className="box-chart-dot"
+            />
             <text
               x={point.x}
-              y={height - 14}
+              y={height - 12}
               textAnchor="middle"
               className="box-chart-label"
             >
@@ -85,7 +98,17 @@ function TruckCountsChart({ points }) {
   );
 }
 
-function BoxDashboard({ demo, jobFilter, setJobFilter, interval, setInterval }) {
+function BoxDashboard({
+  demo,
+  jobFilter,
+  setJobFilter,
+  interval,
+  setInterval,
+  locationFilter,
+  setLocationFilter,
+  unit,
+  setUnit,
+}) {
   return (
     <div className="box-dashboard">
       <div className="box-kpi-grid">
@@ -107,30 +130,27 @@ function BoxDashboard({ demo, jobFilter, setJobFilter, interval, setInterval }) 
         </section>
       </div>
 
-      <div className="box-dashboard-toolbar">
-        <label className="box-filter-field">
-          <span className="sr-only">Filter by job</span>
-          <select
-            value={jobFilter}
-            onChange={(event) => setJobFilter(event.target.value)}
-            aria-label="Filter by job"
-          >
-            {BOX_JOB_FILTERS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
       <section className="box-panel">
         <div className="box-panel-header">
           <h3>Truck Counts</h3>
           <div className="box-panel-controls">
+            <label className="box-filter-field">
+              <span className="sr-only">Filter by job</span>
+              <select
+                value={jobFilter}
+                onChange={(event) => setJobFilter(event.target.value)}
+                aria-label="Filter by job"
+              >
+                {BOX_JOB_FILTERS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             <button type="button" className="box-date-range" disabled>
               <i className="fa fa-calendar" aria-hidden="true"></i>
-              {demo.dateRangeLabel}
+              {demo.truckDateRangeLabel}
             </button>
             <select
               className="box-interval-select"
@@ -154,7 +174,64 @@ function BoxDashboard({ demo, jobFilter, setJobFilter, interval, setInterval }) 
             </button>
           </div>
         </div>
-        <TruckCountsChart points={demo.truckCounts} />
+        <LineChart
+          points={demo.truckCounts}
+          getValue={(point) => point.value}
+          ariaLabel="Truck counts over time"
+          variant="truck"
+        />
+        <div className="box-chart-scrubber" aria-hidden="true">
+          <div className="box-chart-scrubber-track">
+            <div className="box-chart-scrubber-thumb"></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="box-panel">
+        <div className="box-panel-header">
+          <h3>Box Inventory and Product Inventory Chart</h3>
+          <div className="box-panel-controls">
+            <button type="button" className="box-date-range" disabled>
+              <i className="fa fa-calendar" aria-hidden="true"></i>
+              {demo.inventoryDateRangeLabel}
+            </button>
+            <label className="box-filter-field">
+              <span className="sr-only">Filter by location</span>
+              <select
+                value={locationFilter}
+                onChange={(event) => setLocationFilter(event.target.value)}
+                aria-label="Filter by location"
+              >
+                {BOX_LOCATION_FILTERS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="box-lbs-toggle">
+              <button
+                type="button"
+                role="switch"
+                className={`box-lbs-switch ${unit === "LBS" ? "is-on" : ""}`}
+                aria-checked={unit === "LBS"}
+                aria-label="Use LBS units"
+                onClick={() =>
+                  setUnit(unit === "LBS" ? BOX_UNIT_OPTIONS[1].value : "LBS")
+                }
+              >
+                <span className="box-lbs-knob" aria-hidden="true"></span>
+              </button>
+              <span>LBS</span>
+            </label>
+          </div>
+        </div>
+        <LineChart
+          points={demo.inventoryChart}
+          getValue={(point) => point.boxes}
+          ariaLabel="Box inventory and product inventory chart"
+          variant="inventory"
+        />
       </section>
     </div>
   );
@@ -166,6 +243,8 @@ function BoxWorkspace() {
   const [settingsOpen, setSettingsOpen] = useState(true);
   const [jobFilter, setJobFilter] = useState("all");
   const [interval, setIntervalValue] = useState("12-Hour");
+  const [locationFilter, setLocationFilter] = useState("all");
+  const [unit, setUnit] = useState("LBS");
 
   const renderContent = () => {
     switch (activeSection) {
@@ -177,6 +256,10 @@ function BoxWorkspace() {
             setJobFilter={setJobFilter}
             interval={interval}
             setInterval={setIntervalValue}
+            locationFilter={locationFilter}
+            setLocationFilter={setLocationFilter}
+            unit={unit}
+            setUnit={setUnit}
           />
         );
       case "inventory":

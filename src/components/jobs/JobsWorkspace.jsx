@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { buildAddJobFormFromJob } from "../../data/addJobFormConfig";
 import {
   JOB_GROUP_OPTIONS,
   USE_TENANT_JOBS_DEMO,
@@ -7,6 +8,7 @@ import {
   createTenantJobDraft,
   getTenantJobsDemoData,
 } from "../../data/tenantJobsDemo";
+import AddJobModal from "./AddJobModal";
 import JobDetailPanel from "./JobDetailPanel";
 
 const STATUS_META = {
@@ -64,11 +66,9 @@ function JobsWorkspace() {
   const [groupBy, setGroupBy] = useState("none");
   const [menuJobId, setMenuJobId] = useState(null);
   const [isAddJobOpen, setIsAddJobOpen] = useState(false);
-  const [draftForm, setDraftForm] = useState({
-    name: "",
-    operator: "Demo Operator",
-    status: "Pending",
-  });
+  const [jobFormMode, setJobFormMode] = useState("create");
+  const [editingJobId, setEditingJobId] = useState(null);
+  const [formSequence, setFormSequence] = useState(1);
   const searchRef = useRef(null);
   const draftCountRef = useRef(1);
 
@@ -115,27 +115,93 @@ function JobsWorkspace() {
     }, {});
   }, [filteredJobs, groupBy]);
 
+  const buildAddJobDraftMeta = (payload) => ({
+    startDate: payload.startDate,
+    endDate: payload.endDate,
+    loadsRequirements: payload.loadsRequirements,
+    useApptTime: payload.useApptTime,
+    checkInType: payload.checkInType,
+    carrierPo: payload.carrierPo,
+    region: payload.region,
+    freightPo: payload.freightPo,
+    frostLaw: payload.frostLaw,
+    stagesPerDay: payload.stagesPerDay,
+    wells: payload.wells,
+    operatorRateSheets: payload.operatorRateSheets,
+    companyRateSheets: payload.companyRateSheets,
+    companyRateCompany: payload.companyRateCompany,
+    products: payload.products,
+    carriers: payload.carriers,
+    permissionFlags: payload.permissionFlags,
+    permissions: payload.permissions,
+    terminals: payload.terminals,
+    notesByType: payload.notesByType,
+    siloBelts: payload.siloBelts,
+    hoppers: payload.hoppers,
+    pictures: payload.pictures,
+    destination: payload.destination,
+    district: payload.district,
+    crew: payload.crew,
+    basin: payload.basin,
+    status: payload.status,
+    operator: payload.operator,
+    jobType: payload.jobType,
+  });
+
+  const closeJobForm = () => {
+    setIsAddJobOpen(false);
+    setJobFormMode("create");
+    setEditingJobId(null);
+  };
+
   const openAddJob = () => {
-    setDraftForm({
-      name: `Demo Draft Job ${draftCountRef.current}`,
-      operator: "Demo Operator",
-      status: "Pending",
-    });
+    setJobFormMode("create");
+    setEditingJobId(null);
+    setFormSequence(draftCountRef.current);
     setIsAddJobOpen(true);
     setMenuJobId(null);
   };
 
-  const submitAddJob = (event) => {
-    event.preventDefault();
-    const draft = createTenantJobDraft(draftCountRef.current);
-    draftCountRef.current += 1;
-    const next = {
-      ...draft,
-      name: draftForm.name.trim() || draft.name,
-      operator: draftForm.operator.trim() || draft.operator,
-      status: draftForm.status,
-      statusClass: STATUS_META[draftForm.status]?.className || "warning",
-      initials: (draftForm.name.trim() || draft.name)
+  const openJobSettings = (job) => {
+    if (!job?.id) {
+      return;
+    }
+    setJobFormMode("edit");
+    setEditingJobId(job.id);
+    setSelectedJobId(job.id);
+    setIsAddJobOpen(true);
+    setMenuJobId(null);
+  };
+
+  const applyPayloadToJob = (job, payload) => {
+    const name = payload.jobName.trim() || job.name;
+    return {
+      ...job,
+      name,
+      operator: payload.operator?.trim() || job.operator,
+      status: payload.status || job.status || "Pending",
+      statusClass:
+        STATUS_META[payload.status || job.status || "Pending"]?.className ||
+        job.statusClass ||
+        "warning",
+      jobType: payload.jobType || job.jobType,
+      basin: payload.basin || job.basin,
+      crew: payload.crew || job.crew,
+      district: payload.district || job.district,
+      destination: payload.destination || job.destination || "",
+      terminal: (payload.terminals || [])[0]?.terminal || job.terminal || "",
+      notes:
+        [
+          payload.notesByType?.special,
+          payload.notesByType?.accepted,
+          payload.notesByType?.terminal,
+          payload.notesByType?.inTransit,
+          payload.notesByType?.atDest,
+        ]
+          .filter(Boolean)
+          .join(" | ") || job.notes,
+      addJobDraft: buildAddJobDraftMeta(payload),
+      initials: name
         .split(/\s+/)
         .filter(Boolean)
         .slice(0, 2)
@@ -143,6 +209,18 @@ function JobsWorkspace() {
         .join("")
         .toUpperCase(),
     };
+  };
+
+  const submitAddJob = (payload) => {
+    const draft = createTenantJobDraft(draftCountRef.current);
+    draftCountRef.current += 1;
+    const next = applyPayloadToJob(
+      {
+        ...draft,
+        source: "demo-draft",
+      },
+      payload
+    );
 
     setJobs((prev) => [next, ...prev]);
     setLoadsByJobId((prev) => ({ ...prev, [next.id]: emptyLoads() }));
@@ -156,7 +234,36 @@ function JobsWorkspace() {
       [next.id]: createEmptyJobDetails(next),
     }));
     setSelectedJobId(next.id);
-    setIsAddJobOpen(false);
+    closeJobForm();
+  };
+
+  const submitEditJob = (payload) => {
+    if (!editingJobId) {
+      return;
+    }
+
+    const existingJob =
+      jobs.find((job) => job.id === editingJobId) || { id: editingJobId };
+    const updatedJob = applyPayloadToJob(existingJob, payload);
+
+    setJobs((prev) =>
+      prev.map((job) => (job.id === editingJobId ? updatedJob : job))
+    );
+    setDetailsByJobId((prev) => {
+      const current = prev[editingJobId];
+      return {
+        ...prev,
+        [editingJobId]: current
+          ? {
+              ...current,
+              statusLabel: updatedJob.status,
+              operatorLabel: updatedJob.operator,
+              locationName: updatedJob.destination || current.locationName,
+            }
+          : createEmptyJobDetails(updatedJob),
+      };
+    });
+    closeJobForm();
   };
 
   const deleteJob = (jobId) => {
@@ -397,6 +504,7 @@ function JobsWorkspace() {
           details={
             detailsByJobId[selectedJob.id] || createEmptyJobDetails(selectedJob)
           }
+          onOpenJobSettings={openJobSettings}
         />
       ) : (
         <section className="jobs-detail-panel">
@@ -407,96 +515,26 @@ function JobsWorkspace() {
         </section>
       )}
 
-      {isAddJobOpen && (
-        <div className="user-modal-backdrop" role="presentation">
-          <div
-            className="user-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="demo-add-job-title"
-          >
-            <div className="user-modal-header">
-              <div>
-                <div className="user-modal-eyebrow">Frontend demo</div>
-                <h3 id="demo-add-job-title">Add Job (Demo Only)</h3>
-              </div>
-              <button
-                type="button"
-                className="user-modal-close"
-                aria-label="Close"
-                onClick={() => setIsAddJobOpen(false)}
-              >
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
-            <form onSubmit={submitAddJob}>
-              <p className="jobs-detail-source">
-                This form creates a local demo draft only. It does not call
-                create APIs or write to a database.
-              </p>
-              <div className="jobs-detail-grid">
-                <label>
-                  <span>Job name</span>
-                  <input
-                    type="text"
-                    required
-                    value={draftForm.name}
-                    onChange={(event) =>
-                      setDraftForm((prev) => ({
-                        ...prev,
-                        name: event.target.value,
-                      }))
-                    }
-                  />
-                </label>
-                <label>
-                  <span>Operator</span>
-                  <input
-                    type="text"
-                    value={draftForm.operator}
-                    onChange={(event) =>
-                      setDraftForm((prev) => ({
-                        ...prev,
-                        operator: event.target.value,
-                      }))
-                    }
-                  />
-                </label>
-                <label>
-                  <span>Status</span>
-                  <select
-                    value={draftForm.status}
-                    onChange={(event) =>
-                      setDraftForm((prev) => ({
-                        ...prev,
-                        status: event.target.value,
-                      }))
-                    }
-                  >
-                    {Object.keys(STATUS_META).map((status) => (
-                      <option key={status} value={status}>
-                        {status}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <div className="user-form-actions">
-                <button
-                  type="button"
-                  className="jobs-icon-button"
-                  onClick={() => setIsAddJobOpen(false)}
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="new-admin-button">
-                  Create demo draft
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      {isAddJobOpen ? (
+        <AddJobModal
+          key={
+            jobFormMode === "edit"
+              ? `edit-${editingJobId}`
+              : `create-${formSequence}`
+          }
+          mode={jobFormMode}
+          sequence={formSequence}
+          initialValues={
+            jobFormMode === "edit" && editingJobId
+              ? buildAddJobFormFromJob(
+                  jobs.find((job) => job.id === editingJobId)
+                )
+              : null
+          }
+          onClose={closeJobForm}
+          onSubmit={jobFormMode === "edit" ? submitEditJob : submitAddJob}
+        />
+      ) : null}
     </div>
   );
 }

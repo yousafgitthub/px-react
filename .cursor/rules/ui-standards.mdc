@@ -8,8 +8,9 @@ alwaysApply: true
 Before implementing or changing any UI (admin or tenant):
 
 1. Read `UI_STANDARDS.md` at the repo root.
-2. Reuse existing admin-side components, DataTables (`UserDataTable`), styles in `src/css/dashboard.css`, fonts, colors, spacing, and layout patterns.
-3. Do not introduce a new visual design system or duplicate an existing component without justification.
+2. For DataTables / list pages, also read `DATATABLE_UI.md` and match Admin → Terminals (`terminal.jsx`): soft green wash, glass card, pale lime headers, PropX green `#96c33b`.
+3. Reuse existing admin-side components, DataTables (`UserDataTable`), styles in `src/css/dashboard.css`, fonts, colors, spacing, and layout patterns.
+4. Do not introduce a new visual design system or duplicate an existing component without justification.
 
 Core rule from `UI_STANDARDS.md`:
 
