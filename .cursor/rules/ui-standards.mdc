@@ -1,0 +1,16 @@
+---
+description: Enforce PropX admin UI standards for all UI work
+alwaysApply: true
+---
+
+# PropX UI standards
+
+Before implementing or changing any UI (admin or tenant):
+
+1. Read `UI_STANDARDS.md` at the repo root.
+2. Reuse existing admin-side components, DataTables (`UserDataTable`), styles in `src/css/dashboard.css`, fonts, colors, spacing, and layout patterns.
+3. Do not introduce a new visual design system or duplicate an existing component without justification.
+
+Core rule from `UI_STANDARDS.md`:
+
+> Before implementing any new UI, inspect the existing admin-side implementation and reuse its components, DataTables, styles, fonts, colors, spacing, and layout patterns wherever possible. Do not introduce a new visual design system or duplicate an existing component without justification.

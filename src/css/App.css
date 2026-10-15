@@ -242,6 +242,16 @@ body {
   text-decoration: underline;
 }
 
+.login-error {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 5px;
+  background: #fff1f0;
+  border: 1px solid #ffccc7;
+  color: #a8071a;
+  font-size: 13px;
+}
+
 /* Login Button */
 .login-button {
   width: 100%;
@@ -264,8 +274,13 @@ body {
     border-color 0.2s ease;
 }
 
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
 /* Button Hover */
-.login-button:hover {
+.login-button:hover:not(:disabled) {
   background: #799c31;
   border-color: #799c31;
 }
