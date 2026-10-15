@@ -201,7 +201,7 @@ function Sidebar({
                             </a>
 
                             <a
-                                href="/destination"
+                                href="#"
                                 className={`sidebar-subitem ${activePage === "destination" ? "active" : ""}`}
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -209,6 +209,17 @@ function Sidebar({
                                 }}
                             >
                                 Destination
+                            </a>
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "disposal-facilities" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("disposal-facilities");
+                                }}
+                            >
+                                Disposal Facilities
                             </a>
 
                         </div>

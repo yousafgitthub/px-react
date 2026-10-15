@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, initialData = {}, locationType, setLocationType }) {
     const [formData, setFormData] = useState(initialData);
@@ -6,6 +6,17 @@ function UserFormModal({ title, fields, onClose, onSubmit, showImage = true, ini
     const [showPassword, setShowPassword] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [showMap, setShowMap] = useState(false);
+
+    useEffect(() => {
+        if (
+            initialData.longitude !== undefined &&
+            initialData.latitude !== undefined &&
+            initialData.longitude !== "" &&
+            initialData.latitude !== ""
+        ) {
+            setLocationType("coordinates");
+        }
+    }, [initialData, setLocationType]);
 
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
