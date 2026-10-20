@@ -1,5 +1,5 @@
 import UserDataTable from "../../components/UserDataTable";
-import { useAuth } from "../../auth/useAuth";
+// import { useAuth } from "../../auth/useAuth";
 
 const TENANT_STATS = [
   {
@@ -32,15 +32,15 @@ const ACTIVITY_COLUMNS = [
 ];
 
 function Overview() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   return (
     <main className="admin-users-page tenant-overview-page">
-      <div className="tenant-dashboard-note">
+      {/* <div className="tenant-dashboard-note">
         Welcome, {user?.displayName || "Tenant User"}
         {user?.tenant?.name ? ` — ${user.tenant.name}` : ""}.
         Metrics stay unavailable until tenant APIs are connected.
-      </div>
+      </div> */}
 
       <div className="stats-grid">
         {TENANT_STATS.map((stat) => (

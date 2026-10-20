@@ -18,6 +18,8 @@ import ProductType from "../../pages/admin/product-type";
 import ProductSubType from "../../pages/admin/product-sub-type";
 import ProductListing from "../../pages/admin/product-listing";
 import ProductFamily from "../../pages/admin/product-family";
+import BoxDashboard from "../../pages/admin/box-dashboard";
+import BoxCompany from "../../pages/admin/box-company";
 
 function DashboardLayout({ onLogout }) {
 
@@ -54,6 +56,13 @@ function DashboardLayout({ onLogout }) {
             "product-family"       
         ].includes(localStorage.getItem("activePage"))
     );
+    
+    const [boxDashboardOpen, setBoxDashboardOpen] = useState(() =>
+        [
+            "box-dashboard",
+            "box-company"
+        ].includes(localStorage.getItem("activePage"))
+    );
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -85,6 +94,8 @@ function DashboardLayout({ onLogout }) {
         "product-sub-type": "Products Sub Type",
         "product-listing": "Product Listing",
         "product-family": "Product Family",
+        "box-dashboard": "Box Dashboard",
+        "box-company": "Box Companies",
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -113,6 +124,8 @@ function DashboardLayout({ onLogout }) {
                 setLocationOpen={setLocationOpen}
                 productOpen={productOpen}
                 setProductOpen={setProductOpen}
+                boxDashboardOpen={boxDashboardOpen}
+                setBoxDashboardOpen={setBoxDashboardOpen}
             />
 
             <div className="admin-main">
@@ -338,6 +351,12 @@ function DashboardLayout({ onLogout }) {
                 )}
                 {activePage === "product-family" && (
                     <ProductFamily />
+                )}
+                {activePage === "box-dashboard" && (
+                    <BoxDashboard />
+                )}
+                {activePage === "box-company" && (
+                    <BoxCompany />
                 )}
 
                 {/* <Footer /> */}

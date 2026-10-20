@@ -11,6 +11,8 @@ function Sidebar({
     setLocationOpen,
     productOpen,
     setProductOpen,
+    boxDashboardOpen,
+    setBoxDashboardOpen,
 }) {
     return (
         <aside className="admin-sidebar">
@@ -45,7 +47,7 @@ function Sidebar({
                     >
                         <span className="sidebar-item-left">
                             <i className="fa fa-building"></i>
-                            <span>Tenant Company</span>
+                            <span>Companies</span>
                         </span>
 
                         <i
@@ -161,10 +163,56 @@ function Sidebar({
 
                 </div>
 
-                <a href="#" className="sidebar-item">
-                    <i className="fa fa-cube"></i>
-                    <span>Box Management</span>
-                </a>
+               {/* Boxes Management */}
+
+               <div className="sidebar-group">
+
+                    <button
+                        className="sidebar-item sidebar-parent"
+                        onClick={() => setBoxDashboardOpen(!boxDashboardOpen)}
+                    >
+                        <span className="sidebar-item-left">
+                            <i className="fa-solid fa-box"></i>
+                            <span>Box Management</span>
+                        </span>
+
+                        <i
+                            className={`fa fa-chevron-down sidebar-arrow ${
+                                boxDashboardOpen ? "open" : ""
+                            }`}
+                        ></i>
+                    </button>
+
+                    {boxDashboardOpen && (
+                        <div className="sidebar-submenu">
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "box-dashboard" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("box-dashboard");
+                                }}
+                            >
+                                Box Dashboard
+                            </a>
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "box-company" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("box-company");
+                                }}
+                            >
+                                Company
+                            </a>
+
+                        </div>
+                    )}
+
+                </div>
+
                 {/* Product Type */}
                 <div className="sidebar-group">
 
