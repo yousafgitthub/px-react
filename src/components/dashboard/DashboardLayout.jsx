@@ -20,6 +20,7 @@ import ProductListing from "../../pages/admin/product-listing";
 import ProductFamily from "../../pages/admin/product-family";
 import BoxDashboard from "../../pages/admin/box-dashboard";
 import BoxCompany from "../../pages/admin/box-company";
+import StuckLoads from "../../pages/admin/stuck-loads";
 
 function DashboardLayout({ onLogout }) {
 
@@ -63,6 +64,11 @@ function DashboardLayout({ onLogout }) {
             "box-company"
         ].includes(localStorage.getItem("activePage"))
     );
+    const [reportsOpen, setReportsOpen] = useState(() =>
+        [
+            "stuck-loads"
+        ].includes(localStorage.getItem("activePage"))
+    );
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -96,6 +102,7 @@ function DashboardLayout({ onLogout }) {
         "product-family": "Product Family",
         "box-dashboard": "Box Dashboard",
         "box-company": "Box Companies",
+        "stuck-loads": "Stuck Loads"
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -126,6 +133,8 @@ function DashboardLayout({ onLogout }) {
                 setProductOpen={setProductOpen}
                 boxDashboardOpen={boxDashboardOpen}
                 setBoxDashboardOpen={setBoxDashboardOpen}
+                reportsOpen={reportsOpen}
+                setReportsOpen={setReportsOpen}
             />
 
             <div className="admin-main">
@@ -357,6 +366,9 @@ function DashboardLayout({ onLogout }) {
                 )}
                 {activePage === "box-company" && (
                     <BoxCompany />
+                )}
+                {activePage === "stuck-loads" && (
+                    <StuckLoads/>
                 )}
 
                 {/* <Footer /> */}

@@ -870,6 +870,116 @@
 }
 
 /* =========================
+   Stuck Reports
+========================= */
+
+/* Stuck Loads filters */
+.stuck-loads-filter-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stuck-loads-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 240px;
+    min-width: 200px;
+}
+
+.stuck-loads-filter-field label {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stuck-loads-filter-field select,
+.stuck-loads-search-input input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.stuck-loads-filter-field select:focus,
+.stuck-loads-search-input input:focus {
+    border-color: #96c33b;
+    box-shadow: 0 0 0 2px rgba(150, 195, 59, 0.15);
+}
+
+.stuck-loads-search-input {
+    position: relative;
+}
+
+.stuck-loads-search-input > i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.stuck-loads-search-input input {
+    padding-left: 34px;
+}
+
+.stuck-loads-table-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.stuck-loads-resolve-button {
+    padding: 6px 13px;
+    border: 1px solid #96c33b;
+    border-radius: 5px;
+    background: #96c33b;
+    color: #fff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.stuck-loads-resolve-button:hover {
+    border-color: #799c31;
+    background: #799c31;
+}
+
+.dark-mode .stuck-loads-filter-field label {
+    color: #e5e7eb;
+}
+
+.dark-mode .stuck-loads-filter-field select,
+.dark-mode .stuck-loads-search-input input {
+    border-color: #374151;
+    background: #1f2937;
+    color: #f3f4f6;
+}
+
+@media (max-width: 600px) {
+    .stuck-loads-filter-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .stuck-loads-filter-field {
+        width: 100%;
+    }
+}
+
+
+/* =========================
    BOX COMPANY WORKSPACE (Light/Dark)
 ========================= */
 
@@ -926,10 +1036,24 @@
 .box-company-page .box-company-tabs {
     display: flex;
     align-items: stretch;
-    justify-content: center;
-    gap: 24px;
+    justify-content: left;
+    gap: 15px;
     height: 58px;
     border-bottom: 1px solid #e9e5e5;
+}
+.box-company-page .box-company-address span {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.box-company-page .box-company-address h3 {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .box-company-page .box-company-tabs button {
@@ -938,7 +1062,7 @@
     border-bottom: 3px solid transparent;
     background: transparent;
     color: #344054;
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 14px;
     cursor: pointer;
 }
@@ -1109,7 +1233,7 @@
 /* Detail view header */
 .box-company-detail-header {
     padding: 14px 18px;
-    border-bottom: 1px solid #e9e5e5;
+    /* border-bottom: 1px solid #e9e5e5; */
 }
 
 .box-company-detail-header h3 {
@@ -1127,14 +1251,15 @@
     padding: 7px 0;
     border: 0;
     background: transparent;
-    color: #66852d;
+    color: #96C33B;
     font: inherit;
     font-size: 13px;
     cursor: pointer;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 .box-company-back-button:hover {
-    color: #49651c;
+    color: #96c33b;
 }
 
 .dark-mode .box-company-detail-header {
@@ -1172,7 +1297,7 @@
 
 .box-company-page {
     min-width: 0;
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 .box-company-header {
@@ -1238,7 +1363,7 @@
 }
 
 .box-company-search input {
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 12px;
 }
 
@@ -1547,7 +1672,7 @@
     border: none;
     border-left: 3px solid transparent;
     background: transparent;
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     cursor: pointer;
     text-align: left;
 }
@@ -1804,7 +1929,7 @@
 }
 
 .profile-settings-tabs button {
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     border: none;
     background: transparent;
     padding: 11px 18px;
@@ -3868,7 +3993,7 @@
     border-radius: 6px !important;
     background: #1f2937 !important;
     color: #ffffff !important;
-    font-family: inherit;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: 600;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;

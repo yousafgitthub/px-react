@@ -1,4 +1,12 @@
-function ConfirmDeleteModal({ onClose, onConfirm }) {
+
+function ConfirmDeleteModal({
+    onClose,
+    onConfirm,
+    title = "Delete Record",
+    message = "Are you sure you want to delete this record?",
+    confirmText = "Yes, Delete",
+    icon = "fa-trash",
+}) {
     return (
         <div className="delete-modal-backdrop" onMouseDown={onClose}>
             <section
@@ -9,16 +17,12 @@ function ConfirmDeleteModal({ onClose, onConfirm }) {
                 onMouseDown={(event) => event.stopPropagation()}
             >
                 <div className="delete-modal-icon">
-                    <i className="fa fa-trash"></i>
+                    <i className={`fa ${icon}`} aria-hidden="true"></i>
                 </div>
 
-                <h3 id="delete-modal-title">Delete Record</h3>
+                <h3 id="delete-modal-title">{title}</h3>
 
-                <p>
-                    Are you sure you want to delete this record?
-                    {/* <br />
-                    This action cannot be undone. */}
-                </p>
+                <p>{message}</p>
 
                 <div className="delete-modal-actions">
                     <button
@@ -34,7 +38,7 @@ function ConfirmDeleteModal({ onClose, onConfirm }) {
                         className="delete-modal-confirm"
                         onClick={onConfirm}
                     >
-                        Yes, Delete
+                        {confirmText}
                     </button>
                 </div>
             </section>

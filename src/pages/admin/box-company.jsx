@@ -6,7 +6,7 @@ import "../../css/dashboard.css";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
 import Actions from "../../components/Actions";
-
+import UserDataTable from "../../components/UserDataTable";
 const initialCompanies = [
     {
         id: 1,
@@ -65,7 +65,6 @@ function CompanyListItem({ company, onDelete, onToggleStatus, onSelect, isSelect
             onClick: onDelete,
         },
     ];
-
     return (
         <article className={`box-company-list-item ${isSelected ? "is-selected" : ""}`} onClick={onSelect}>
             <div className="box-company-avatar-wrap">
@@ -81,12 +80,14 @@ function CompanyListItem({ company, onDelete, onToggleStatus, onSelect, isSelect
             </div>
 
             <div className="box-company-information">
-                <h3>{company.name}</h3>
+                <div class="box-company-address">
+                    <h3>{company.name}</h3>
+                </div>
                 <span className="box-company-type">{company.type}</span>
 
                 <div className="box-company-address">
                     <i className="fa fa-map-marker" aria-hidden="true" />
-                    <span>{company.address}</span>
+                    <span title={company.address}>{company.address}</span>
                 </div>
             </div>
 
@@ -244,27 +245,25 @@ function BoxCompany() {
                                 <i className="fa fa-arrow-left" aria-hidden="true" />
                                 Back
                             </button>
+                            <div className="box-company-tabs">
+                                <button
+                                    type="button"
+                                    className={activeTab === "Details" ? "active" : ""}
+                                    onClick={() => setActiveTab("Details")}
+                                >
+                                    Details
+                                </button>
 
-                            {/* <h3>{activeCompany?.name}</h3> */}
+                                <button
+                                    type="button"
+                                    className={activeTab === "Box" ? "active" : ""}
+                                    onClick={() => setActiveTab("Box")}
+                                >
+                                    Box
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="box-company-tabs">
-                            <button
-                                type="button"
-                                className={activeTab === "Details" ? "active" : ""}
-                                onClick={() => setActiveTab("Details")}
-                            >
-                                Details
-                            </button>
-
-                            <button
-                                type="button"
-                                className={activeTab === "Box" ? "active" : ""}
-                                onClick={() => setActiveTab("Box")}
-                            >
-                                Box
-                            </button>
-                        </div>
 
                         {activeTab === "Details" && activeCompany && (
                             <div className="box-company-detail-panel">
@@ -285,7 +284,7 @@ function BoxCompany() {
                                         </span>
 
                                         <span>
-                                            <i className="fa fa-circle" aria-hidden="true" />
+                                            <i className="fa fa-circle" aria-hidden="true" style={{ color: activeCompany.status === "Active" ? "#96C33B" : "#e0362a" }}/>
                                             {activeCompany.status}
                                         </span>
                                     </div>
@@ -293,39 +292,34 @@ function BoxCompany() {
                             </div>
                         )}
 
+                        
                         {activeTab === "Box" && (
                             <div className="box-company-box-panel">
-                                <h3>Box Listing</h3>
-
-                                <div className="box-company-table-scroll">
-                                    <table className="box-company-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Box No.</th>
-                                                <th>Box Status Name</th>
-                                                <th>Condition Name</th>
-                                                <th>Capacity</th>
-                                                <th>Weight</th>
-                                                <th>Tracking Hardware</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td colSpan="8" className="box-company-no-data">
-                                                    No data available in table
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <UserDataTable
+                                    title="Box Listing"
+                                    rows={[]}
+                                    columns={[
+                                        { key: "box_no", label: "Box No." },
+                                        { key: "box_status_name", label: "Box Status Name" },
+                                        { key: "condition_name", label: "Condition Name" },
+                                        { key: "capacity", label: "Capacity" },
+                                        { key: "weight", label: "Weight" },
+                                        { key: "tracking_hardware", label: "Tracking Hardware" },
+                                        { key: "status", label: "Status" },
+                                    ]}
+                                    showActions={true}
+                                    emptyMessage="No data available in table"
+                                    tableClassName="box-company-table admin-users-table"
+                                    wrapperClassName="box-company-table-scroll"
+                                    getRowKey={(row) => row.id}
+                                />
 
                                 <div className="box-company-table-footer">
                                     Showing 0 to 0 of 0 entries
                                 </div>
                             </div>
                         )}
+
                     </div>
                 </section>
             )}

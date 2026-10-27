@@ -13,6 +13,8 @@ function Sidebar({
     setProductOpen,
     boxDashboardOpen,
     setBoxDashboardOpen,
+    reportsOpen,
+    setReportsOpen,
 }) {
     return (
         <aside className="admin-sidebar">
@@ -344,10 +346,44 @@ function Sidebar({
                     <span>System Configuration</span>
                 </a>
 
-                <a href="#" className="sidebar-item">
-                    <i className="fa fa-file-text"></i>
-                    <span>System Reports</span>
-                </a>
+                {/* System Reports */}
+
+               <div className="sidebar-group">
+
+                    <button
+                        className="sidebar-item sidebar-parent"
+                        onClick={() => setReportsOpen(!reportsOpen)}
+                    >
+                        <span className="sidebar-item-left">
+                            <i className="fa fa-file-text" aria-hidden="true"></i>
+                            <span>System Reports</span>
+                        </span>
+
+                        <i
+                            className={`fa fa-chevron-down sidebar-arrow ${
+                                reportsOpen ? "open" : ""
+                            }`}
+                        ></i>
+                    </button>
+
+                    {reportsOpen && (
+                        <div className="sidebar-submenu">
+
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "stuck-loads" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("stuck-loads");
+                                }}
+                            >
+                                Stuck Loads
+                            </a>
+
+                        </div>
+                    )}
+
+                </div>
 
                 <a href="#" className="sidebar-item">
                     <i className="fa-solid fa-file-signature"></i>
