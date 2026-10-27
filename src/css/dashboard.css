@@ -869,6 +869,302 @@
         box-shadow 0.2s ease;
 }
 
+/* =========================
+   BOX COMPANY WORKSPACE (Light/Dark)
+========================= */
+
+.box-company-page .box-company-workspace {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    min-height: 580px;
+    overflow: hidden;
+    /* border: 1px solid #ffffff; */
+    background: #ffffff;
+}
+
+/* Left company sidebar */
+.box-company-page .box-company-sidebar {
+    flex: 0 0 270px;
+    width: 270px;
+    min-width: 0;
+    max-height: 580px;
+    overflow-y: auto;
+    border-right: 1px solid #e9e5e5;
+    background: #ffffff;
+}
+
+.box-company-page .box-company-sidebar .box-company-list {
+    width: 100%;
+}
+
+.box-company-page .box-company-list-item {
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.box-company-page .box-company-list-item.is-selected {
+    background: #d1e7f6;
+    border-left: 3px solid #96c33b;
+    padding-left: 17px;
+}
+
+/* Keep actions above the selected row */
+.box-company-page .box-company-row-actions {
+    z-index: 5;
+}
+
+/* Right content panel */
+.box-company-page .box-company-main {
+    flex: 1 1 0;
+    min-width: 0;
+    background: #ffffff;
+}
+
+/* Details and Box tabs */
+.box-company-page .box-company-tabs {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 24px;
+    height: 58px;
+    border-bottom: 1px solid #e9e5e5;
+}
+
+.box-company-page .box-company-tabs button {
+    padding: 0 14px;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: #344054;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.box-company-page .box-company-tabs button.active {
+    border-bottom-color: #96c33b;
+    font-weight: 600;
+}
+
+/* Company Details */
+.box-company-page .box-company-detail-panel {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+}
+
+.box-company-page .box-company-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 140px;
+    height: 140px;
+    border: 1px solid 1px solid #374151;
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 58px;
+}
+
+.box-company-page .box-company-detail-information {
+    min-width: 0;
+}
+
+.box-company-page .box-company-detail-information h1 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.box-company-page .box-company-detail-type {
+    margin: 0 0 6px;
+    color: #7d8792;
+    font-size: 14px;
+}
+
+.box-company-page .box-company-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    color: #777;
+    font-size: 13px;
+}
+
+.box-company-page .box-company-contact span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    overflow-wrap: anywhere;
+}
+
+/* Box listing */
+.box-company-page .box-company-box-panel {
+    min-width: 0;
+    padding: 18px 12px;
+}
+
+.box-company-page .box-company-box-panel h3 {
+    margin: 0 0 18px;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.box-company-page .box-company-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.box-company-page .box-company-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.box-company-page .box-company-table th,
+.box-company-page .box-company-table td {
+    padding: 12px 9px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.box-company-page .box-company-table .box-company-no-data {
+    text-align: center;
+}
+
+.box-company-page .box-company-table-footer {
+    margin-top: 16px;
+    color: #344054;
+    font-size: 13px;
+}
+
+/* Dark theme */
+.dark-mode .box-company-page .box-company-workspace,
+.dark-mode .box-company-page .box-company-sidebar,
+.dark-mode .box-company-page .box-company-main {
+    border-color: #ffffff;
+    background: #1f2937;
+    border-right: 1px solid #374151;
+}
+
+.dark-mode .box-company-page .box-company-list-item.is-selected {
+    background: #263b4d;
+    border-left-color: #96c33b;
+}
+
+.dark-mode .box-company-page .box-company-tabs {
+    border-color: #374151;
+}
+
+.dark-mode .box-company-page .box-company-tabs button {
+    color: #e5e7eb;
+}
+
+.dark-mode .box-company-page .box-company-detail-information h1,
+.dark-mode .box-company-page .box-company-box-panel h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .box-company-page .box-company-logo-placeholder,
+.dark-mode .box-company-page .box-company-table th,
+.dark-mode .box-company-page .box-company-table td {
+    border-color: #374151;
+}
+
+.dark-mode .box-company-page .box-company-table th,
+.dark-mode .box-company-page .box-company-table td {
+    color: #e5e7eb;
+    background: #1f2937;
+}
+
+.dark-mode .box-company-page .box-company-table-footer {
+    color: #9ca3af;
+}
+
+/* Company directory default view */
+.box-company-page .box-company-directory {
+    width: 100%;
+    overflow: visible;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    background: #fff;
+}
+.dark-mode .box-company-page .box-company-directory {
+    width: 100%;
+    overflow: visible;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.box-company-page .box-company-directory .box-company-list-item {
+    cursor: pointer;
+}
+
+/* Detail view header */
+.box-company-detail-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e9e5e5;
+}
+
+.box-company-detail-header h3 {
+    margin: 12px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 0.8;
+    color: #263b50;
+}
+
+.box-company-back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 0;
+    border: 0;
+    background: transparent;
+    color: #66852d;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.box-company-back-button:hover {
+    color: #49651c;
+}
+
+.dark-mode .box-company-detail-header {
+    border-color: #374151;
+}
+
+.dark-mode .box-company-detail-header h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .box-company-back-button {
+    color: #c6e99a;
+}
+
+
+@media (max-width: 768px) {
+    .box-company-page .box-company-sidebar {
+        flex-basis: 220px;
+    }
+
+    .box-company-page .box-company-detail-panel {
+        flex-direction: column;
+    }
+
+    .box-company-page .box-company-contact {
+        flex-direction: column;
+    }
+}
+
+
 
 /* =========================
    BOX COMPANY
@@ -895,9 +1191,9 @@
 
 .box-company-directory {
     overflow: visible;
-    border: 1px solid #e4e9ee;
+    border: 1px solid #374151;
     border-radius: 8px;
-    background: #ffffff;
+    /* background: #ffffff; */
 }
 
 .box-company-toolbar {
@@ -906,7 +1202,7 @@
     justify-content: space-between;
     gap: 18px;
     padding: 15px 20px;
-    border-bottom: 1px solid #e9edf1;
+    border-bottom: 1px solid #374151;
 }
 
 .box-company-list-heading {

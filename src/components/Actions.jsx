@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function Actions({ onDelete, menuItems = [] }) {
+function Actions({ onDelete, menuItems = [], popupOnly = false }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -24,20 +24,24 @@ function Actions({ onDelete, menuItems = [] }) {
     return (
         <div className="company-actions">
 
-            <button
-                className="admin-action-button"
-                aria-label="Edit"
-            >
-                <i className="fa fa-pencil"></i>
-            </button>
+            {!popupOnly && (
+                <>
+                    <button
+                        className="admin-action-button"
+                        aria-label="Edit"
+                    >
+                        <i className="fa fa-pencil"></i>
+                    </button>
 
-            <button
-                className="admin-action-button"
-                aria-label="Delete"
-                onClick={onDelete}
-            >
-                <i className="fa fa-trash"></i>
-            </button>
+                    <button
+                        className="admin-action-button"
+                        aria-label="Delete"
+                        onClick={onDelete}
+                    >
+                        <i className="fa fa-trash"></i>
+                    </button>
+                </>
+            )}
 
             <div
                 className="company-more-actions"
@@ -79,6 +83,7 @@ function Actions({ onDelete, menuItems = [] }) {
             </div>
 
         </div>
+
     );
 }
 

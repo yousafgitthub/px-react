@@ -38,7 +38,7 @@ const initialCompanies = [
     },
 ];
 
-function CompanyListItem({ company, onDelete, onToggleStatus }) {
+function CompanyListItem({ company, onDelete, onToggleStatus, onSelect, isSelected }) {
     const initials = company.name
         .split(/\s+/)
         .slice(0, 2)
@@ -67,7 +67,7 @@ function CompanyListItem({ company, onDelete, onToggleStatus }) {
     ];
 
     return (
-        <article className="box-company-list-item">
+        <article className={`box-company-list-item ${isSelected ? "is-selected" : ""}`} onClick={onSelect}>
             <div className="box-company-avatar-wrap">
                 <div className="box-company-avatar">{initials}</div>
 
@@ -90,8 +90,8 @@ function CompanyListItem({ company, onDelete, onToggleStatus }) {
                 </div>
             </div>
 
-            <div className="box-company-row-actions">
-                <Actions menuItems={actionItems}/>
+            <div className="box-company-row-actions" onClick={(event) => event.stopPropagation()}>
+                <Actions menuItems={actionItems} popupOnly/>
             </div>
         </article>
     );
@@ -103,6 +103,9 @@ function BoxCompany() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isNewCompanyModalOpen, setIsNewCompanyModalOpen] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState(null);
+    const [activeCompany, setActiveCompany] = useState(null);
+    const [activeTab, setActiveTab] = useState("Details");
+    const [viewMode, setViewMode] = useState("list");
 
     const fields = [
         { name: "name", label: "Company Name", type: "text", required: true, placeholder: "Enter company name", fullWidth: true },
@@ -144,13 +147,20 @@ function BoxCompany() {
     const confirmDelete = () => {
         if (!selectedCompany) return;
 
+        const deletedId = selectedCompany.id;
+
         setCompanies((current) =>
-            current.filter((company) => company.id !== selectedCompany.id)
+            current.filter((company) => company.id !== deletedId)
         );
 
+        if (activeCompany?.id === deletedId) {
+            setActiveCompany(null);
+            setViewMode("list");
+        }
+
         setIsDeleteModalOpen(false);
-        toastr.success("Company deleted successfully.", "Success");
         setSelectedCompany(null);
+        toastr.success("Company deleted successfully.", "Success");
     };
 
     const createCompany = () => {
@@ -176,43 +186,151 @@ function BoxCompany() {
             </div>
 
             
-            <section className="box-company-directory">
-                {/* <div className="box-company-toolbar">
-                    {/* <div className="box-company-list-heading">
-                        <h3>Companies</h3>
-                    </div> 
+            
+            {viewMode === "list" ? (
+                <section className="box-company-directory">
+                    <div className="box-company-list">
+                        {companies.map((company) => (
+                            <CompanyListItem
+                                key={company.id}
+                                company={company}
+                                onSelect={() => {
+                                    setActiveCompany(company);
+                                    setActiveTab("Details");
+                                    setViewMode("detail");
+                                }}
+                                onToggleStatus={() => toggleStatus(company)}
+                                onDelete={() => {
+                                    setSelectedCompany(company);
+                                    setIsDeleteModalOpen(true);
+                                }}
+                            />
+                        ))}
 
-                    <div className="tanent-users-search box-company-search">
-                        <input
-                            type="text"
-                            placeholder="Search companies..."
-                            value={searchTerm}
-                            onChange={(event) => setSearchTerm(event.target.value)}
-                        />
-                        <i className="fa fa-search"></i>
+                        {companies.length === 0 && (
+                            <div className="box-company-empty">
+                                <strong>No companies available</strong>
+                            </div>
+                        )}
                     </div>
-                </div> */}
-
-                <div className="box-company-list">
-                    {companies.map((company) => (
-                        <CompanyListItem
-                            key={company.id}
-                            company={company}
-                            onToggleStatus={() => toggleStatus(company)}
-                            onDelete={() => {
-                                setSelectedCompany(company);
-                                setIsDeleteModalOpen(true);
-                            }}
-                        />
-                    ))}
-
-                    {companies.length === 0 && (
-                        <div className="box-company-empty">
-                            <strong>No companies available</strong>
+                </section>
+            ) : (
+                <section className="box-company-workspace">
+                    <aside className="box-company-sidebar">
+                        <div className="box-company-list">
+                            {companies.map((company) => (
+                                <CompanyListItem
+                                    key={company.id}
+                                    company={company}
+                                    isSelected={activeCompany?.id === company.id}
+                                    onSelect={() => setActiveCompany(company)}
+                                    onToggleStatus={() => toggleStatus(company)}
+                                    onDelete={() => {
+                                        setSelectedCompany(company);
+                                        setIsDeleteModalOpen(true);
+                                    }}
+                                />
+                            ))}
                         </div>
-                    )}
-                </div>
-            </section>
+                    </aside>
+
+                    <div className="box-company-main">
+                        <div className="box-company-detail-header">
+                            <button
+                                type="button"
+                                className="box-company-back-button"
+                                onClick={() => setViewMode("list")}
+                            >
+                                <i className="fa fa-arrow-left" aria-hidden="true" />
+                                Back
+                            </button>
+
+                            {/* <h3>{activeCompany?.name}</h3> */}
+                        </div>
+
+                        <div className="box-company-tabs">
+                            <button
+                                type="button"
+                                className={activeTab === "Details" ? "active" : ""}
+                                onClick={() => setActiveTab("Details")}
+                            >
+                                Details
+                            </button>
+
+                            <button
+                                type="button"
+                                className={activeTab === "Box" ? "active" : ""}
+                                onClick={() => setActiveTab("Box")}
+                            >
+                                Box
+                            </button>
+                        </div>
+
+                        {activeTab === "Details" && activeCompany && (
+                            <div className="box-company-detail-panel">
+                                <div className="box-company-logo-placeholder">
+                                    <i className="fa fa-building" aria-hidden="true" />
+                                </div>
+
+                                <div className="box-company-detail-information">
+                                    <h1>{activeCompany.name}</h1>
+                                    <p className="box-company-detail-type">
+                                        {activeCompany.type}
+                                    </p>
+
+                                    <div className="box-company-contact">
+                                        <span>
+                                            <i className="fa fa-map-marker" aria-hidden="true" />
+                                            {activeCompany.address}
+                                        </span>
+
+                                        <span>
+                                            <i className="fa fa-circle" aria-hidden="true" />
+                                            {activeCompany.status}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === "Box" && (
+                            <div className="box-company-box-panel">
+                                <h3>Box Listing</h3>
+
+                                <div className="box-company-table-scroll">
+                                    <table className="box-company-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Box No.</th>
+                                                <th>Box Status Name</th>
+                                                <th>Condition Name</th>
+                                                <th>Capacity</th>
+                                                <th>Weight</th>
+                                                <th>Tracking Hardware</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colSpan="8" className="box-company-no-data">
+                                                    No data available in table
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className="box-company-table-footer">
+                                    Showing 0 to 0 of 0 entries
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
+
+
 
 
             {isNewCompanyModalOpen && (
