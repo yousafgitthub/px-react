@@ -102,7 +102,7 @@ function StuckLoads() {
                 <h2>Stuck Loads</h2>
             </div>
 
-            <div className="stuck-loads-filter-row">
+            {/* <div className="stuck-loads-filter-row">
                 <div className="stuck-loads-filter-field">
                     <label htmlFor="stuck-company">Company</label>
 
@@ -136,9 +136,10 @@ function StuckLoads() {
                         />
                     </div>
                 </div>
-                
-            </div>
 
+            </div> */}
+
+            
             <UserDataTable
                 title="Stuck Loads Listing"
                 rows={companyId ? filteredLoads : []}
@@ -161,7 +162,54 @@ function StuckLoads() {
                         Resolve
                     </button>
                 )}
+                
+                toolbar={
+                    <div className="tenant-users-filters">
+                        <label className="tenant-filter-control">
+                            <span className="tenant-filter-select-wrap">
+                                <i
+                                    className="fa fa-building tenant-filter-icon"
+                                    aria-hidden="true"
+                                ></i>
+
+                                <select
+                                    value={companyId}
+                                    onChange={(event) => setCompanyId(event.target.value)}
+                                    className="tenant-users-filter"
+                                    aria-label="Filter by company"
+                                >
+                                    <option value="">Select Company</option>
+
+                                    {companyOptions.map((company) => (
+                                        <option key={company.id} value={company.id}>
+                                            {company.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                <i
+                                    className="fa fa-chevron-down tenant-filter-chevron"
+                                    aria-hidden="true"
+                                ></i>
+                            </span>
+                        </label>
+
+                        <div className="tanent-users-search">
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchTerm}
+                                onChange={(event) => setSearchTerm(event.target.value)}
+                                aria-label="Search job name or load number"
+                            />
+
+                            <i className="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                }
+
             />
+
             {showResolveModal && selectedLoad && (
                 <ConfirmDeleteModal
                     onClose={() => {

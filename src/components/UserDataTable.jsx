@@ -65,9 +65,13 @@ function UserDataTable({
     return (
         <div className="admin-users-card">
             {(title || toolbar) && (
-                <div className={headerClassName}>
+                <div className={`${headerClassName} ${toolbar ? "has-toolbar" : ""}`}>
                     {title ? <h3>{title}</h3> : null}
-                    {toolbar}
+                    {toolbar ? (
+                        <div className="admin-users-card-toolbar">
+                            {toolbar}
+                        </div>
+                    ) : null}
                 </div>
             )}
             <div className={wrapperClassName}>

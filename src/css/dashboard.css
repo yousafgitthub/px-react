@@ -966,6 +966,38 @@
     background: #1f2937;
     color: #f3f4f6;
 }
+/* Align table title and filters on one row */
+.admin-users-card-header.has-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.admin-users-card-toolbar {
+    margin-left: auto;
+    min-width: 0;
+}
+
+.stuck-loads-filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.stuck-loads-filter-field {
+    width: 210px;
+    min-width: 0;
+}
+
+.stuck-loads-filter-field select,
+.stuck-loads-search-input input {
+    box-sizing: border-box;
+}
 
 @media (max-width: 600px) {
     .stuck-loads-filter-row {
