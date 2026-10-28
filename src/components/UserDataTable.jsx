@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function SortHeader({ column, sortConfig, onSort }) {
     const isActive = sortConfig.column === column.key;
@@ -34,8 +34,10 @@ function UserDataTable({
     tableClassName = "admin-users-table",
     wrapperClassName = "admin-users-table-wrapper",
     getRowKey,
+    pageSize = 10,
 }) {
     const [sortConfig, setSortConfig] = useState({ column: "", direction: "asc" });
+    const [currentPage, setCurrentPage] = useState(1);
 
     const sortedRows = useMemo(() => {
         const data = rows ?? users ?? [];
@@ -49,6 +51,33 @@ function UserDataTable({
             return sortConfig.direction === "asc" ? result : -result;
         });
     }, [rows, users, sortConfig]);
+
+    const totalRows = sortedRows.length;
+    const totalPages = Math.ceil(totalRows / pageSize);
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, totalRows);
+
+    const paginatedRows = sortedRows.slice(startIndex, endIndex);
+
+    useEffect(() => {
+        if (currentPage > Math.max(totalPages, 1)) {
+            setCurrentPage(Math.max(totalPages, 1));
+        }
+    }, [currentPage, totalPages]);
+
+    const getPageNumbers = () => {
+        const pages = [];
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+
+        for (let page = startPage; page <= endPage; page++) {
+            pages.push(page);
+        }
+
+        return pages;
+    };
+
 
     const handleSort = (column) => {
         setSortConfig((currentSort) => ({
@@ -101,7 +130,7 @@ function UserDataTable({
                                 </td>
                             </tr>
                         ) : (
-                            sortedRows.map((row, index) => {
+                            paginatedRows.map((row, index) => {
                                 const key = getRowKey
                                     ? getRowKey(row, index)
                                     : row.id ?? row.email ?? `row-${index}`;
@@ -136,6 +165,55 @@ function UserDataTable({
                     ) : null}
                 </table>
             </div>
+            {totalRows > 0 && (
+                <div className="admin-table-pagination">
+                    <div className="admin-table-pagination-info">
+                        Showing <strong>{startIndex + 1}</strong> to{" "}
+                        <strong>{endIndex}</strong> of{" "}
+                        <strong>{totalRows}</strong> entries
+                    </div>
+
+                    <div className="admin-table-pagination-controls">
+                        <button
+                            type="button"
+                            className="admin-pagination-button admin-pagination-prev"
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((page) => page - 1)}
+                            aria-label="Previous page"
+                        >
+                            <i className="fa fa-chevron-left" aria-hidden="true"></i>
+                            <span>Previous</span>
+                        </button>
+
+                        {getPageNumbers().map((page) => (
+                            <button
+                                key={page}
+                                type="button"
+                                className={`admin-pagination-button admin-pagination-number ${
+                                    currentPage === page ? "active" : ""
+                                }`}
+                                aria-current={
+                                    currentPage === page ? "page" : undefined
+                                }
+                                onClick={() => setCurrentPage(page)}
+                            >
+                                {page}
+                            </button>
+                        ))}
+
+                        <button
+                            type="button"
+                            className="admin-pagination-button admin-pagination-next"
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage((page) => page + 1)}
+                            aria-label="Next page"
+                        >
+                            <span>Next</span>
+                            <i className="fa fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

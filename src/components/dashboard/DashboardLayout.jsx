@@ -21,6 +21,7 @@ import ProductFamily from "../../pages/admin/product-family";
 import BoxDashboard from "../../pages/admin/box-dashboard";
 import BoxCompany from "../../pages/admin/box-company";
 import StuckLoads from "../../pages/admin/stuck-loads";
+import BoxVisualization from "../../pages/admin/box-visualization";
 
 function DashboardLayout({ onLogout }) {
 
@@ -61,7 +62,8 @@ function DashboardLayout({ onLogout }) {
     const [boxDashboardOpen, setBoxDashboardOpen] = useState(() =>
         [
             "box-dashboard",
-            "box-company"
+            "box-company",
+            "box-visualization",
         ].includes(localStorage.getItem("activePage"))
     );
     const [reportsOpen, setReportsOpen] = useState(() =>
@@ -102,7 +104,8 @@ function DashboardLayout({ onLogout }) {
         "product-family": "Product Family",
         "box-dashboard": "Box Dashboard",
         "box-company": "Box Companies",
-        "stuck-loads": "Stuck Loads"
+        "stuck-loads": "Stuck Loads",
+        "box-visualization": "Box Visualization"
     };
     useEffect(() => {
         document.documentElement.classList.toggle("dark-mode", darkMode);
@@ -152,7 +155,7 @@ function DashboardLayout({ onLogout }) {
 
                 {/* Dashboard Content */}
                 {activePage === "dashboard" && (
-                    <main className="dashboard-content">
+                    <main className="admin-users-page admin-overview-page">
 
                         <div className="stats-grid">
 
@@ -270,17 +273,17 @@ function DashboardLayout({ onLogout }) {
 
                         </div>
 
-                        <div className="coming-soon-card">
+                        <div className="admin-users-card">
 
-                            <div className="coming-soon-header">
+                            <div className="admin-users-card-header">
                                 <div>
                                     <h3>Coming Soon</h3>
                                 </div>
                             </div>
 
-                            <div className="coming-soon-table-wrapper">
+                            <div className="admin-users-table-wrapper">
 
-                                <table className="coming-soon-table">
+                                <table className="admin-users-table">
 
                                     <thead>
                                         <tr>
@@ -366,6 +369,9 @@ function DashboardLayout({ onLogout }) {
                 )}
                 {activePage === "box-company" && (
                     <BoxCompany />
+                )}
+                { activePage === "box-visualization" &&  (
+                    <BoxVisualization />
                 )}
                 {activePage === "stuck-loads" && (
                     <StuckLoads/>

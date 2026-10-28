@@ -210,6 +210,17 @@ function Sidebar({
                                 Company
                             </a>
 
+                            <a
+                                href="#"
+                                className={`sidebar-subitem ${activePage === "box-visualization" ? "active" : ""}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    changePage("box-visualization");
+                                }}
+                            >
+                                Box Visualization
+                            </a>
+
                         </div>
                     )}
 

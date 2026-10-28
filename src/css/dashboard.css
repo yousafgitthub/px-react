@@ -333,9 +333,9 @@
    DASHBOARD CONTENT
 ========================= */
 
-.dark-mode .dashboard-content {
+/* .dark-mode .dashboard-content {
     background: #111827;
-}
+} */
 
 
 /* =========================
@@ -1071,7 +1071,7 @@
     justify-content: left;
     gap: 15px;
     height: 58px;
-    border-bottom: 1px solid #e9e5e5;
+    /* border-bottom: 1px solid #e9e5e5; */
 }
 .box-company-page .box-company-address span {
     display: block;
@@ -1464,7 +1464,7 @@
 }
 
 .box-company-presence.is-inactive {
-    background: #d6a23c;
+    background: rgb(224, 54, 42);;
 }
 
 /* Company information */
@@ -1576,6 +1576,1063 @@
     background: #fafbfc;
     color: #84909e;
     font-size: 11px;
+}
+
+
+/* =========================================================
+   BOX TIMELINE PAGE
+   Light Theme + Dark Theme
+   File: src/css/dashboard.css
+========================================================= */
+
+/* ---------- 1. Main page ---------- */
+
+.box-timeline-page {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    padding: 22px 24px;
+    background: #f7f9fc;
+    color: #1f2937;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.box-timeline-page *,
+.box-timeline-page *::before,
+.box-timeline-page *::after {
+    box-sizing: border-box;
+}
+
+/* ---------- 2. Header ---------- */
+
+.box-timeline-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 20px;
+}
+
+.box-timeline-heading {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.box-timeline-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 10px;
+    color: #7b8794;
+    font-size: 12px;
+}
+
+.box-timeline-breadcrumb span {
+    color: #799c31;
+}
+
+.box-timeline-breadcrumb i {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.box-timeline-breadcrumb strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+.box-timeline-heading h2 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+}
+
+.box-timeline-heading p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---------- 3. Filters ---------- */
+/* Works when the page heading is commented out. */
+
+.box-timeline-filters {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.box-timeline-filter-field {
+    display: flex;
+    flex: 0 1 175px;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 135px;
+    margin: 0;
+    color: #4b5563;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.box-timeline-filter-field.box-no-filter {
+    flex-basis: 145px;
+}
+
+.box-timeline-filter-field input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    margin: 0;
+    padding: 0 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    background: #ffffff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box-timeline-filter-field input:hover {
+    border-color: #aeb8c4;
+}
+
+.box-timeline-filter-field input:focus {
+    border-color: #96c33b;
+    box-shadow: 0 0 0 3px rgba(150, 195, 59, 0.14);
+}
+
+.box-timeline-apply-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 36px;
+    padding: 0 13px;
+    border: 1px solid #96c33b;
+    border-radius: 6px;
+    background: #96c33b;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.box-timeline-apply-button:hover {
+    border-color: #799c31;
+    background: #799c31;
+}
+
+.box-timeline-apply-button:focus-visible {
+    outline: 3px solid rgba(150, 195, 59, 0.3);
+    outline-offset: 2px;
+}
+
+.box-timeline-apply-button i {
+    font-size: 11px;
+}
+
+/* ---------- 4. Results summary ---------- */
+
+.box-timeline-results {
+    width: 100%;
+    min-width: 0;
+}
+
+.box-timeline-results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 28px;
+    margin-bottom: 14px;
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.box-timeline-results-header > span:first-child strong {
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.box-timeline-results-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 25px;
+    padding: 4px 10px;
+    border: 1px solid #e1e7ef;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #596579;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ---------- 5. Timeline track ---------- */
+
+.box-timeline-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 58px;
+    row-gap: 18px;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 0 20px;
+}
+
+.box-timeline-center-line {
+    position: absolute;
+    z-index: 0;
+    top: 24px;
+    bottom: 20px;
+    left: 50%;
+    width: 2px;
+    background: #d8e0e9;
+    transform: translateX(-50%);
+}
+
+.box-timeline-track-marker {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 3px solid #f7f9fc;
+    border-radius: 50%;
+    background: #334155;
+    color: #ffffff;
+    box-shadow: 0 2px 7px rgba(15, 23, 42, 0.12);
+    transform: translateX(-50%);
+}
+
+.box-timeline-track-marker i {
+    font-size: 12px;
+}
+
+/* ---------- 6. Timeline entries ---------- */
+
+.box-timeline-entry {
+    position: relative;
+    min-width: 0;
+    padding-top: 3px;
+}
+
+.box-timeline-entry.left {
+    grid-column: 1;
+}
+
+.box-timeline-entry.right {
+    grid-column: 2;
+    margin-top: 22px;
+}
+
+.box-timeline-entry-node {
+    position: absolute;
+    z-index: 2;
+    top: 25px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #96c33b;
+    box-shadow: 0 0 0 1px #cbd5e1;
+}
+
+.box-timeline-entry.left .box-timeline-entry-node {
+    right: -34px;
+}
+
+.box-timeline-entry.right .box-timeline-entry-node {
+    left: -34px;
+}
+
+/* ---------- 7. Job cards ---------- */
+
+.box-timeline-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(31, 41, 55, 0.035);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box-timeline-card:hover {
+    border-color: #cbd8b8;
+    box-shadow: 0 4px 12px rgba(31, 41, 55, 0.07);
+}
+
+/* Card header */
+
+.box-timeline-card-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 10px 11px;
+    border-bottom: 1px solid #e8edf3;
+    background: #ffffff;
+}
+
+.box-timeline-company-icon {
+    display: flex;
+    flex: 0 0 30px;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eef5e4;
+    color: #668f2e;
+    font-size: 12px;
+}
+
+.box-timeline-job-information {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    color: #64748b;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.box-timeline-job-information h3 {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #263548;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.box-timeline-box-number {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 9px;
+    border-left: 1px solid #e5eaf0;
+    color: #6b7280;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.box-timeline-box-number strong {
+    color: #263548;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ---------- 8. Workflow stages ---------- */
+
+.box-timeline-stages {
+    padding: 0 11px;
+}
+
+.box-timeline-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 7px;
+    min-width: 0;
+    padding: 9px 0;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.box-timeline-stage:last-child {
+    border-bottom: 0;
+}
+
+.box-timeline-stage-content {
+    min-width: 0;
+}
+
+.box-timeline-stage-heading {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #425267;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.box-timeline-stage-heading strong {
+    font-weight: 700;
+}
+
+.box-timeline-stage-dot {
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #b9c4d0;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+.box-timeline-stage-dot.is-complete {
+    border-color: #96c33b;
+    background: #96c33b;
+    box-shadow: 0 0 0 2px rgba(150, 195, 59, 0.12);
+}
+
+/* Driver and scanner information */
+
+.box-timeline-scan-information {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 7px;
+    margin: 6px 0 0 15px;
+}
+
+.box-timeline-scan-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
+}
+
+.box-timeline-field-label {
+    color: #7b8797;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.box-timeline-field-value {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: #37465a;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+/* Supervisor and driver role labels */
+
+.box-timeline-role {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 2px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.box-timeline-role.supervisor {
+    background: #fff1cc;
+    color: #8a5b08;
+}
+
+.box-timeline-role.driver {
+    background: #eaf4dc;
+    color: #4f7228;
+}
+
+/* Stage date and time */
+
+.box-timeline-stage-time {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 83px;
+    padding-top: 1px;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.box-timeline-stage-time span:not(.box-timeline-no-time) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.box-timeline-stage-time i {
+    flex: 0 0 11px;
+    width: 11px;
+    color: #94a3b8;
+    text-align: center;
+}
+
+.box-timeline-no-time {
+    color: #b5bfca;
+    font-size: 14px;
+    text-align: right;
+}
+
+/* ---------- 9. Empty state ---------- */
+
+.box-timeline-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 300px;
+    margin: 0;
+    padding: 30px 20px;
+    border: 1px dashed #d4dde7;
+    border-radius: 9px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.box-timeline-empty-state > i {
+    color: #96c33b;
+    font-size: 25px;
+}
+
+.box-timeline-empty-state h3 {
+    margin: 12px 0 6px;
+    color: #263548;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.box-timeline-empty-state p {
+    max-width: 400px;
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   10. DARK THEME
+========================================================= */
+
+.dark-mode .box-timeline-page {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+.dark-mode .box-timeline-breadcrumb {
+    color: #9ca3af;
+}
+
+.dark-mode .box-timeline-breadcrumb span {
+    color: #b1d879;
+}
+
+.dark-mode .box-timeline-breadcrumb strong,
+.dark-mode .box-timeline-heading h2,
+.dark-mode .box-timeline-results-header > span:first-child strong {
+    color: #f3f4f6;
+}
+
+.dark-mode .box-timeline-breadcrumb i {
+    color: #6b7280;
+}
+
+.dark-mode .box-timeline-heading p {
+    color: #9ca3af;
+}
+
+/* Dark filters */
+
+.dark-mode .box-timeline-filter-field {
+    color: #cbd5e1;
+}
+
+.dark-mode .box-timeline-filter-field input {
+    border-color: #374151;
+    background: #1f2937;
+    color: #f3f4f6;
+    color-scheme: dark;
+}
+
+.dark-mode .box-timeline-filter-field input:hover {
+    border-color: #4b5563;
+}
+
+.dark-mode .box-timeline-filter-field input:focus {
+    border-color: #96c33b;
+    box-shadow: 0 0 0 3px rgba(150, 195, 59, 0.12);
+}
+
+.dark-mode .box-timeline-apply-button {
+    border-color: #96c33b;
+    background: #96c33b;
+    color: #17200d;
+}
+
+.dark-mode .box-timeline-apply-button:hover {
+    border-color: #a9d65b;
+    background: #a9d65b;
+}
+
+/* Dark results and timeline */
+
+.dark-mode .box-timeline-results-header {
+    color: #9ca3af;
+}
+
+.dark-mode .box-timeline-results-count {
+    border-color: #374151;
+    background: #1f2937;
+    color: #d1d5db;
+}
+
+.dark-mode .box-timeline-center-line {
+    background: #374151;
+}
+
+.dark-mode .box-timeline-track-marker {
+    border-color: #111827;
+    background: #334155;
+    color: #f9fafb;
+}
+
+.dark-mode .box-timeline-entry-node {
+    border-color: #1f2937;
+    box-shadow: 0 0 0 1px #4b5563;
+}
+
+/* Dark cards */
+
+.dark-mode .box-timeline-card {
+    border-color: #374151;
+    background: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.dark-mode .box-timeline-card:hover {
+    border-color: #52643b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .box-timeline-card-header {
+    border-bottom-color: #374151;
+    background: #1f2937;
+}
+
+.dark-mode .box-timeline-company-icon {
+    background: #293b29;
+    color: #b4d77d;
+}
+
+.dark-mode .box-timeline-job-information {
+    color: #9ca3af;
+}
+
+.dark-mode .box-timeline-job-information h3,
+.dark-mode .box-timeline-box-number strong {
+    color: #f3f4f6;
+}
+
+.dark-mode .box-timeline-box-number {
+    border-left-color: #374151;
+    color: #9ca3af;
+}
+
+/* Dark workflow stages */
+
+.dark-mode .box-timeline-stage {
+    border-bottom-color: #374151;
+}
+
+.dark-mode .box-timeline-stage-heading {
+    color: #e5e7eb;
+}
+
+.dark-mode .box-timeline-stage-dot {
+    border-color: #6b7280;
+    background: #1f2937;
+}
+
+.dark-mode .box-timeline-stage-dot.is-complete {
+    border-color: #96c33b;
+    background: #96c33b;
+}
+
+.dark-mode .box-timeline-field-label {
+    color: #9ca3af;
+}
+
+.dark-mode .box-timeline-field-value {
+    color: #e5e7eb;
+}
+
+.dark-mode .box-timeline-role.supervisor {
+    background: #4a391c;
+    color: #fbd477;
+}
+
+.dark-mode .box-timeline-role.driver {
+    background: #293b29;
+    color: #c4e39b;
+}
+
+.dark-mode .box-timeline-stage-time {
+    color: #a7b3c3;
+}
+
+.dark-mode .box-timeline-stage-time i {
+    color: #8493a7;
+}
+
+.dark-mode .box-timeline-no-time {
+    color: #64748b;
+}
+
+/* Dark empty state */
+
+.dark-mode .box-timeline-empty-state {
+    border-color: #374151;
+    background: #1f2937;
+}
+
+.dark-mode .box-timeline-empty-state > i {
+    color: #a8d35c;
+}
+
+.dark-mode .box-timeline-empty-state h3 {
+    color: #f3f4f6;
+}
+
+.dark-mode .box-timeline-empty-state p {
+    color: #9ca3af;
+}
+
+/* =========================================================
+   11. RESPONSIVE LAYOUT
+========================================================= */
+
+@media (max-width: 1100px) {
+    .box-timeline-page-header {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .box-timeline-filters {
+        flex: 1 1 auto;
+        justify-content: flex-start;
+    }
+
+    .box-timeline-filter-field {
+        flex: 1 1 150px;
+    }
+
+    .box-timeline-track {
+        column-gap: 42px;
+    }
+
+    .box-timeline-entry.left .box-timeline-entry-node {
+        right: -26px;
+    }
+
+    .box-timeline-entry.right .box-timeline-entry-node {
+        left: -26px;
+    }
+}
+
+@media (max-width: 900px) {
+    .box-timeline-track {
+        column-gap: 30px;
+    }
+
+    .box-timeline-stage {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 5px;
+    }
+
+    .box-timeline-stage-time {
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 0;
+        padding-left: 15px;
+    }
+
+    .box-timeline-no-time {
+        text-align: left;
+    }
+
+    .box-timeline-entry.left .box-timeline-entry-node {
+        right: -21px;
+    }
+
+    .box-timeline-entry.right .box-timeline-entry-node {
+        left: -21px;
+    }
+}
+
+@media (max-width: 640px) {
+    .box-timeline-page {
+        padding: 16px;
+    }
+
+    .box-timeline-heading h2 {
+        font-size: 21px;
+    }
+
+    .box-timeline-filters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .box-timeline-filter-field,
+    .box-timeline-filter-field.box-no-filter {
+        flex: initial;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .box-timeline-apply-button {
+        width: 100%;
+        grid-column: 1 / -1;
+    }
+
+    .box-timeline-track {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+        padding: 10px 0 18px 23px;
+    }
+
+    .box-timeline-center-line {
+        top: 25px;
+        bottom: 18px;
+        left: 6px;
+        transform: none;
+    }
+
+    .box-timeline-track-marker {
+        left: 6px;
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+        font-size: 11px;
+    }
+
+    .box-timeline-entry.left,
+    .box-timeline-entry.right {
+        grid-column: 1;
+        margin-top: 0;
+    }
+
+    .box-timeline-entry.left .box-timeline-entry-node,
+    .box-timeline-entry.right .box-timeline-entry-node {
+        top: 23px;
+        right: auto;
+        left: -23px;
+    }
+
+    .box-timeline-card-header {
+        padding: 10px;
+    }
+
+    .box-timeline-stages {
+        padding: 0 10px;
+    }
+
+    .box-timeline-results-header {
+        align-items: center;
+    }
+
+    .box-timeline-empty-state {
+        min-height: 240px;
+    }
+}
+
+@media (max-width: 380px) {
+    .box-timeline-page {
+        padding: 12px;
+    }
+
+    .box-timeline-filters {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .box-timeline-card-header {
+        flex-wrap: wrap;
+    }
+
+    .box-timeline-box-number {
+        margin-left: 39px;
+    }
+
+    .box-timeline-scan-information {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .box-timeline-results-count {
+        padding: 4px 7px;
+        font-size: 10px;
+    }
+}
+
+
+
+/* =========================
+   PAGINATION OF DATATABLE
+========================= */
+
+/* Shared DataTable pagination */
+.admin-table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    border-top: 1px solid #e5e7eb;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.admin-table-pagination-info {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.admin-table-pagination-info strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+.admin-table-pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.admin-pagination-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #fff;
+    color: #4b5563;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease,
+                border-color 0.15s ease,
+                color 0.15s ease;
+}
+
+.admin-pagination-button:hover:not(:disabled):not(.active) {
+    border-color: #96c33b;
+    background: #f7faef;
+    color: #374151;
+}
+
+.admin-pagination-button.active {
+    border-color: #96c33b;
+    background: #96c33b;
+    color: #fff;
+    font-weight: 600;
+}
+
+.admin-pagination-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.admin-pagination-button:focus-visible {
+    outline: 2px solid #96c33b;
+    outline-offset: 2px;
+}
+
+.admin-users-card .admin-table-pagination {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Dark mode */
+.dark-mode .admin-table-pagination {
+    border-top-color: #374151;
+    background: #1f2937;
+}
+
+.dark-mode .admin-table-pagination-info {
+    color: #9ca3af;
+}
+
+.dark-mode .admin-table-pagination-info strong {
+    color: #f3f4f6;
+}
+
+.dark-mode .admin-pagination-button {
+    border-color: #374151;
+    background: #1f2937;
+    color: #d1d5db;
+}
+
+.dark-mode .admin-pagination-button:hover:not(:disabled):not(.active) {
+    border-color: #96c33b;
+    background: #273321;
+    color: #f9fafb;
+}
+
+.dark-mode .admin-pagination-button.active {
+    border-color: #96c33b;
+    background: #96c33b;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .admin-table-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px;
+    }
+
+    .admin-table-pagination-controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .admin-pagination-button {
+        min-width: 32px;
+        padding: 0 8px;
+    }
 }
 
 
@@ -2119,9 +3176,9 @@
    DASHBOARD CONTENT
 ========================= */
 
-.dashboard-content {
+/* .dashboard-content {
     padding: 24px;
-}
+} */
 
 /* =========================
    STATISTICS
@@ -2307,87 +3364,6 @@
 .stat-status i {
     margin-right: 3px;
     font-size: 9px;
-}
-
-/* =========================
-   COMING SOON
-========================= */
-
-.coming-soon-card {
-    background: #ffffff;
-    border: 1px solid #dfe5ea;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.coming-soon-header {
-    min-height: 65px;
-
-    padding: 12px 18px;
-
-    display: flex;
-    align-items: center;
-
-    background: #f7f9fa;
-    border-bottom: 1px solid #dfe5ea;
-}
-
-.coming-soon-header h3 {
-    margin: 0 0 3px;
-
-    color: #34495e;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.coming-soon-header span {
-    color: #96a3ad;
-    font-size: 12px;
-}
-
-.coming-soon-table-wrapper {
-    padding: 18px;
-    overflow-x: auto;
-}
-
-.coming-soon-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-}
-
-.coming-soon-table th,
-.coming-soon-table td {
-    height: 40px;
-    padding: 9px 10px;
-
-    border: 1px solid #dfe5ea;
-
-    text-align: left;
-}
-
-.coming-soon-table th {
-    background: #fafbfc;
-    color: #34495e;
-    font-weight: 600;
-}
-
-.coming-soon-table td {
-    color: #6f7f8c;
-}
-
-.status-active {
-    display: inline-block;
-
-    padding: 3px 8px;
-
-    background: #4caf50;
-    color: #ffffff;
-
-    border-radius: 3px;
-
-    font-size: 11px;
-    font-weight: 600;
 }
 
 /* =========================
@@ -3344,9 +4320,9 @@
         font-size: 15px;
     }
 
-    .dashboard-content {
+    /* .dashboard-content {
         padding: 16px;
-    }
+    } */
 
     .admin-users-card-header {
         align-items: flex-start;
@@ -4344,59 +5320,80 @@
 }
 
 .jobs-toolbar {
-    display: flex;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
-    border-bottom: 1px solid rgba(120, 130, 140, 0.13);
-    padding: 8px 10px;
+    padding: 12px;
     background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
     flex-shrink: 0;
 }
 
 .jobs-toolbar .jobs-toolbar-actions {
-    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    min-width: 0;
+    margin-left: 0;
 }
 
-.jobs-add-button.new-admin-button {
-    height: 30px;
+.jobs-toolbar .jobs-add-button.new-admin-button {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    height: 38px;
     padding: 0 12px;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 3px;
-    background: #4bad29;
-}
-
-.jobs-add-button.new-admin-button:hover {
-    background: #409c20;
-}
-
-.jobs-search-button {
-    height: 30px;
-    padding: 0 12px;
-    border: 1px solid #dfe4e8;
-    border-radius: 3px;
-    background: #ffffff;
-    color: #212121;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid #96c33b;
+    border-radius: 7px;
+    background: #96c33b;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
-.jobs-search-button:hover {
-    background: #f5f8fb;
-    border-color: #cfd9e6;
+.jobs-toolbar .jobs-add-button.new-admin-button:hover {
+    background: #799c31;
+    border-color: #799c31;
 }
 
-.jobs-search-button i {
+.jobs-toolbar .jobs-search-button {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 35px;
+    padding: 0 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    font-family: inherit;
     font-size: 12px;
-    color: #60717e;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.jobs-toolbar .jobs-search-button:hover {
+    background: #f7f9f4;
+    border-color: #96c33b;
+}
+
+.jobs-toolbar .jobs-search-button i {
+    color: #6b7280;
+    font-size: 12px;
 }
 
 .jobs-add-button {
@@ -4429,55 +5426,86 @@
     border-color: #96c33b;
 }
 
-.jobs-search-field {
-    position: relative;
+.jobs-toolbar .jobs-search-field {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
 }
 
-.jobs-search-field > .fa-search {
-    position: absolute;
-    left: 10px;
+.jobs-toolbar .jobs-search-field > .fa-search {
+    position: static;
+    flex-shrink: 0;
     color: #8b98ab;
     font-size: 12px;
-    pointer-events: none;
 }
 
-.jobs-search-field input {
-    width: 140px;
-    height: 32px;
-    border: 1px solid #dfe4e8;
-    border-radius: 4px;
-    padding: 0 8px 0 28px;
-    font: inherit;
-    font-size: 13px;
-    color: #333;
-}
-
-.jobs-group-by {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    min-width: 0;
-    flex: 1 1 90px;
-    max-width: 120px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #7a8a97;
-    line-height: 1.1;
-}
-
-.jobs-group-by select {
+.jobs-toolbar .jobs-search-field input {
+    box-sizing: border-box;
+    flex: 1 1 auto;
     width: 100%;
-    height: 28px;
-    border: 1px solid #dfe4e8;
-    border-radius: 3px;
+    min-width: 0;
+    height: 35px;
+    padding: 0 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
     background: #ffffff;
-    color: #333;
-    font: inherit;
+    color: #374151;
+    font-family: inherit;
     font-size: 12px;
-    padding: 0 6px;
+}
+.jobs-toolbar:has(.jobs-search-field) {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.jobs-toolbar:has(.jobs-search-field) .jobs-group-by {
+    display: none;
+}
+
+.jobs-toolbar:has(.jobs-search-field) .jobs-toolbar-actions {
+    width: 100%;
+}
+
+.jobs-toolbar .jobs-search-field .jobs-icon-button {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.jobs-toolbar .jobs-group-by {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.jobs-toolbar .jobs-group-by select {
+    box-sizing: border-box;
+    width: 100px;
+    min-width: 0;
+    height: 35px;
+    padding: 0 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .jobs-list-scroll {
