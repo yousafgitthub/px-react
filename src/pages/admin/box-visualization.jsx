@@ -58,6 +58,7 @@ function formatTimelineDate(value) {
         time: date.toLocaleTimeString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
+            second: "2-digit",
         }),
     };
 }
@@ -328,7 +329,7 @@ function BoxTimeline() {
                             className="box-timeline-track-marker"
                             aria-hidden="true"
                         >
-                            {/* <i className="fa fa-cube" /> */}
+                            <i className="fa fa-cube" />
                         </div>
 
                         {filteredJobs.map((job, index) => (

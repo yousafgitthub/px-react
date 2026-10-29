@@ -302,7 +302,7 @@ function JobsWorkspace() {
 
   return (
     <div className="jobs-workspace">
-      <aside className="jobs-list-panel col-box">
+      <aside className="box-company-sidebar jobs-list-panel">
         <div className="simple-grid-filter jobs-toolbar">
           <button
             type="button"
@@ -372,8 +372,7 @@ function JobsWorkspace() {
             Demo mode is off. Connect a tenant jobs API to populate this list.
           </div>
         )}
-
-        <div className="col-box-list jobs-list-scroll">
+        <div className="box-company-list jobs-list-scroll">
           {filteredJobs.length === 0 ? (
             <div className="no-jobs">
               <i className="fa fa-briefcase" aria-hidden="true"></i>
@@ -394,7 +393,7 @@ function JobsWorkspace() {
                     const status =
                       STATUS_META[job.status] || STATUS_META.Pending;
                     return (
-                      <div
+                      <article
                         key={job.id}
                         className={`list-item ${
                           selectedJobId === job.id ? "active" : ""
@@ -482,7 +481,7 @@ function JobsWorkspace() {
                             </div>
                           )}
                         </div>
-                      </div>
+                      </article>
                     );
                   })}
                 </div>

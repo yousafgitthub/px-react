@@ -142,61 +142,78 @@ function DetailsTab({ job, details, onOpenJobSettings }) {
       </div>
 
       <div className="job-details-cards-section">
-        <div className="job-summary-cards">
-          <article className="job-summary-card">
-            <h3>TOTAL LOADS</h3>
-            <div className="job-summary-values">
-              <p className="job-summary-metric">
-                <strong className="is-blue">
-                  {formatNumber(summary.loadsDelivered)}
-                </strong>
-                <span className="job-summary-label">Delivered</span>
-              </p>
-              <p className="job-summary-metric">
-                <strong className="is-blue">
-                  {formatNumber(summary.loadsTotal)}
-                </strong>
-                <span className="job-summary-label">Total</span>
-              </p>
-            </div>
-          </article>
+        
+      <div className="job-details-stats-grid">
+          {[
+              {
+                  label: "TOTAL LOADS",
+                  icon: "fa-truck",
+                  metrics: [
+                      {
+                          label: "Delivered",
+                          value: summary.loadsDelivered,
+                      },
+                      {
+                          label: "Total",
+                          value: summary.loadsTotal,
+                      },
+                  ],
+              },
+              {
+                  label: "ASSIGN DRIVER",
+                  icon: "fa-users",
+                  metrics: [
+                      {
+                          label: "Assigned",
+                          value: summary.driversAssigned,
+                      },
+                      {
+                          label: "Ordered",
+                          value: summary.driversOrdered,
+                      },
+                  ],
+              },
+              {
+                  label: "PO CONSUMPTION (INN LBS)",
+                  icon: "fa-balance-scale",
+                  metrics: [
+                      {
+                          label: "Delivered",
+                          value: summary.poDeliveredLbs,
+                      },
+                      {
+                          label: "Total",
+                          value: summary.poTotalLbs,
+                      },
+                  ],
+              },
+          ].map((stat) => (
+              <div className="box-card" key={stat.label}>
+                  <div className="stat-card-top">
+                      <div className={`stat-icon ${stat.className}`}>
+                          <i className={`fa ${stat.icon}`} aria-hidden="true" />
+                      </div>
 
-          <article className="job-summary-card">
-            <h3>ASSIGN DRIVER</h3>
-            <div className="job-summary-values">
-              <p className="job-summary-metric">
-                <strong className="is-amber">
-                  {formatNumber(summary.driversAssigned)}
-                </strong>
-                <span className="job-summary-label">Assigned</span>
-              </p>
-              <p className="job-summary-metric">
-                <strong className="is-amber">
-                  {formatNumber(summary.driversOrdered)}
-                </strong>
-                <span className="job-summary-label">Ordered</span>
-              </p>
-            </div>
-          </article>
+                      <div className="stat-label">{stat.label}</div>
+                  </div>
 
-          <article className="job-summary-card">
-            <h3>PO CONSUMPTION (IN LBS)</h3>
-            <div className="job-summary-values">
-              <p className="job-summary-metric">
-                <strong className="is-green">
-                  {formatNumber(summary.poDeliveredLbs)}
-                </strong>
-                <span className="job-summary-label">Delivered</span>
-              </p>
-              <p className="job-summary-metric">
-                <strong className="is-green">
-                  {formatNumber(summary.poTotalLbs)}
-                </strong>
-                <span className="job-summary-label">Total</span>
-              </p>
-            </div>
-          </article>
-        </div>
+                  <div className="job-stat-metrics">
+                    {stat.metrics.map((metric) => (
+                        <div className="job-stat-metric" key={metric.label}>
+                            <div className="job-summary-label">
+                                {metric.label}
+                            </div>
+
+                            <div className={`stat-number ${stat.className}`}>
+                                {formatNumber(metric.value)}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+              </div>
+          ))}
+      </div>
+
 
         <div className="job-details-lower-grid">
         <SearchableAdminTable

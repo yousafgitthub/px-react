@@ -684,7 +684,7 @@ function buildJobDetails(job) {
           driversAssigned: 0,
           driversOrdered: 0,
           poDeliveredLbs: 2131806,
-          poTotalLbs: 1103191848,
+          poTotalLbs: 1103191848222,
         }
       : null;
 

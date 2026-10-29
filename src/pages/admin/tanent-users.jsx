@@ -119,7 +119,24 @@ function TanentUsers() {
                     { key: "email", label: "Email" }, { key: "phone", label: "Phone" },
                     { key: "status", label: "Status", render: (user) => <span className={user.status === "Active" ? "admin-status-active" : "admin-status-inactive"}>{user.status}</span> },
                 ]}
-                toolbar={<div className="tenant-users-filters"><label className="tenant-filter-control"><span className="tenant-filter-label"></span><span className="tenant-filter-select-wrap"><i className="fa fa-building" aria-hidden="true"></i><select value={companyFilter} onChange={(event) => setCompanyFilter(event.target.value)} className="tenant-users-filter"><option value="">All companies</option>{companies.map((company) => <option key={company} value={company}>{company}</option>)}</select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i></span></label><label className="tenant-filter-control"><span className="tenant-filter-label"></span><span className="tenant-filter-select-wrap"><i className="fa fa-user-tag" aria-hidden="true"></i><select value={roleFilter} onChange={(event) => setRoleFilter(event.target.value)} className="tenant-users-filter"><option value="">All roles</option>{roles.map((role) => <option key={role} value={role}>{role}</option>)}</select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i></span></label>{hasActiveFilters && <button type="button" className="tenant-clear-filters" onClick={() => { setCompanyFilter(""); setRoleFilter(""); }}>Clear filters</button>}<div className="tanent-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /><i className="fa fa-search"></i></div></div>}
+                toolbar=
+                {<div className="tenant-users-filters"><label className="tenant-filter-control">
+                    <span className="tenant-filter-label"></span><span className="tenant-filter-select-wrap">
+                    <i className="fa fa-building" aria-hidden="true"></i>
+                    <select value={companyFilter} 
+                    onChange={(event) => setCompanyFilter(event.target.value)}
+                    className="tenant-users-filter"><option value="">All companies</option>
+                    {companies.map((company) => <option key={company} value={company}>{company}</option>)}
+                    </select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i>
+                    </span></label><label className="tenant-filter-control"><span className="tenant-filter-label"></span>
+                    <span className="tenant-filter-select-wrap"><i className="fa fa-user-tag" aria-hidden="true"></i>
+                    <select value={roleFilter} onChange={(event) => setRoleFilter(event.target.value)} className="tenant-users-filter">
+                        <option value="">All roles</option>{roles.map((role) => <option key={role} value={role}>{role}</option>
+                    )}</select><i className="fa fa-chevron-down tenant-filter-chevron" aria-hidden="true"></i></span>
+                    </label>{hasActiveFilters && <button type="button" className="tenant-clear-filters" onClick={() => { setCompanyFilter(""); setRoleFilter(""); }}>Clear filters</button>}
+                    <div className="tanent-users-search"><input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />
+                    <i className="fa fa-search"></i></div>
+                </div>}
                 tableClassName="tanent-users-table"
                 wrapperClassName="tanent-users-table-wrapper"
                 renderActions={() => (
