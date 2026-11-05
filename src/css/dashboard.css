@@ -6555,14 +6555,13 @@
 }
 
 .job-pumping-btn {
-    background: #4bad29;
-    border-color: #4bad29;
+    background: #96c33b;
     color: #ffffff;
 }
 
 .job-pumping-btn:hover:not(:disabled) {
-    background: #409c20;
-    border-color: #409c20;
+    background: #799c31;
+    border-color: #799c31;
     color: #ffffff;
 }
 
@@ -6587,7 +6586,7 @@
 }
 
 .job-status-dot.is-inactive {
-    background: #c5ced6;
+    background: #96c33b;
 }
 
 .job-status-menu {

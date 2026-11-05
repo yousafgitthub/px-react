@@ -61,6 +61,7 @@ function TenantSidebar({
           <NavLink
             key={item.to}
             to={item.to}
+            title={item.label}
             end={item.end}
             className={({ isActive }) =>
               `sidebar-item ${isActive ? "active" : ""}`
