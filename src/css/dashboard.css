@@ -1585,26 +1585,6 @@
    File: src/css/dashboard.css
 ========================================================= */
 
-/* ---------- 1. Main page ---------- */
-
-.box-timeline-page {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    min-height: 100%;
-    padding: 22px 24px;
-    background: #f7f9fc;
-    color: #1f2937;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
-    font-size: 13px;
-}
-
-.box-timeline-page *,
-.box-timeline-page *::before,
-.box-timeline-page *::after {
-    box-sizing: border-box;
-}
-
 /* ---------- 2. Header ---------- */
 
 .box-timeline-page-header {
@@ -1753,6 +1733,34 @@
 
 .box-timeline-apply-button i {
     font-size: 11px;
+}
+
+/* Disabled Apply Filter button */
+.box-timeline-apply-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Clear Filter button */
+.box-timeline-apply-button.is-clear-filter {
+    background: #8493A7;
+    border-color: #8493A7;
+}
+
+.box-timeline-apply-button.is-clear-filter:hover {
+    background: #8493A7;
+    border-color: #8493A7;
+}
+
+.dark-mode .box-timeline-apply-button.is-clear-filter {
+    background: #8493A7;
+    border-color: #8493A7;
+}
+
+.dark-mode .box-timeline-apply-button.is-clear-filter:hover {
+    background: #475569;
+    border-color: #475569;
 }
 
 /* ---------- 4. Results summary ---------- */
@@ -2140,11 +2148,6 @@
 /* =========================================================
    10. DARK THEME
 ========================================================= */
-
-.dark-mode .box-timeline-page {
-    background: #111827;
-    color: #e5e7eb;
-}
 
 .dark-mode .box-timeline-breadcrumb {
     color: #9ca3af;

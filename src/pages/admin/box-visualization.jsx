@@ -184,11 +184,8 @@ function BoxTimeline() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
-    const [filters, setFilters] = useState({
-        boxNo: "",
-        startDate: "",
-        endDate: "",
-    });
+    const [filters, setFilters] = useState({boxNo: "", startDate: "", endDate: ""});
+    const [isFilterApplied, setIsFilterApplied] = useState(false);
 
 
     const filteredJobs = useMemo(() => {
@@ -223,19 +220,43 @@ function BoxTimeline() {
         });
     }, [filters]);
 
+    const canApplyFilter = Boolean(boxNo.trim() && startDate && endDate) && startDate <= endDate;
+
     const handleApplyFilter = (event) => {
         event.preventDefault();
+        // If filters are already applied, clear everything.
+        if (isFilterApplied) {
+            setBoxNo("");
+            setStartDate("");
+            setEndDate("");
 
+            setFilters({
+                boxNo: "",
+                startDate: "",
+                endDate: "",
+            });
+            setIsFilterApplied(false);
+            return;
+        }
+        // Require all three filter fields.
+        if (!boxNo.trim() || !startDate || !endDate) {
+            return;
+        }
+        // Validate date range.
+        if (startDate > endDate) {
+            return;
+        }
         setFilters({
             boxNo: boxNo.trim(),
             startDate,
             endDate,
         });
+        setIsFilterApplied(true);
     };
 
 
     return (
-        <div className="box-timeline-page">
+        <div className="admin-users-page">
             <div className="box-timeline-page-header">
                 {/* <div className="box-timeline-heading">
                     <nav
@@ -296,13 +317,21 @@ function BoxTimeline() {
                             }
                         />
                     </label>
-
                     <button
                         type="submit"
-                        className="box-timeline-apply-button"
+                        className={`box-timeline-apply-button ${
+                            isFilterApplied ? "is-clear-filter" : ""
+                        }`}
+                        disabled={!isFilterApplied && !canApplyFilter}
                     >
-                        <i className="fa fa-filter" aria-hidden="true" />
-                        Apply Filter
+                        <i
+                            className={`fa ${
+                                isFilterApplied ? "fa-times" : "fa-filter"
+                            }`}
+                            aria-hidden="true"
+                        />
+
+                        {isFilterApplied ? "Clear Filter" : "Apply Filter"}
                     </button>
                 </form>
             </div>

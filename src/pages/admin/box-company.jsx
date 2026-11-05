@@ -284,7 +284,7 @@ function BoxCompany() {
                                         </span>
 
                                         <span>
-                                            <i className="fa fa-circle" aria-hidden="true" style={{ color: activeCompany.status === "Active" ? "#96C33B" : "#e0362a" }}/>
+                                            <i className="fa fa-circle" aria-hidden="true" style={{ color: activeCompany.status === "Active" ? "#96C33B" : "#ec180d" }}/>
                                             {activeCompany.status}
                                         </span>
                                     </div>
