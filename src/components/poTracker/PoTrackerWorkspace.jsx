@@ -204,7 +204,6 @@ function PoTrackerWorkspace() {
           <div className="jobs-toolbar-actions">
             {searchOpen ? (
               <div className="jobs-search-field">
-                <i className="fa fa-search" aria-hidden="true"></i>
                 <input
                   ref={searchRef}
                   type="search"
