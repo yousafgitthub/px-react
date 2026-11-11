@@ -108,8 +108,22 @@ function ProductFamily() {
                 wrapperClassName="tanent-users-table-wrapper"
                 renderActions={() => (
                     <Actions
-                        onDelete={() => setIsDeleteModalOpen(true)}
-                        menuItems={productFamilyActionItems}
+                        popupOnly={true}
+                        menuItems={[
+                            {
+                                label: "Edit",
+                                icon: "fa-pencil",
+                                onClick: () => {
+                                    console.log("Edit carrier user");
+                                },
+                            },
+                            {
+                                label: "Delete",
+                                icon: "fa-trash",
+                                onClick: () => setIsDeleteModalOpen(true),
+                            },
+                            ...productFamilyActionItems,
+                        ]}
                     />
                 )}
             />

@@ -140,7 +140,7 @@ function BoxCompany() {
         );
 
         toastr.success(
-            `${company.name} status updated successfully.`,
+             `Data updated successfully.`,
             "Success"
         );
     };

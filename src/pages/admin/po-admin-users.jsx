@@ -93,8 +93,23 @@ function PoAdminUsers() {
                 wrapperClassName="admin-users-table-wrapper"
                 renderActions={() => (
                     <Actions
+                        popupOnly={true}
                         onDelete={() => setIsDeleteModalOpen(true)}
-                        menuItems={carrierActionItems}
+                        menuItems={[
+                            {
+                                label: "Edit",
+                                icon: "fa-pencil",
+                                onClick: () => {
+                                    console.log("Edit user");
+                                },
+                            },
+                            {
+                                label: "Delete",
+                                icon: "fa-trash",
+                                onClick: () => setIsDeleteModalOpen(true),
+                            },
+                            ...carrierActionItems,
+                        ]}
                     />
                 )}
             />
