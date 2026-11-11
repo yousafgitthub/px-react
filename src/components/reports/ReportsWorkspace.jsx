@@ -207,6 +207,7 @@ function ReportDetailView({
 }
 
 function ReportsWorkspace() {
+  const [settingsOpen, setSettingsOpen] = useState(true);
   const demoByReport = useMemo(() => getTenantReportsDemoData(), []);
   const [activeReport, setActiveReport] = useState("loads-overview");
   const [navOpen, setNavOpen] = useState(true);
@@ -268,6 +269,17 @@ function ReportsWorkspace() {
       {navOpen ? (
         <aside className="reports-nav-panel" aria-label="Reports navigation">
           <nav className="reports-nav">
+            <div className="box-settings-header">
+              <h2>Reports</h2>
+              <button
+                type="button"
+                className="box-settings-close"
+                aria-label="Close Box Settings"
+                onClick={() => setNavOpen(false)}
+              >
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
             {REPORT_NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
