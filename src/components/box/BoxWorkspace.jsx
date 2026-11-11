@@ -365,18 +365,18 @@ function BoxWorkspace() {
     <div className="box-workspace">
       {settingsOpen ? (
         <aside className="box-settings-panel" aria-label="Box Settings">
-          <div className="box-settings-header">
-            <h2>Box Settings</h2>
-            <button
-              type="button"
-              className="box-settings-close"
-              aria-label="Close Box Settings"
-              onClick={() => setSettingsOpen(false)}
-            >
-              <i className="fa fa-times" aria-hidden="true"></i>
-            </button>
-          </div>
           <nav className="box-settings-nav">
+            <div className="box-settings-header">
+              <h2>Box Settings</h2>
+              <button
+                type="button"
+                className="box-settings-close"
+                aria-label="Close Box Settings"
+                onClick={() => setSettingsOpen(false)}
+              >
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
             {BOX_SETTINGS_NAV.map((item) => (
               <button
                 key={item.id}

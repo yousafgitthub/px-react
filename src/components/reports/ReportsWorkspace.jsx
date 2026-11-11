@@ -207,7 +207,6 @@ function ReportDetailView({
 }
 
 function ReportsWorkspace() {
-  const [settingsOpen, setSettingsOpen] = useState(true);
   const demoByReport = useMemo(() => getTenantReportsDemoData(), []);
   const [activeReport, setActiveReport] = useState("loads-overview");
   const [navOpen, setNavOpen] = useState(true);

@@ -2892,8 +2892,8 @@
     padding: 0 16px;
     display: flex;
     align-items: center;
-    background: #202228;
-    border-bottom: 1px solid #2b2e39;
+    background: #151b26;
+    border-bottom: 1px solid #27303d;
 }
 
 .sidebar-logo img {
@@ -2912,10 +2912,10 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 8px 0;
-
     /* Hide scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background: #151b26;
 }
 
 .sidebar-menu::-webkit-scrollbar {
@@ -3085,8 +3085,8 @@
 
 .admin-layout.sidebar-collapsed .sidebar-logo-mark {
     display: block;
-    width: 44px;
-    max-width: 44px;
+    width: 48px;
+    max-width: 48px;
     height: 36px;
     max-height: 36px;
     object-fit: contain;
@@ -5510,12 +5510,12 @@
 
 /* Jobs page: match original PropX icon-rail (#181A1D, ~70–100px) */
 .admin-layout.jobs-workspace-layout .admin-sidebar {
-    background: #181a1d;
+    background: #151b26;
 }
 
 .admin-layout.jobs-workspace-layout .sidebar-logo,
 .admin-layout.jobs-workspace-layout .sidebar-bottom {
-    background: #181a1d;
+    background: #151b26;
     border-color: #2a2c31;
 }
 
@@ -6872,12 +6872,12 @@
 }
 
 .admin-layout.box-workspace-layout .admin-sidebar {
-    background: #111827;
+    background: #151b26;
 }
 
 .admin-layout.box-workspace-layout .sidebar-logo,
 .admin-layout.box-workspace-layout .sidebar-bottom {
-    background: #111827;
+    background: #151b26;
     border-color: #2a2c31;
 }
 
@@ -6908,7 +6908,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: #111827;
+    background: #151b26;
     color: #ffffff;
     border-right: 1px solid #1f222b;
 }
@@ -7262,12 +7262,12 @@
 }
 
 .admin-layout.reports-workspace-layout .admin-sidebar {
-    background: #181a1d;
+    background: #151b26;
 }
 
 .admin-layout.reports-workspace-layout .sidebar-logo,
 .admin-layout.reports-workspace-layout .sidebar-bottom {
-    background: #181a1d;
+    background: #151b26;
     border-color: #2a2c31;
 }
 
@@ -7298,7 +7298,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: #111827;
+    background: #151b26;
     color: #ffffff;
     border-right: 1px solid #1f222b;
 }
