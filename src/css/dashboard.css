@@ -5403,7 +5403,10 @@
 }
 
 .dark-mode .box-dashboard {
-    background: #111827;
+    background:
+    radial-gradient(circle at 8% 12%, rgba(150, 195, 59, 0.12), transparent 30%),
+    radial-gradient(circle at 92% 85%, rgba(103, 156, 188, 0.10), transparent 32%),
+    linear-gradient(135deg, #111827 0%, #1a2633 100%);
     color: #e5e7eb;
 }
 
@@ -7011,6 +7014,14 @@
         linear-gradient(135deg, #f5f8f1 0%, #eef4f5 100%);
 }
 
+.dark-mode .box-main-content {
+    background:
+    radial-gradient(circle at 8% 12%, rgba(150, 195, 59, 0.12), transparent 30%),
+    radial-gradient(circle at 92% 85%, rgba(103, 156, 188, 0.10), transparent 32%),
+    linear-gradient(135deg, #111827 0%, #1a2633 100%);
+}
+
+
 .box-main-content .admin-users-card {
     margin: 0;
 }
@@ -7031,8 +7042,7 @@
 .box-kpi-card {
     background: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
     min-height: 110px;
     padding: 22px 16px;
     display: flex;
@@ -7042,12 +7052,20 @@
     gap: 8px;
     text-align: center;
 }
+.dark-mode .box-kpi-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.dark-mode .box-kpi-label {
+    color: #9ca8b7;
+}
 
 .box-kpi-value {
     font-size: 42px;
     font-weight: 700;
     line-height: 1;
-    color: #ff8a00;
+    color: #96c33b;
 }
 
 .box-kpi-label {
@@ -7068,13 +7086,34 @@
     padding: 0 10px;
     min-width: 110px;
 }
+.box-filter-field select:focus,
+.box-interval-select:focus {
+    border: 1px solid #96c33b;
+    outline: none;
+}
+.dark-mode .box-filter-field select:focus,
+.box-interval-select:focus {
+    border: 1px solid #96c33b;
+    outline: none;
+}
+.dark-mode .box-filter-field select,
+.dark-mode .box-interval-select {
+    background: #1f2937;
+    border-color: #374151;
+    color: #c5c9d4;
+}
 
 .box-panel {
+    margin: 10px 0;
     background: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 3px;
+    border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     overflow: hidden;
+}
+.dark-mode .box-panel {
+    background: #1f2937;
+    border-color: #374151;
 }
 
 .box-panel-header {
@@ -7117,6 +7156,11 @@
     gap: 8px;
     cursor: default;
 }
+.dark-mode .box-date-range {
+    background: #1f2937;
+    border-color: #374151;
+    color: #e5e7eb;
+}
 
 .box-panel-menu {
     width: 32px;
@@ -7127,6 +7171,11 @@
     color: #546a79;
     cursor: pointer;
 }
+.dark-mode .box-panel-menu {
+    background: #1f2937;
+    border-color: #374151;
+    color: #e5e7eb;
+}
 
 .box-lbs-toggle {
     display: inline-flex;
@@ -7135,6 +7184,9 @@
     font-size: 13px;
     font-weight: 600;
     color: #2f3a42;
+}
+.dark-mode .box-lbs-toggle {
+    color: #e5e7eb;
 }
 
 .box-lbs-switch {
@@ -7150,7 +7202,7 @@
 }
 
 .box-lbs-switch.is-on {
-    background: #4bad29;
+    background: #96c33b;
 }
 
 .box-lbs-knob {
@@ -7335,24 +7387,8 @@
     border-left-color: #96c33b;
 }
 
-.reports-nav-reopen {
-    position: absolute;
-    top: 12px;
-    left: 100px;
-    z-index: 5;
-    height: 32px;
-    padding: 0 12px;
-    border: 1px solid #d7d7d7;
-    border-radius: 3px;
-    background: #ffffff;
-    color: #212121;
-    font: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+.reports-workspace {
+    position: relative;
 }
 
 .reports-main.admin-users-page {
@@ -7399,12 +7435,9 @@
 }
 
 .report-kpi-card {
-    background: rgba(255, 255, 255, 0.48);
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 14px;
-    box-shadow: 0 18px 42px rgba(52, 73, 94, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(18px) saturate(130%);
-    -webkit-backdrop-filter: blur(18px) saturate(130%);
+    background: #ffffff;
+    border: 1px solid #d5dde3;
+    border-radius: 10px;
     min-height: 96px;
     padding: 18px 16px;
     display: flex;
@@ -7413,6 +7446,10 @@
     justify-content: center;
     gap: 8px;
     text-align: center;
+}
+.dark-mode .report-kpi-card {
+    background: #1f2937;
+    border: 1px solid #374151;
 }
 
 .report-kpi-label {
@@ -7468,6 +7505,11 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+}
+.dark-mode .report-columns-btn {
+    border-color: rgba(194, 207, 216, 0.35);
+    background: #1f2937;
+    color: #c5c9d4;
 }
 
 .report-columns-btn:hover {

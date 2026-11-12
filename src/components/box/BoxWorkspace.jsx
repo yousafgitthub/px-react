@@ -110,7 +110,7 @@ function BoxDashboard({
   setUnit,
 }) {
   return (
-    <div className="box-dashboard">
+    <>
       <div className="box-kpi-grid">
         <section className="box-kpi-card">
           <strong className="box-kpi-value">{demo.kpis.activeBoxes}</strong>
@@ -180,11 +180,11 @@ function BoxDashboard({
           ariaLabel="Truck counts over time"
           variant="truck"
         />
-        <div className="box-chart-scrubber" aria-hidden="true">
+        {/* <div className="box-chart-scrubber" aria-hidden="true">
           <div className="box-chart-scrubber-track">
             <div className="box-chart-scrubber-thumb"></div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className="box-panel">
@@ -233,14 +233,13 @@ function BoxDashboard({
           variant="inventory"
         />
       </section>
-    </div>
+    </>
   );
 }
 
 function BoxWorkspace() {
   const demo = useMemo(() => getTenantBoxDemoData(), []);
   const [activeSection, setActiveSection] = useState("dashboard");
-  const [settingsOpen, setSettingsOpen] = useState(true);
   const [jobFilter, setJobFilter] = useState("all");
   const [interval, setIntervalValue] = useState("12-Hour");
   const [locationFilter, setLocationFilter] = useState("all");
@@ -363,19 +362,10 @@ function BoxWorkspace() {
 
   return (
     <div className="box-workspace">
-      {settingsOpen ? (
         <aside className="box-settings-panel" aria-label="Box Settings">
           <nav className="box-settings-nav">
             <div className="box-settings-header">
               <h2>Box Settings</h2>
-              <button
-                type="button"
-                className="box-settings-close"
-                aria-label="Close Box Settings"
-                onClick={() => setSettingsOpen(false)}
-              >
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </button>
             </div>
             {BOX_SETTINGS_NAV.map((item) => (
               <button
@@ -391,16 +381,6 @@ function BoxWorkspace() {
             ))}
           </nav>
         </aside>
-      ) : (
-        <button
-          type="button"
-          className="box-settings-reopen"
-          onClick={() => setSettingsOpen(true)}
-        >
-          <i className="fa fa-bars" aria-hidden="true"></i>
-          Box Settings
-        </button>
-      )}
 
       <div className="box-main-content">
         {!USE_TENANT_BOX_DEMO && (
