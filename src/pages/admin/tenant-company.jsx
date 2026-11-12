@@ -6,8 +6,11 @@ import UserDataTable from "../../components/UserDataTable";
 import UserFormModal from "../../components/UserFormModal";
 import ConfirmDeleteModal from "../../components/ConfirmDeleteModal";
 import Actions from "../../components/Actions";
+import SetFeatures from "../../components/SetFeatures/set-features";
 
 function TenantCompany() {
+    const [isFeaturesModalOpen, setIsFeaturesModalOpen] = useState(false);
+    const [selectedCompany, setSelectedCompany] = useState(null);
     const companyTypes = ["Operator", "Company"];
     const premiumTypes = ["Premium", "Standard"];
     const statuses = ["Active", "Inactive"];
@@ -26,13 +29,6 @@ function TenantCompany() {
             },
         },
         {
-            label: "Set Features",
-            icon: "fa-pencil-alt",
-            onClick: () => {
-                console.log("Duplicate carrier");
-            },
-        },
-        {
             label: "Make Inactive",
             icon: "fa-toggle-on",
             onClick: () => {
@@ -41,7 +37,7 @@ function TenantCompany() {
         },
     ];
 
-    const tenantCompanies = [
+    const [tenantCompanies, setTenantCompanies] = useState([
         {
             companyName: "Admin Addition Test",
             companyType: "Company",
@@ -74,7 +70,7 @@ function TenantCompany() {
             type: "Premium",
             status: "Active",
         },
-    ];
+    ]);
 
     const hasActiveFilters = Boolean(companyTypeFilter || premiumFilter || statusFilter);
 
@@ -213,27 +209,35 @@ function TenantCompany() {
                     </div>
                 }tableClassName="tanent-users-table"
                 wrapperClassName="tanent-users-table-wrapper"
-                renderActions={() => (
-                    <Actions
-                        popupOnly={true}
-                        menuItems={[
-                            {
-                                label: "Edit",
-                                icon: "fa-pencil",
-                                onClick: () => {
-                                    console.log("Edit carrier user");
+                    renderActions={(company) => (
+                        <Actions
+                            popupOnly={true}
+                            menuItems={[
+                                {
+                                    label: "Edit",
+                                    icon: "fa-pencil",
+                                    onClick: () => {
+                                        console.log("Edit company", company);
+                                    },
                                 },
-                            },
-                            {
-                                label: "Delete",
-                                icon: "fa-trash",
-                                onClick: () => setIsDeleteModalOpen(true),
-                            },
-                            ...carrierActionItems,
-                        ]}
-                    />
-                )}
-            />
+                                {
+                                    label: "Set Features",
+                                    icon: "fa-sliders",
+                                    onClick: () => {
+                                        setSelectedCompany(company);
+                                        setIsFeaturesModalOpen(true);
+                                    },
+                                },
+                                {
+                                    label: "Delete",
+                                    icon: "fa-trash",
+                                    onClick: () => setIsDeleteModalOpen(true),
+                                },
+                                ...carrierActionItems,
+                            ]}
+                        />
+                    )}
+                />
 
             {/* Create Modal */}
             {isNewCompanyModalOpen && (
@@ -256,6 +260,32 @@ function TenantCompany() {
                     onConfirm={() => {
                         setIsDeleteModalOpen(false);
                         toastr.success("Company deleted successfully.", "Success");
+                    }}
+                />
+            )}
+            {isFeaturesModalOpen && selectedCompany && (
+                <SetFeatures
+                    company={selectedCompany}
+                    onClose={() => {
+                        setIsFeaturesModalOpen(false);
+                        setSelectedCompany(null);
+                    }}
+                    onSave={(features) => {
+                        setTenantCompanies((previous) =>
+                            previous.map((company) =>
+                                company === selectedCompany
+                                    ? { ...company, features }
+                                    : company
+                            )
+                        );
+
+                        setIsFeaturesModalOpen(false);
+                        setSelectedCompany(null);
+
+                        toastr.success(
+                            "Company features updated successfully.",
+                            "Success"
+                        );
                     }}
                 />
             )}
