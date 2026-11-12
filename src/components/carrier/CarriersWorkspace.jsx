@@ -339,8 +339,8 @@ function CarriersWorkspace() {
           >
             <div className="user-modal-header">
               <div>
-                <div className="user-modal-eyebrow">Frontend demo</div>
-                <h3 id="demo-add-carrier-title">Add Carrier (Demo Only)</h3>
+                <div className="user-modal-eyebrow">Add Carrier</div>
+                {/* <h3 id="demo-add-carrier-title">Add Carrier</h3> */}
               </div>
               <button
                 type="button"
@@ -352,10 +352,10 @@ function CarriersWorkspace() {
               </button>
             </div>
             <form onSubmit={submitAddCarrier}>
-              <p className="jobs-detail-source">
+              {/* <p className="jobs-detail-source">
                 This form creates a local demo draft only. It does not call
                 create APIs or write to a database.
-              </p>
+              </p> */}
               <div className="jobs-detail-grid">
                 <label>
                   <span>Carrier name</span>
@@ -432,13 +432,13 @@ function CarriersWorkspace() {
               <div className="user-form-actions">
                 <button
                   type="button"
-                  className="jobs-icon-button"
+                  className="user-modal-cancel"
                   onClick={() => setIsAddOpen(false)}
                 >
                   Cancel
                 </button>
                 <button type="submit" className="new-admin-button">
-                  Create demo draft
+                  Save
                 </button>
               </div>
             </form>

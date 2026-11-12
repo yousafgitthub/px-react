@@ -61,6 +61,7 @@ function JobsWorkspace() {
   const [selectedJobId, setSelectedJobId] = useState(
     () => initialDemo.jobs[0]?.id || null
   );
+  const [collapsedGroups, setCollapsedGroups] = useState({});
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [groupBy, setGroupBy] = useState("none");
@@ -385,9 +386,33 @@ function JobsWorkspace() {
             Object.entries(groupedJobs).map(([groupName, groupJobs]) => (
               <div key={groupName} className="jobs-group">
                 {groupName !== "Ungrouped" ? (
-                  <div className="jobs-group-heading">{groupName}</div>
+                  <div className="jobs-group-heading">
+                    <span>{groupName}</span>
+
+                    <button
+                      type="button"
+                      className="jobs-group-toggle"
+                      aria-label={`${collapsedGroups[groupName] ? "Expand" : "Collapse"} ${groupName}`}
+                      aria-expanded={!collapsedGroups[groupName]}
+                      onClick={() =>
+                        setCollapsedGroups((prev) => ({
+                          ...prev,
+                          [groupName]: !prev[groupName],
+                        }))
+                      }
+                    >
+                      <i
+                        className={`fa ${
+                          collapsedGroups[groupName] ? "fa-chevron-right" : "fa-chevron-down"
+                        }`}
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+                  </div>
                 ) : null}
-                <div className="list">
+
+                {!collapsedGroups[groupName] && (
+                  <div className="list">
                   {groupJobs.map((job) => {
                     const status =
                       STATUS_META[job.status] || STATUS_META.Pending;
@@ -483,7 +508,8 @@ function JobsWorkspace() {
                       </article>
                     );
                   })}
-                </div>
+                  </div>
+                )}
               </div>
             ))
           )}

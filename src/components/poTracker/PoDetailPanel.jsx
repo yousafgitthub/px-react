@@ -143,7 +143,7 @@ function PoDetailPanel({ po, transactions = [], onStatusChange, onDelete }) {
         <div className="job-summary-cards po-summary-cards">
           <article className="job-summary-card po-summary-card">
             <h3>PO CONSUMPTION (IN LBS)</h3>
-            <div className="job-summary-values po-summary-metrics-row">
+            <div className="job-summary-values">
               <p className="job-summary-metric">
                 <strong className="is-blue">{formatLbs(po.consumedLbs)}</strong>
                 <span className="job-summary-label">Consumed</span>

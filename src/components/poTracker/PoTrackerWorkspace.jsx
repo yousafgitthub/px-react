@@ -187,7 +187,7 @@ function PoTrackerWorkspace() {
           </button>
 
           <label className="jobs-group-by">
-            <span>Grouped by</span>
+            <span>Group by</span>
             <select
               value={groupBy}
               onChange={(event) => setGroupBy(event.target.value)}
@@ -261,20 +261,24 @@ function PoTrackerWorkspace() {
               const isCollapsed = Boolean(collapsedGroups[groupName]);
               return (
                 <div key={groupName} className="jobs-group">
-                  <button
-                    type="button"
-                    className="jobs-group-heading po-group-heading"
-                    onClick={() => toggleGroup(groupName)}
-                    aria-expanded={!isCollapsed}
-                  >
-                    <i
-                      className={`fa ${
-                        isCollapsed ? "fa-chevron-right" : "fa-chevron-down"
-                      }`}
-                      aria-hidden="true"
-                    ></i>
-                    {groupName}
-                  </button>
+                 <div className="jobs-group-heading po-group-heading">
+                    <span>{groupName}</span>
+
+                    <button
+                      type="button"
+                      className="jobs-group-toggle"
+                      onClick={() => toggleGroup(groupName)}
+                      aria-label={`${isCollapsed ? "Expand" : "Collapse"} ${groupName}`}
+                      aria-expanded={!isCollapsed}
+                    >
+                      <i
+                        className={`fa ${
+                          isCollapsed ? "fa-chevron-right" : "fa-chevron-down"
+                        }`}
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+                  </div>
                   {!isCollapsed ? (
                     <div className="list">
                       {groupPos.map((po) => {
@@ -399,8 +403,8 @@ function PoTrackerWorkspace() {
           >
             <div className="user-modal-header">
               <div>
-                <div className="user-modal-eyebrow">Frontend demo</div>
-                <h3 id="demo-add-po-title">Add PO (Demo Only)</h3>
+                <div className="user-modal-eyebrow">Add PO</div>
+                {/* <h3 id="demo-add-po-title">Add PO (Demo Only)</h3> */}
               </div>
               <button
                 type="button"
@@ -412,10 +416,10 @@ function PoTrackerWorkspace() {
               </button>
             </div>
             <form onSubmit={submitAddPo}>
-              <p className="jobs-detail-source">
+              {/* <p className="jobs-detail-source">
                 This form creates a local demo draft only. It does not call
                 create APIs or write to a database.
-              </p>
+              </p> */}
               <div className="jobs-detail-grid">
                 <label>
                   <span>PO number / name</span>
@@ -493,13 +497,13 @@ function PoTrackerWorkspace() {
               <div className="user-form-actions">
                 <button
                   type="button"
-                  className="jobs-icon-button"
+                  className="user-modal-cancel"
                   onClick={() => setIsAddOpen(false)}
                 >
                   Cancel
                 </button>
                 <button type="submit" className="new-admin-button">
-                  Create demo draft
+                  Save
                 </button>
               </div>
             </form>
